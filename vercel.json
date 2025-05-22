@@ -2,17 +2,15 @@
     "version": 2,
     "builds": [
       {
-        "src": "angular.json",
+        "src": "package.json",
         "use": "@vercel/static-build",
         "config": {
-          "distDir": "dist/qrrextaux/browser"
+          "distDir": "dist/dashbord/browser"
         }
       }
     ],
     "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "/index.csr.html" 
-      }
+      { "handle": "filesystem" },
+      { "src": "/.*", "dest": "/index.csr.html" }
     ]
   }
