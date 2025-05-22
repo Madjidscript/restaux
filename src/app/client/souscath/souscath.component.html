@@ -1,0 +1,30 @@
+<div class="loader-container" *ngIf="loading">
+    <div class="spinner"></div>
+</div>
+
+<div *ngIf="!loading">
+    <div class="menu-list">
+      <div class="menu-item" *ngFor="let item of data">
+        <div class="item-text" >
+          <h4>{{ item.nom }}</h4>
+          <p *ngIf="id === '656ef52ee5b0a031c55a455c'">Des repas copieux et savoureux pour satisfaire toutes les faims.</p>
+          <p *ngIf="id === '656ef53fe5b0a031c55a455e'">Parfaites pour accompagner vos plats avec goût.</p>
+          <p *ngIf="id === '656f0e6f6fce29614e93cedb'">Rafraîchissez-vous avec notre sélection de boissons.</p>
+          <p *ngIf="id === '6584a958275ac01290849f23'">Douceurs sucrées pour terminer sur une note gourmande.</p>
+          
+          <div  style="display: flex; justify-content: space-between;">
+           <div class="price"> {{ item.prix }} F CFA</div>
+            <!-- <ion-button type="button" style="padding: 5;" (click)="addToCart(item)">Ajouter</ion-button > -->
+              <button type="button" class="add-btn" (click)="addToCart(item)">
+                Ajouter
+              </button>
+          </div>
+        </div>
+        
+        <img [src]="formatImagePath(item.image)" alt="Image" />
+  
+      </div>
+    </div>
+  
+  
+  </div>

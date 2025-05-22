@@ -1,0 +1,41 @@
+.header {
+    background-color: #f8f8f8;
+    padding: 10px 16px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+  
+  .toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .left-title {
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .icon-wrapper {
+    position: relative;
+    font-size: 24px;
+    color: #333;
+    cursor: pointer;
+  }
+  
+  .badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 50%;
+    font-weight: bold;
+  }
+  

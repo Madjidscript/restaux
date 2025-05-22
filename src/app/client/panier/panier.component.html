@@ -1,0 +1,46 @@
+
+<div class="loader-container" *ngIf="!loading">
+    <div class="spinner"></div>
+</div>
+
+
+<div class="dark-content" *ngIf="loading">
+    <!-- <div class="order-header">
+      <h3>Commande No #18</h3>
+    </div> -->
+  
+    <div class="cart-item" *ngFor="let item of cartItems">
+    <img [src]="formatImagePath(item.image)" alt="Image" />
+
+      <!-- <img [src]="item.image" alt="Image" /> -->
+      <div class="item-info">
+        <div class="top">
+          <div class="name">{{ item.nom }}</div>
+          <div class="price">{{ item.prix_total }} $</div>
+        </div>
+        <div class="bottom">
+          <span>x{{ item.quantite }}</span>
+          <div class="quantity-control">
+            <button (click)="decrease(item)">−</button>
+            <span>{{ item.quantite }}</span>
+            <button (click)="increase(item)">+</button>
+          </div>
+          <!-- <ion-icon name="trash-outline" (click)="remove(item)"></ion-icon> -->
+          <i class="fa-solid fa-trash" (click)="remove(item)" style="cursor: pointer; color: red;margin-left: 10px;"></i>
+
+        </div>
+      </div>
+    </div>
+  
+    <div class="summary">
+      <!-- <div class="line">
+        <span>Sous-total</span>
+        <span>{{ subtotal }} $</span>
+      </div> -->
+      <div class="line total">
+        <span>Total</span>
+        <span>{{ total }} $</span>
+      </div>
+    </div>
+  </div>
+  

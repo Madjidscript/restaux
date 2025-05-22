@@ -1,0 +1,20 @@
+<div class="loader-container" *ngIf="loading">
+    <div class="spinner"></div>
+</div>
+  
+
+
+<div *ngIf="!loading">
+    <h2 class="title">Our Menu</h2>
+    
+    <div class="card-container" >
+      
+      <div class="card" *ngFor="let item of data" (click)="nav(item._id)" style="cursor: pointer;">
+        <!-- <img [src]="item.image.replace(/\\/g, '/')" alt="Image" /> -->
+        <img [src]="formatImagePath(item.image)" alt="Image" />
+  
+        <h4>{{ item.nom }}</h4>
+      </div>
+    </div>
+</div>
+  
