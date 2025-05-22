@@ -15,6 +15,7 @@ import { PanierService } from '../../panierservice/panier.service';
 export class SouscathComponent implements OnInit {
   totalQuantite: any;
   loading=false
+  tb: any;
   
 
   constructor(private api:ClientserviceService, private activate:ActivatedRoute, private panierService:PanierService){
@@ -32,6 +33,8 @@ export class SouscathComponent implements OnInit {
   ngOnInit() {
     this.id = this.activate.snapshot.paramMap.get("id");
     console.log("mon id", this.id);
+    // this.tb = this.activate.snapshot.paramMap.get("tb")
+    // console.log("mon tbfff",this.tb);
     
     this.getsouscath();
   

@@ -10,11 +10,11 @@ const routes: Routes = [
   {
     path:"",component:ClientComponent,
     children:[
-      {path:"",redirectTo:"home/:tb",pathMatch:"full"},
-      {path:"home/:tb",component:HomeComponent},
-      {path:"panier/:tb",component:PanierComponent},
-      {path:"cath/:tb",component:CathComponent},
-      {path:"souscath/:id/:tb",component:SouscathComponent},
+      { path: "home/:tb", component: HomeComponent },
+  { path: "panier/:tb", component: PanierComponent },
+  { path: "cath/:tb", component: CathComponent },
+  { path: "souscath/:id/:tb", component: SouscathComponent },
+  { path: "**", redirectTo: "home/:tb" }  // redirection par défaut
     ]
   }
 ];
