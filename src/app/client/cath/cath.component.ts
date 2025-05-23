@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../environments/environment.prod';
 import { ClientserviceService } from '../../clientservice/clientservice.service';
 import { CommonModule } from '@angular/common';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-cath',
@@ -14,11 +14,13 @@ import { Router, RouterModule } from '@angular/router';
 export class CathComponent implements OnInit {
   ngOnInit(): void {
     this.getallcath()
+    this.tb =this.activate.snapshot.paramMap.get("tb")
   }
 
-  constructor(private api:ClientserviceService,private router:Router){}
+  constructor(private api:ClientserviceService,private router:Router,private activate:ActivatedRoute){}
 
   data:any
+  tb:any
   loading=false
   baseUrl = environment.apiUrl + '/';
   formatImagePath(path: string): string {
@@ -51,7 +53,7 @@ export class CathComponent implements OnInit {
    }
 
    nav(id:any){
-    this.router.navigate([`/client/souscath/${id}/19`])
+    this.router.navigate([`/client/souscath/${id}/${this.tb}`])
    }
 
 
