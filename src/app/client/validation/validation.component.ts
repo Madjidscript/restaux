@@ -27,6 +27,12 @@ export class ValidationComponent {
    
   }
 
+  generateUniqueIndex(): string {
+    const timestamp = Date.now().toString(36); // Encodage base36
+    const random = Math.random().toString(36).substring(2, 8); // 6 caractères aléatoires
+    return `${timestamp}-${random}`;
+  }
+
   ngOnInit() {
     this.cartItems = JSON.parse(sessionStorage.getItem('panier') || '[]');
     this.commandeValidee = sessionStorage.getItem('commandeValidee') === 'true';
@@ -39,11 +45,13 @@ export class ValidationComponent {
   confirmerCommande() {
     this.commandeValidee = true;
     const allergies = this.validationForm.get('allergies')?.value;
+    const index = this.generateUniqueIndex();
     
     const commande = {
       num: this.tb,
       total: this.total.toString(),
       statut: true,
+      index: index,
       data: this.cartItems.map(item => ({
         id: item._id,
         image: item.image,
@@ -85,13 +93,45 @@ export class ValidationComponent {
     this.cartItems = [];
   }
 
-  annulerCommande() {
-    sessionStorage.removeItem('commandeValidee');
-    sessionStorage.removeItem('alergit');
-    this.commandeValidee = false;
-    this.router.navigate([`/client/cath/${this.tb}`])
 
-  }
+  // annulerCommande(id:any,num:any){
+    
+
+  //   this.api.annulecmd(id,num).subscribe({
+  //     next:(res:any)=> {
+  //       console.log("mons data",res);
+        
+
+  //       if (res?.status === 'success') {
+  //         sessionStorage.removeItem('commandeValidee');
+  //       sessionStorage.removeItem('alergit');
+  //       this.commandeValidee = false;
+  //       this.router.navigate([`/client/cath/${this.tb}`])
+         
+  //       //  setTimeout(() => {
+  //       //   this.nav()
+  //       //  }, 3000);
+
+  //       } 
+         
+  
+  //     },
+  //     error:(err:any)=> {
+  //       console.log("mon erreur",err);
+       
+        
+        
+  //     },
+  //     complete:()=> {
+  //       console.log("mon api youpi");
+        
+  //     },
+  //   })
+
+  // }
+  
+
+  
 
   viderPanier() {
     sessionStorage.removeItem('panier');
