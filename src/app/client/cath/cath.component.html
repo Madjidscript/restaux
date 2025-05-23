@@ -1,20 +1,55 @@
 <div class="loader-container" *ngIf="loading">
     <div class="spinner"></div>
 </div>
+
+
+<div class="search-container" style="margin-top: 80px;">
+  <form [formGroup]="searchForm">
+    <input
+      type="text"
+      formControlName="searchTerm"
+      placeholder="Rechercher une catégorie..."
+      class="search-bar"
+    />
+  </form>
+</div>
+
+<div *ngIf="!loading">
+  <h2 class="title">Our Menu</h2>
+
+  <div class="card-container">
+    <div
+      class="card"
+      *ngFor="let item of filteredData"
+      (click)="nav(item._id)"
+      style="cursor: pointer;"
+    >
+      <img [src]="formatImagePath(item.image)" alt="Image" />
+      <h4>{{ item.nom }}</h4>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!loading && filteredData.length === 0" class="no-result">
+  Aucune catégorie trouvée.
+</div>
+
+
+
+
   
 
 
-<div *ngIf="!loading">
+<!-- <div *ngIf="!loading">
     <h2 class="title">Our Menu</h2>
     
     <div class="card-container" >
       
       <div class="card" *ngFor="let item of data" (click)="nav(item._id)" style="cursor: pointer;">
-        <!-- <img [src]="item.image.replace(/\\/g, '/')" alt="Image" /> -->
         <img [src]="formatImagePath(item.image)" alt="Image" />
   
         <h4>{{ item.nom }}</h4>
       </div>
     </div>
-</div>
+</div> -->
   

@@ -29,6 +29,7 @@
     gap: 16px;
     padding: 5px 16px;
     margin-top: 50px;
+    margin-bottom: 40px;
   }
   
   .card {
@@ -56,4 +57,58 @@
     color: #fd7400;
     margin-left: 15px;
   }
+
+
+
+
+  // autre
+
+ 
+  
+  .search-bar {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 16px;
+  }
+  
+ 
+  
+ 
+ 
+  
+  .no-result {
+    text-align: center;
+    color: #999;
+    margin-top: 20px;
+  }
+
+
+  .search-container {
+    // width: 80%;
+    position: sticky;
+    top: 0;
+    // background-color: white;
+    z-index: 10;
+    padding: 15px;
+    // box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .search-bar {
+    width: 90%;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    margin: 0px auto;
+    border: 1px solid #ccc;
+  }
+  
+  .title {
+    text-align: center;
+    margin: 20px 0;
+  }
+  
+  
   
