@@ -23,16 +23,17 @@
   </div>
 
   <div class="boxs">
-    <div *ngIf="commandeValidee" class="confirmation-message">
+    <!-- Message de confirmation -->
+    <div *ngIf="commandeValidee && statut" class="confirmation-message">
       <i class="fa-solid fa-circle-check"></i>
       <p>Commande effectuée avec succès !</p>
       <button class="cancel-btn" (click)="annulerCommande()">Annuler la commande</button>
     </div>
-
-    <!-- <div *ngIf="cartItems.length <= 0" class="confirmation-message">
-      <i class="fas fa-shopping-basket"></i>
-      <p>votre panier est vide !</p>
-      <button class="cancel-btn" (click)="panier()">retour panier</button>
-    </div> -->
+  
+    <!-- Message d'annulation -->
+    <div *ngIf="!statut" class="confirmation-message annulee">
+      <i class="fa-solid fa-circle-xmark"></i>
+      <p>Commande annulée avec succès !</p>
+    </div>
   </div>
   

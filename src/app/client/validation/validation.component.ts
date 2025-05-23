@@ -17,6 +17,7 @@ export class ValidationComponent {
  
   cartItems: any[] = [];
   tb:any
+  statut=false
   commandeValidee = false;
   validationForm:FormGroup = new FormGroup({
     allergies: new FormControl('')
@@ -46,6 +47,7 @@ export class ValidationComponent {
 
   confirmerCommande() {
     this.commandeValidee = true;
+    this.statut=true
     const allergies = this.validationForm.get('allergies')?.value;
      
     
@@ -77,7 +79,7 @@ export class ValidationComponent {
         sessionStorage.removeItem('commandeValidee');
         this.router.navigate([`/client/cath/${this.tb}`])
           
-        }, 10000);
+        }, 8000);
           
         }
         
@@ -103,18 +105,23 @@ export class ValidationComponent {
 
   annulerCommande(){
     
-
+     
     this.api.annulecmd(this.index,this.tb).subscribe({
       next:(res:any)=> {
         console.log("mons data",res);
         
         if (res.status== "success"){
 
-
+        
         sessionStorage.removeItem('commandeValidee');
         sessionStorage.removeItem('alergit');
         this.commandeValidee = false;
-        this.router.navigate([`/client/cath/${this.tb}`])
+        this.statut=false
+
+        // setTimeout(() => {
+
+        //   this.router.navigate([`/client/cath/${this.tb}`])
+        // }, 5000);
 
         }
       

@@ -91,3 +91,35 @@
     margin-bottom: 10px;
   }
   
+
+
+  .confirmation-message {
+    text-align: center;
+    padding: 40px;
+    background-color: #f0fff0;
+    border-radius: 10px;
+    margin: 20px;
+    color: green;
+    font-size: 18px;
+  }
+  
+  .confirmation-message.annulee {
+    background-color: #fff0f0;
+    color: red;
+  }
+  
+  .cancel-btn {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #ff4d4d;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .cancel-btn:hover {
+    background-color: #cc0000;
+  }
+  
