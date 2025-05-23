@@ -21,4 +21,12 @@ export class ClientserviceService {
   validationcmmd(body:any) {
     return this.http.post(this.api_url+"/admin/validationcmmd", body);
   }
+
+  // Editstatut(id:any) {
+  //   return this.http.get(this.api_url+`/admin/commandes/${id}`, );
+  // }
+
+  annulecmd(index:any,num:any) {
+    return this.http.delete(this.api_url+`/admin/annulecommandes/${index}/${num}`, );
+  }
 }

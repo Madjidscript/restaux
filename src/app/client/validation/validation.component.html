@@ -1,4 +1,5 @@
 <div class="validation-page" *ngIf="cartItems.length > 0">
+  
     <h2 *ngIf="!commandeValidee">Récapitulatif de votre commande</h2>
   
     <div *ngIf="!commandeValidee">
@@ -25,7 +26,13 @@
     <div *ngIf="commandeValidee" class="confirmation-message">
       <i class="fa-solid fa-circle-check"></i>
       <p>Commande effectuée avec succès !</p>
-      <!-- <button class="cancel-btn" (click)="annulerCommande()">Annuler la commande</button> -->
+      <button class="cancel-btn" (click)="annulerCommande()">Annuler la commande</button>
+    </div>
+
+    <div *ngIf="cartItems.length <= 0" class="confirmation-message">
+      <i class="fas fa-shopping-basket"></i>
+      <p>votre panier est vide !</p>
+      <button class="cancel-btn" (click)="panier()">retour panier</button>
     </div>
   </div>
   

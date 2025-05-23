@@ -22,6 +22,7 @@ export class ValidationComponent {
     allergies: new FormControl('')
   });
   total: any;
+  index:any
 
   constructor( private router:Router,private activate:ActivatedRoute,private api:ClientserviceService) {
    
@@ -38,20 +39,20 @@ export class ValidationComponent {
     this.commandeValidee = sessionStorage.getItem('commandeValidee') === 'true';
     this.tb=this.activate.snapshot.paramMap.get("tb")
     this.total = this.cartItems.reduce((sum, item) => sum + item.prix_total, 0);
-    console.log("mon tatal",this.total);
+    console.log("mon tatal",this.total,this.cartItems);
     
   }
 
   confirmerCommande() {
     this.commandeValidee = true;
     const allergies = this.validationForm.get('allergies')?.value;
-    const index = this.generateUniqueIndex();
+     this.index = this.generateUniqueIndex();
     
     const commande = {
       num: this.tb,
       total: this.total.toString(),
       statut: true,
-      index: index,
+      index: this.index,
       data: this.cartItems.map(item => ({
         id: item._id,
         image: item.image,
@@ -82,7 +83,7 @@ export class ValidationComponent {
       },
       complete:()=> {
         console.log("ok");
-        
+        this.cartItems = [];
       },
     })
 
@@ -90,45 +91,45 @@ export class ValidationComponent {
     
     
     
-    this.cartItems = [];
+    
   }
 
 
-  // annulerCommande(id:any,num:any){
+  annulerCommande(){
     
 
-  //   this.api.annulecmd(id,num).subscribe({
-  //     next:(res:any)=> {
-  //       console.log("mons data",res);
+    this.api.annulecmd(this.index,this.tb).subscribe({
+      next:(res:any)=> {
+        console.log("mons data",res);
         
 
-  //       if (res?.status === 'success') {
-  //         sessionStorage.removeItem('commandeValidee');
-  //       sessionStorage.removeItem('alergit');
-  //       this.commandeValidee = false;
-  //       this.router.navigate([`/client/cath/${this.tb}`])
+        if (res?.status === 'success') {
+          sessionStorage.removeItem('commandeValidee');
+        sessionStorage.removeItem('alergit');
+        this.commandeValidee = false;
+        this.router.navigate([`/client/cath/${this.tb}`])
          
-  //       //  setTimeout(() => {
-  //       //   this.nav()
-  //       //  }, 3000);
+        //  setTimeout(() => {
+        //   this.nav()
+        //  }, 3000);
 
-  //       } 
+        } 
          
   
-  //     },
-  //     error:(err:any)=> {
-  //       console.log("mon erreur",err);
+      },
+      error:(err:any)=> {
+        console.log("mon erreur",err);
        
         
         
-  //     },
-  //     complete:()=> {
-  //       console.log("mon api youpi");
+      },
+      complete:()=> {
+        console.log("mon api youpi");
         
-  //     },
-  //   })
+      },
+    })
 
-  // }
+  }
   
 
   
@@ -137,6 +138,10 @@ export class ValidationComponent {
     sessionStorage.removeItem('panier');
     this.cartItems = [];
     this.router.navigate([`/client/cath/${this.tb}`])
+  }
+
+  panier(){
+    this.router.navigate([`/client/panier/${this.tb}`])
   }
 
 }
