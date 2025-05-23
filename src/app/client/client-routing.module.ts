@@ -5,6 +5,7 @@ import { HomeComponent } from './home/home.component';
 import { PanierComponent } from './panier/panier.component';
 import { CathComponent } from './cath/cath.component';
 import { SouscathComponent } from './souscath/souscath.component';
+import { ValidationComponent } from './validation/validation.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: "panier/:tb", component: PanierComponent },
   { path: "cath/:tb", component: CathComponent },
   { path: "souscath/:id/:tb", component: SouscathComponent },
+  { path: "validation/:tb", component: ValidationComponent },
   { path: "**", redirectTo: "home/:tb" }  // redirection par défaut
     ]
   }

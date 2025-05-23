@@ -17,4 +17,8 @@ export class ClientserviceService {
   AllsousCathebycath(body:any) {
     return this.http.post(this.api_url+"/admin/cathegoriesbycath", body);
   }
+
+  validationcmmd(body:any) {
+    return this.http.post(this.api_url+"/admin/validationcmmd", body);
+  }
 }

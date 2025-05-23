@@ -58,7 +58,8 @@ export class PanierService {
         image: item.image,
         prix_unitaire: item.prix,
         quantite: 1,
-        prix_total: item.prix
+        prix_total: item.prix,
+       
       });
     }
 

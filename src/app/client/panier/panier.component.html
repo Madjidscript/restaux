@@ -4,7 +4,7 @@
 </div>
 
 
-<div class="dark-content" *ngIf="loading">
+<div class="dark-content" *ngIf="loading && totalQuantite > 0">
     <!-- <div class="order-header">
       <h3>Commande No #18</h3>
     </div> -->
@@ -42,5 +42,15 @@
         <span>{{ total }} $</span>
       </div>
     </div>
+
+    <button class="validate-btn" (click)="validerCommande()">Valider ma commande</button>
+
+
+  </div>
+
+
+  <div *ngIf="loading && totalQuantite <= 0" class="empty-cart">
+    <i class="fas fa-shopping-basket"></i>
+    <p style="color: red;">Veuillez ajouter des plats à votre panier.</p>
   </div>
   

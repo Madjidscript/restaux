@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { environment } from '../../../environments/environment.prod';
 import { PanierService } from '../../panierservice/panier.service';
 
@@ -15,6 +15,7 @@ export class PanierComponent implements OnInit {
 
 
   cartItems: any[] = [];
+  tb:any
   loading=false
   subtotal: number = 0;
   total: number = 0;
@@ -26,9 +27,10 @@ export class PanierComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadCart();
+    this.tb = this.activate.snapshot.paramMap.get("tb")
   }
 
-  constructor(private panierService:PanierService){}
+  constructor(private panierService:PanierService,private router:Router,private activate:ActivatedRoute){}
 
   loadCart(): void {
     const storedCart = sessionStorage.getItem('panier');
@@ -85,6 +87,10 @@ export class PanierComponent implements OnInit {
 
   // Optionnel : recalculer la quantité totale si tu l'affiches
   this.totalQuantite = this.cartItems.reduce((sum, p) => sum + p.quantite, 0);
+  }
+
+  validerCommande() {
+    this.router.navigate(['/client/validation', this.tb]); // Redirection vers une page de validation
   }
 
 }

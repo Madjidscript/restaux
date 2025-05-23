@@ -1,0 +1,31 @@
+<div class="validation-page" *ngIf="cartItems.length > 0">
+    <h2 *ngIf="!commandeValidee">Récapitulatif de votre commande</h2>
+  
+    <div *ngIf="!commandeValidee">
+      <div *ngFor="let item of cartItems" class="recap-item">
+        {{ item.nom }} x{{ item.quantite }} - {{ item.prix_total }} $
+      </div>
+
+      <div>total: {{total}} </div>
+  
+      <form [formGroup]="validationForm">
+        <textarea formControlName="allergies" placeholder="Avez-vous des allergies ?"></textarea>
+      </form>
+  
+      <div class="buttons">
+        <button class="confirm-btn" (click)="confirmerCommande()">Confirmer</button>
+        <button class="clear-btn" (click)="viderPanier()">Vider le panier</button>
+      </div>
+    </div>
+  
+    
+  </div>
+
+  <div class="boxs">
+    <div *ngIf="commandeValidee" class="confirmation-message">
+      <i class="fa-solid fa-circle-check"></i>
+      <p>Commande effectuée avec succès !</p>
+      <button class="cancel-btn" (click)="annulerCommande()">Annuler la commande</button>
+    </div>
+  </div>
+  
