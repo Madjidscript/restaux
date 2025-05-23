@@ -40,13 +40,14 @@ export class ValidationComponent {
     this.tb=this.activate.snapshot.paramMap.get("tb")
     this.total = this.cartItems.reduce((sum, item) => sum + item.prix_total, 0);
     console.log("mon tatal",this.total,this.cartItems);
+    this.index = this.generateUniqueIndex();
     
   }
 
   confirmerCommande() {
     this.commandeValidee = true;
     const allergies = this.validationForm.get('allergies')?.value;
-     this.index = this.generateUniqueIndex();
+     
     
     const commande = {
       num: this.tb,
@@ -71,7 +72,12 @@ export class ValidationComponent {
         if (res.status== "success") {
           sessionStorage.setItem('alergit', allergies);
         sessionStorage.removeItem('panier');
-       sessionStorage.setItem('commandeValidee', 'true');
+        sessionStorage.setItem('commandeValidee', 'true');
+        setTimeout(() => {
+        sessionStorage.removeItem('commandeValidee');
+        this.router.navigate([`/client/cath/${this.tb}`])
+          
+        }, 10000);
           
         }
         
@@ -102,20 +108,17 @@ export class ValidationComponent {
       next:(res:any)=> {
         console.log("mons data",res);
         
+        if (res.status== "success"){
 
-        if (res?.status === 'success') {
-          sessionStorage.removeItem('commandeValidee');
+
+        sessionStorage.removeItem('commandeValidee');
         sessionStorage.removeItem('alergit');
         this.commandeValidee = false;
         this.router.navigate([`/client/cath/${this.tb}`])
-         
-        //  setTimeout(() => {
-        //   this.nav()
-        //  }, 3000);
 
-        } 
+        }
+      
          
-  
       },
       error:(err:any)=> {
         console.log("mon erreur",err);

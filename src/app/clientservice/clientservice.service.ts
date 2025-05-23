@@ -27,6 +27,6 @@ export class ClientserviceService {
   // }
 
   annulecmd(index:any,num:any) {
-    return this.http.delete(this.api_url+`/admin/annulecommandes/${index}/${num}`, );
+    return this.http.delete(this.api_url+`/admin/annulecommandesbyclient/${index}/${num}`,);
   }
 }
