@@ -18,62 +18,122 @@ export class AppComponent implements OnInit {
   notifdata:any
   constructor(private socket:SoketserviceService ,private session:SessionserviceService){}
 
-  ngOnInit(): void {
-    this.notifdata = this.session.getItem("notif")
-    console.log("ma notif",this.notifdata);
+  // ngOnInit(): void {
+  //   this.notifdata = this.session.getItem("notif")
+  //   console.log("ma notif",this.notifdata);
 
     
+  //   this.socket.onMessage("notification", data => {
+  //     console.log("mon message depuis le socket backend111", data);
+
+  //     const notifStr = sessionStorage.getItem("notif");
+  //     if (!notifStr) return; 
+
+  //     const notifdata = JSON.parse(notifStr); // pas this.notifdata ici
+  //     console.log("notifdata.num =", notifdata.num);
+  //     console.log("data.num =", data.num);
+  //     console.log("notifdata.index =", notifdata.index);
+  //     console.log("data.index =", data.index);
+  //     console.log("data.type =", data.type);
+      
+  //     if (notifdata.num == data.num && notifdata.index ==data.index && data.type=="valider" ) {
+  //       console.log("mon message depuis le socket backend222", data);
+  //       this.message = data.message;
+
+  //       const notifStr = sessionStorage.getItem('notif');
+  //       if (notifStr) {
+  //          const notif = JSON.parse(notifStr);
+  //         // 2. Ajouter un message dans le tableau 'message'
+  //         notif.message.push(this.message); // 'this.message' contient ton message à ajouter
+  //         notif.notiflength = notif.message.length;
+  //         // 3. Réenregistrer dans le sessionStorage
+  //         sessionStorage.setItem('notif', JSON.stringify(notif));
+  //       }
+      
+  //     // Durée totale de vocalisation (en millisecondes)
+  //     const duration = 3000;
+  //     const intervalTime = 1000; // délai entre chaque répétition
+  //     const startTime = Date.now();
+    
+  //     const speakMessage = () => {
+  //       const now = Date.now();
+  //       if (now - startTime < duration) {
+  //         const utterance = new SpeechSynthesisUtterance(this.message);
+  //         utterance.lang = 'fr-FR';
+  //         speechSynthesis.speak(utterance);
+    
+  //         // Planifie la prochaine lecture
+  //         setTimeout(speakMessage, intervalTime);
+  //       }
+  //     };
+    
+  //     speakMessage(); // Démarrer la lecture
+      
+  //    }
+     
+  //   });
+   
+  // }
+
+
+  ngOnInit(): void {
+    // Étape 1 : débloquer speechSynthesis
+    document.body.addEventListener('click', () => {
+      const initVoice = new SpeechSynthesisUtterance('Initialisation');
+      initVoice.lang = 'fr-FR';
+      speechSynthesis.speak(initVoice);
+    }, { once: true });
+  
+    // Charger notif de sessionStorage
+    this.notifdata = this.session.getItem("notif");
+    console.log("ma notif", this.notifdata);
+  
+    // Réception socket
     this.socket.onMessage("notification", data => {
       console.log("mon message depuis le socket backend111", data);
-
+  
       const notifStr = sessionStorage.getItem("notif");
-      if (!notifStr) return; 
-
-      const notifdata = JSON.parse(notifStr); // pas this.notifdata ici
+      if (!notifStr) return;
+  
+      const notifdata = JSON.parse(notifStr);
       console.log("notifdata.num =", notifdata.num);
       console.log("data.num =", data.num);
       console.log("notifdata.index =", notifdata.index);
       console.log("data.index =", data.index);
       console.log("data.type =", data.type);
-      
-      if (notifdata.num == data.num && notifdata.index ==data.index && data.type=="valider" ) {
+  
+      if (notifdata.num == data.num && notifdata.index == data.index && data.type == "valider") {
         console.log("mon message depuis le socket backend222", data);
         this.message = data.message;
-
-        const notifStr = sessionStorage.getItem('notif');
-        if (notifStr) {
-           const notif = JSON.parse(notifStr);
-          // 2. Ajouter un message dans le tableau 'message'
-          notif.message.push(this.message); // 'this.message' contient ton message à ajouter
-          notif.notiflength = notif.message.length;
-          // 3. Réenregistrer dans le sessionStorage
-          sessionStorage.setItem('notif', JSON.stringify(notif));
-        }
-      
-      // Durée totale de vocalisation (en millisecondes)
-      const duration = 3000;
-      const intervalTime = 1000; // délai entre chaque répétition
-      const startTime = Date.now();
-    
-      const speakMessage = () => {
-        const now = Date.now();
-        if (now - startTime < duration) {
-          const utterance = new SpeechSynthesisUtterance(this.message);
-          utterance.lang = 'fr-FR';
-          speechSynthesis.speak(utterance);
-    
-          // Planifie la prochaine lecture
-          setTimeout(speakMessage, intervalTime);
-        }
-      };
-    
-      speakMessage(); // Démarrer la lecture
-      
-     }
-     
+  
+        // Ajouter le message à la session
+        const notif = JSON.parse(sessionStorage.getItem('notif') || '{}');
+        notif.message = notif.message || [];
+        notif.message.push(this.message);
+        notif.notiflength = notif.message.length;
+        sessionStorage.setItem('notif', JSON.stringify(notif));
+  
+        // Lecture vocale
+        const duration = 3000;
+        const intervalTime = 1000;
+        const startTime = Date.now();
+  
+        const speakMessage = () => {
+          const now = Date.now();
+          if (now - startTime < duration) {
+            const utterance = new SpeechSynthesisUtterance(this.message);
+            utterance.lang = 'fr-FR';
+            speechSynthesis.cancel(); // stoppe si une autre lecture est en cours
+            speechSynthesis.speak(utterance);
+            setTimeout(speakMessage, intervalTime);
+          }
+        };
+  
+        speakMessage(); // Lancer la lecture
+      }
     });
-   
   }
+  
   
 
   
