@@ -105,6 +105,8 @@ export class AppComponent implements OnInit {
       if (notifdata.num == data.num && notifdata.index == data.index && data.type == "valider") {
         console.log("mon message depuis le socket backend222", data);
         this.message = data.message;
+        // Affiche pour confirmer la réception
+        alert("Socket reçu : " + this.message);
   
         // Ajouter le message à la session
         const notif = JSON.parse(sessionStorage.getItem('notif') || '{}');
