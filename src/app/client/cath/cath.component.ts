@@ -70,7 +70,16 @@ export class CathComponent implements OnInit {
 
    nav(id:any){
     this.router.navigate([`/client/souscath/${id}/${this.tb}`])
+    this.initialiserVoix()
    }
+
+
+
+   initialiserVoix() {
+    const test = new SpeechSynthesisUtterance("Voix activée");
+    test.lang = 'fr-FR';
+    speechSynthesis.speak(test);
+  }
 
 
 
