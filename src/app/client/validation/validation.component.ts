@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ClientserviceService } from '../../clientservice/clientservice.service';
+import { SessionserviceService } from '../../sessionservice/sessionservice.service';
+import { PanierService } from '../../panierservice/panier.service';
 
 
 @Component({
@@ -17,6 +19,7 @@ export class ValidationComponent {
  
   cartItems: any[] = [];
   tb:any
+  notif:any
   statut=false
   commandeValidee = false;
   validationForm:FormGroup = new FormGroup({
@@ -25,7 +28,7 @@ export class ValidationComponent {
   total: any;
   index:any
 
-  constructor( private router:Router,private activate:ActivatedRoute,private api:ClientserviceService) {
+  constructor( private router:Router,private activate:ActivatedRoute,private api:ClientserviceService,private session:SessionserviceService,private paniers:PanierService) {
    
   }
 
@@ -66,15 +69,26 @@ export class ValidationComponent {
       })),
       alergit:allergies
     };
+
+    this.notif={
+      num:commande.num,
+      index:this.index,
+      message:[]
+    }
     console.log("ma commande backend",commande);
 
     this.api.validationcmmd(commande).subscribe({
       next:(res:any)=> {
         console.log("ma reponse ",res);
         if (res.status== "success") {
-          sessionStorage.setItem('alergit', allergies);
+          sessionStorage.removeItem('alergit');
+          if (sessionStorage.getItem('notif')) {
+            sessionStorage.removeItem('notif');
+          }
+        sessionStorage.setItem('notif', JSON.stringify(this.notif));
         sessionStorage.removeItem('panier');
         sessionStorage.setItem('commandeValidee', 'true');
+        this.paniers.refreshPanier()
         setTimeout(() => {
         sessionStorage.removeItem('commandeValidee');
         this.router.navigate([`/client/cath/${this.tb}`])
@@ -115,6 +129,8 @@ export class ValidationComponent {
         
         sessionStorage.removeItem('commandeValidee');
         sessionStorage.removeItem('alergit');
+        this.paniers.refreshPanier()
+
         this.commandeValidee = false;
         this.statut=false
 
@@ -146,8 +162,10 @@ export class ValidationComponent {
 
   viderPanier() {
     sessionStorage.removeItem('panier');
+    sessionStorage.removeItem('notif');
     this.cartItems = [];
     this.router.navigate([`/client/cath/${this.tb}`])
+    this.paniers.refreshPanier()
   }
 
   panier(){

@@ -63,6 +63,9 @@ export class PanierService {
       });
     }
 
+
+    
+
     this.savePanierToStorage(panier);
     this.panierSubject.next(panier); // 🔔 Notifie les abonnés
   }

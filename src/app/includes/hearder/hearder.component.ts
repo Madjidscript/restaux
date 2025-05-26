@@ -11,6 +11,7 @@ import { filter } from 'rxjs/operators';
 })
 export class HearderComponent implements OnInit{
   tb:any
+  length:any =0
   constructor(private router: Router, private route: ActivatedRoute){}
   ngOnInit() {
     // Écoute les changements de route
@@ -25,7 +26,23 @@ export class HearderComponent implements OnInit{
 
         this.tb = activeRoute.snapshot.paramMap.get('tb');
         console.log("TB dans le header :", this.tb);
+        this.taille()
       });
+
+     
+  }
+
+  taille(){
+    const notifStr = sessionStorage.getItem('notif');
+        if (notifStr) {
+           const notif = JSON.parse(notifStr);
+          // 2. Ajouter un message dans le tableau 'message'
+          this.length = notif.message.length;
+          console.log("ma notif length",this.length);
+          
+          // 3. Réenregistrer dans le sessionStorage
+          
+        }
   }
 
 
