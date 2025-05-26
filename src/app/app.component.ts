@@ -88,7 +88,7 @@ export class AppComponent implements OnInit {
         this.message = data.message;
 
         // Lire vocalement
-        const utterance = new SpeechSynthesisUtterance(this.message);
+        const utterance = new SpeechSynthesisUtterance("papapaap");
         utterance.lang = 'fr-FR';
         speechSynthesis.speak(utterance);
 
