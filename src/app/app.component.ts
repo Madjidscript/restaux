@@ -26,13 +26,17 @@ export class AppComponent implements OnInit {
     this.socket.onMessage("notification", data => {
       console.log("mon message depuis le socket backend111", data);
 
-      console.log("notifdata.num =", this.notifdata.num);
-console.log("data.num =", data.num);
-console.log("notifdata.index =", this.notifdata.index);
-console.log("data.index =", data.index);
-console.log("data.type =", data.type);
+      const notifStr = sessionStorage.getItem("notif");
+      if (!notifStr) return; 
+
+      const notifdata = JSON.parse(notifStr); // pas this.notifdata ici
+      console.log("notifdata.num =", notifdata.num);
+      console.log("data.num =", data.num);
+      console.log("notifdata.index =", notifdata.index);
+      console.log("data.index =", data.index);
+      console.log("data.type =", data.type);
       
-      if (this.notifdata.num == data.num && this.notifdata.index ==data.index && data.type=="valider" ) {
+      if (notifdata.num == data.num && notifdata.index ==data.index && data.type=="valider" ) {
         console.log("mon message depuis le socket backend222", data);
         this.message = data.message;
 
@@ -41,6 +45,7 @@ console.log("data.type =", data.type);
            const notif = JSON.parse(notifStr);
           // 2. Ajouter un message dans le tableau 'message'
           notif.message.push(this.message); // 'this.message' contient ton message à ajouter
+          notif.notiflength = notif.message.length;
           // 3. Réenregistrer dans le sessionStorage
           sessionStorage.setItem('notif', JSON.stringify(notif));
         }

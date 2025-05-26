@@ -70,11 +70,7 @@ export class ValidationComponent {
       alergit:allergies
     };
 
-    this.notif={
-      num:commande.num,
-      index:this.index,
-      message:[]
-    }
+    
     console.log("ma commande backend",commande);
 
     this.api.validationcmmd(commande).subscribe({
@@ -83,8 +79,25 @@ export class ValidationComponent {
         if (res.status== "success") {
           sessionStorage.removeItem('alergit');
           if (sessionStorage.getItem('notif')) {
+            console.log('supprimer et nouveau');
+
+            
+            console.log("datanotif",this.notif);
+            
+            
             sessionStorage.removeItem('notif');
+
+            this.notif={
+              num:commande.num,
+              index:commande.index,
+              message:[],
+              notiflength:0
+        
+            }
+            console.log("md",this.notif);
+            
           }
+          
         sessionStorage.setItem('notif', JSON.stringify(this.notif));
         sessionStorage.removeItem('panier');
         sessionStorage.setItem('commandeValidee', 'true');

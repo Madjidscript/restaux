@@ -37,7 +37,8 @@ export class HearderComponent implements OnInit{
         if (notifStr) {
            const notif = JSON.parse(notifStr);
           // 2. Ajouter un message dans le tableau 'message'
-          this.length = notif.message.length;
+          this.length =notif.notiflength;
+          ;
           console.log("ma notif length",this.length);
           
           // 3. Réenregistrer dans le sessionStorage
