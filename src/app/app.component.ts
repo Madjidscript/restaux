@@ -15,6 +15,8 @@ import { SessionserviceService } from './sessionservice/sessionservice.service';
 export class AppComponent implements OnInit {
   title = 'qrrextaux';
   message:any
+  
+  voixActive = false;
   notifdata:any
   constructor(private socket:SoketserviceService ,private session:SessionserviceService){}
 
@@ -77,52 +79,34 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit(): void {
-    // Étape 1 : débloquer speechSynthesis
-    document.body.addEventListener('click', () => {
-      const initVoice = new SpeechSynthesisUtterance('Initialisation');
-      initVoice.lang = 'fr-FR';
-      speechSynthesis.speak(initVoice);
-    }, { once: true });
-  
-    // Charger notif de sessionStorage
-    this.notifdata = this.session.getItem("notif");
-    console.log("ma notif", this.notifdata);
-  
-    // Réception socket
-    this.socket.onMessage("notification", data => {
-      const notifStr = sessionStorage.getItem("notif");
-      if (!notifStr) return;
-    
-      const notifdata = JSON.parse(notifStr);
-    
-      if (notifdata.num == data.num && notifdata.index == data.index && data.type == "valider") {
+    this.socket.onMessage('notification', (data: any) => {
+      console.log("Message reçu :", data);
+
+      if (!this.voixActive) return; // Si l'utilisateur n’a pas activé la voix, on ne fait rien
+
+      if (data?.type === 'valider') {
         this.message = data.message;
-    
-        // Annule les voix précédentes
-        speechSynthesis.cancel();
-    
+
+        // Lire vocalement
         const utterance = new SpeechSynthesisUtterance(this.message);
         utterance.lang = 'fr-FR';
-    
-        // Rejoue plusieurs fois si nécessaire
-        const duration = 3000;
-        const intervalTime = 1000;
-        const startTime = Date.now();
-    
-        const speakMessage = () => {
-          if (Date.now() - startTime < duration) {
-            speechSynthesis.cancel(); // Toujours annuler
-            speechSynthesis.speak(utterance);
-            setTimeout(speakMessage, intervalTime);
-          }
-        };
-    
-        speakMessage();
+        speechSynthesis.speak(utterance);
+
+        // Vibrer le téléphone (durée : 500 ms)
+        if (navigator.vibrate) {
+          navigator.vibrate(500);
+        }
       }
     });
-    
   }
-  
+
+  activerVoix() {
+    const test = new SpeechSynthesisUtterance("Notifications vocales activées");
+    test.lang = 'fr-FR';
+    speechSynthesis.speak(test);
+
+    this.voixActive = true;
+  }
   
 
   

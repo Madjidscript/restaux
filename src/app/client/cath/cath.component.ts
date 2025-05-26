@@ -25,6 +25,7 @@ export class CathComponent implements OnInit {
 
   data:any
   filteredData: any[] = [];
+  voixActive = false;
   tb:any
   loading=false
   baseUrl = environment.apiUrl + '/';
@@ -70,15 +71,17 @@ export class CathComponent implements OnInit {
 
    nav(id:any){
     this.router.navigate([`/client/souscath/${id}/${this.tb}`])
-    this.initialiserVoix()
+    this.activerVoix()
    }
 
 
 
-   initialiserVoix() {
-    const test = new SpeechSynthesisUtterance("Voix activée");
+   activerVoix() {
+    const test = new SpeechSynthesisUtterance("Notifications vocales activées");
     test.lang = 'fr-FR';
     speechSynthesis.speak(test);
+
+    this.voixActive = true;
   }
 
 
