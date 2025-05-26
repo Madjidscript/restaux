@@ -90,50 +90,37 @@ export class AppComponent implements OnInit {
   
     // Réception socket
     this.socket.onMessage("notification", data => {
-      console.log("mon message depuis le socket backend111", data);
-  
       const notifStr = sessionStorage.getItem("notif");
       if (!notifStr) return;
-  
+    
       const notifdata = JSON.parse(notifStr);
-      console.log("notifdata.num =", notifdata.num);
-      console.log("data.num =", data.num);
-      console.log("notifdata.index =", notifdata.index);
-      console.log("data.index =", data.index);
-      console.log("data.type =", data.type);
-  
+    
       if (notifdata.num == data.num && notifdata.index == data.index && data.type == "valider") {
-        console.log("mon message depuis le socket backend222", data);
         this.message = data.message;
-        // Affiche pour confirmer la réception
-        alert("Socket reçu : " + this.message);
-  
-        // Ajouter le message à la session
-        const notif = JSON.parse(sessionStorage.getItem('notif') || '{}');
-        notif.message = notif.message || [];
-        notif.message.push(this.message);
-        notif.notiflength = notif.message.length;
-        sessionStorage.setItem('notif', JSON.stringify(notif));
-  
-        // Lecture vocale
+    
+        // Annule les voix précédentes
+        speechSynthesis.cancel();
+    
+        const utterance = new SpeechSynthesisUtterance(this.message);
+        utterance.lang = 'fr-FR';
+    
+        // Rejoue plusieurs fois si nécessaire
         const duration = 3000;
         const intervalTime = 1000;
         const startTime = Date.now();
-  
+    
         const speakMessage = () => {
-          const now = Date.now();
-          if (now - startTime < duration) {
-            const utterance = new SpeechSynthesisUtterance(this.message);
-            utterance.lang = 'fr-FR';
-            speechSynthesis.cancel(); // stoppe si une autre lecture est en cours
+          if (Date.now() - startTime < duration) {
+            speechSynthesis.cancel(); // Toujours annuler
             speechSynthesis.speak(utterance);
             setTimeout(speakMessage, intervalTime);
           }
         };
-  
-        speakMessage(); // Lancer la lecture
+    
+        speakMessage();
       }
     });
+    
   }
   
   
