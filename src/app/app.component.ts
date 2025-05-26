@@ -88,7 +88,7 @@ export class AppComponent implements OnInit {
         this.message = data.message;
 
         // Lire vocalement
-        const utterance = new SpeechSynthesisUtterance("papapaap");
+        const utterance = new SpeechSynthesisUtterance(this.message);
         utterance.lang = 'fr-FR';
         speechSynthesis.speak(utterance);
 
@@ -106,6 +106,33 @@ export class AppComponent implements OnInit {
     speechSynthesis.speak(test);
 
     this.voixActive = true;
+
+
+
+
+
+
+
+
+    this.socket.onMessage('notification', (data: any) => {
+      console.log("Message reçu :", data);
+
+      if (!this.voixActive) return; // Si l'utilisateur n’a pas activé la voix, on ne fait rien
+
+      if (data?.type === 'valider') {
+        this.message = data.message;
+
+        // Lire vocalement
+        const utterance = new SpeechSynthesisUtterance(this.message);
+        utterance.lang = 'fr-FR';
+        speechSynthesis.speak(utterance);
+
+        // Vibrer le téléphone (durée : 500 ms)
+        if (navigator.vibrate) {
+          navigator.vibrate(500);
+        }
+      }
+    });
   }
   
 
