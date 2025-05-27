@@ -56,7 +56,7 @@ export class AppComponent implements OnInit {
         }
       
       // Durée totale de vocalisation (en millisecondes)
-      const duration = 3000;
+      const duration = 2000;
       const intervalTime = 1000; // délai entre chaque répétition
       const startTime = Date.now();
     
