@@ -104,6 +104,7 @@ export class ValidationComponent {
         this.paniers.refreshPanier()
         setTimeout(() => {
         sessionStorage.removeItem('commandeValidee');
+        sessionStorage.removeItem('voixActive');
         this.router.navigate([`/client/cath/${this.tb}`])
           
         }, 8000);

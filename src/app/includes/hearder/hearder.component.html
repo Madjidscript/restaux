@@ -8,4 +8,13 @@
       </div>
     </div>
 </header>
+
+
+<div class="popup-notif" *ngIf="showNotifPopup">
+  <h4>Mes notifications</h4>
+  <ul>
+    <li *ngFor="let msg of notifdata?.message">{{ msg }}</li>
+  </ul>
+  <button (click)="fermerPopup()">Fermer</button>
+</div>
   

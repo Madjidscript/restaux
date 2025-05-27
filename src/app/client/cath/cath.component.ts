@@ -77,14 +77,24 @@ export class CathComponent implements OnInit {
 
 
    activerVoix() {
-    const test = new SpeechSynthesisUtterance("Bienvenue chez Restaux ! Nous sommes ravis de vous accueillir. Veuillez choisir une table pour commencer votre commande.");
-    console.log('first read');
+    // Vérifie si déjà activé dans sessionStorage
+    const dejaActive = sessionStorage.getItem('voixActive');
+  
+    if (dejaActive === 'true') {
+      console.log('Voix déjà activée, on ne répète pas.');
+      return;
+    }
+  
+    const message = new SpeechSynthesisUtterance("Bienvenue ! Nous sommes ravis de vous accueillir. Veuillez commencer votre commande.");
+    message.lang = navigator.language.startsWith('en') ? 'en-US' : 'fr-FR';
     
-    test.lang = 'fr-FR';
-    speechSynthesis.speak(test);
-
+    speechSynthesis.speak(message);
+  
+    // Marque comme activée
+    sessionStorage.setItem('voixActive', 'true');
     this.voixActive = true;
   }
+  
 
 
 

@@ -1,9 +1,14 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class SessionserviceService {
+
+   private sessionSubject = new BehaviorSubject<any[]>(this.getNotifFromStorage());
+  public notif$ = this.sessionSubject.asObservable();
 
   constructor() { }
 
@@ -31,5 +36,19 @@ export class SessionserviceService {
   // Supprimer toute la session
   clear(): void {
     sessionStorage.clear();
+  }
+
+
+  private getNotifFromStorage(): any {
+    if (typeof window !== 'undefined') {
+      return JSON.parse(sessionStorage.getItem('notif') || '{}');
+    }
+    return {};
+  }
+
+
+  notiflength(): number {
+    const notif = this.getNotifFromStorage();
+    return notif.notiflength || 0; // Retourne 0 si undefined
   }
 }
