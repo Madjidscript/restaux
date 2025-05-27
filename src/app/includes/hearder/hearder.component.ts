@@ -17,6 +17,8 @@ export class HearderComponent implements OnInit{
   length:any =0
   message:any
   showNotifPopup = false;
+  firstNotif = true; // au début
+
   
   voixActive = false;
   notifdata:any
@@ -56,6 +58,10 @@ export class HearderComponent implements OnInit{
 
   notif() {
     this.message = this.notifdata?.message?.at(-1) || "Pas de notification";
+    if (this.firstNotif && this.notifdata.message.length === 1) {
+      console.log("Première notification reçue");
+      this.firstNotif = false; // Ne plus l'afficher après
+    }
     this.lireVoix(this.message);
     this.showNotifPopup = true;
   }
