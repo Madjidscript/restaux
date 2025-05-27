@@ -12,9 +12,19 @@
 
 <div class="popup-notif" *ngIf="showNotifPopup">
   <h4>Mes notifications</h4>
-  <ul>
-    <li *ngFor="let msg of notifdata?.message">{{ msg }}</li>
+
+  <ul *ngIf="notifdata?.message?.length > 0">
+    <li *ngFor="let msg of notifdata.message">
+      {{ msg }}
+      <hr />
+    </li>
   </ul>
+
+  <ul *ngIf="!notifdata || !notifdata.message || notifdata.message.length === 0">
+    <li class="no-notif">Pas de notification</li>
+  </ul>
+
   <button (click)="fermerPopup()">Fermer</button>
 </div>
+
   
