@@ -130,6 +130,8 @@ export class ValidationComponent {
   }
 
 
+  
+
   annulerCommande(){
     
      

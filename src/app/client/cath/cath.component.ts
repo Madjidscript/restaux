@@ -77,7 +77,9 @@ export class CathComponent implements OnInit {
 
 
    activerVoix() {
-    const test = new SpeechSynthesisUtterance("Notifications vocales activées");
+    const test = new SpeechSynthesisUtterance("Bienvenue chez Restaux ! Nous sommes ravis de vous accueillir. Veuillez choisir une table pour commencer votre commande.");
+    console.log('first read');
+    
     test.lang = 'fr-FR';
     speechSynthesis.speak(test);
 
