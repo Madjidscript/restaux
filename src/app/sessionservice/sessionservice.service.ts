@@ -7,8 +7,9 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class SessionserviceService {
 
-   private sessionSubject = new BehaviorSubject<any[]>(this.getNotifFromStorage());
-  public notif$ = this.sessionSubject.asObservable();
+  private notifSubject = new BehaviorSubject<any[]>(this.getNotifFromStorage());
+  notif$ = this.notifSubject.asObservable();
+
 
   constructor() { }
 
@@ -17,12 +18,7 @@ export class SessionserviceService {
     sessionStorage.setItem(key, JSON.stringify(value));
   }
 
-  // Récupérer une donnée
-  getItem<T>(key: string): T | null {
-    const item = sessionStorage.getItem(key);
-    return item ? JSON.parse(item) as T : null;
-  }
-
+  
   // Supprimer une donnée spécifique
   removeItem(key: string): void {
     sessionStorage.removeItem(key);
@@ -39,16 +35,35 @@ export class SessionserviceService {
   }
 
 
+ 
+  getItem(key: string): any {
+    if (typeof window !== 'undefined') {
+      return JSON.parse(sessionStorage.getItem(key) || 'null');
+    }
+    return null;
+  }
+  
+  setNotif(data: any) {
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('notif', JSON.stringify(data));
+      this.notifSubject.next(data);
+    }
+  }
+  
   private getNotifFromStorage(): any {
     if (typeof window !== 'undefined') {
-      return JSON.parse(sessionStorage.getItem('notif') || '{}');
+      return JSON.parse(sessionStorage.getItem('notif') || '{"message":[],"notiflength":0}');
     }
-    return {};
+    return { message: [], notiflength: 0 };
   }
-
-
+  
   notiflength(): number {
-    const notif = this.getNotifFromStorage();
-    return notif.notiflength || 0; // Retourne 0 si undefined
+    if (typeof window !== 'undefined') {
+      const notif = this.getNotifFromStorage();
+      return notif?.notiflength || 0;
+    }
+    return 0;
   }
+
+  
 }

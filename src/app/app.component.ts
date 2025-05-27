@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
   constructor(private socket:SoketserviceService ,private session:SessionserviceService){}
 
   ngOnInit(): void {
-    this.notifdata = this.session.getItem("notif")
+    this.notifdata = this.session.getItem('notif');
     console.log("ma notif",this.notifdata);
 
     
@@ -44,12 +44,15 @@ export class AppComponent implements OnInit {
 
         const notifStr = sessionStorage.getItem('notif');
         if (notifStr) {
-           const notif = JSON.parse(notifStr);
-          // 2. Ajouter un message dans le tableau 'message'
-          notif.message.push(this.message); // 'this.message' contient ton message à ajouter
+          const notif = JSON.parse(notifStr);
+          notif.message.push(this.message);
           notif.notiflength = notif.message.length;
-          // 3. Réenregistrer dans le sessionStorage
+        
+          // Mets à jour sessionStorage
           sessionStorage.setItem('notif', JSON.stringify(notif));
+        
+          // Mets à jour le BehaviorSubject pour réveiller le header
+          this.session.setNotif(notif); // 🔁 AJOUT ESSENTIEL
         }
       
       // Durée totale de vocalisation (en millisecondes)

@@ -22,11 +22,7 @@ export class HearderComponent implements OnInit{
   notifdata:any
   constructor(private router: Router, private route: ActivatedRoute,private socket:SoketserviceService,private session:SessionserviceService ){}
   ngOnInit() {
-    // Écoute les changements de route
-    if (!this.notifdata || !this.notifdata.message || this.notifdata.message.length === 0) {
-      this.notifdata = { message: [] }; // éviter les erreurs plus loin
-      this.length=this.notifdata?.message.length
-    }
+    this.taille()
     
     this.router.events
       .pipe(filter((event:any) => event instanceof NavigationEnd))
@@ -45,18 +41,21 @@ export class HearderComponent implements OnInit{
      
   }
 
+
+  taille() {
+    this.session.notif$.subscribe((data: any) => {
+      this.notifdata = data;
+      this.length = data?.notiflength || 0;
+      console.log('Longueur des notifications (header) :', this.length);
+    });
+  }
+  
+
   
 
 
   notif() {
-    this.notifdata = this.session.getItem("notif");
-  
-    if (!this.notifdata || !this.notifdata.message || this.notifdata.message.length === 0) {
-      this.notifdata = { message: [] }; // éviter les erreurs plus loin
-    }
-  
-    this.message = this.notifdata.message.at(-1); // dernière notification
-  
+    this.message = this.notifdata?.message?.at(-1) || "Pas de notification";
     this.lireVoix(this.message);
     this.showNotifPopup = true;
   }

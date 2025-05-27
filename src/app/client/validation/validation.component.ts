@@ -78,6 +78,14 @@ export class ValidationComponent {
         console.log("ma reponse ",res);
         if (res.status== "success") {
           sessionStorage.removeItem('alergit');
+
+          this.notif={
+            num:commande.num,
+            index:commande.index,
+            message:[],
+            notiflength:0
+      
+          }
           if (sessionStorage.getItem('notif')) {
             console.log('supprimer et nouveau');
 
@@ -97,8 +105,8 @@ export class ValidationComponent {
             console.log("md",this.notif);
             
           }
-          
-        sessionStorage.setItem('notif', JSON.stringify(this.notif));
+          this.session.setNotif(this.notif);
+        // sessionStorage.setItem('notif', JSON.stringify(this.notif));
         sessionStorage.removeItem('panier');
         sessionStorage.setItem('commandeValidee', 'true');
         this.paniers.refreshPanier()
