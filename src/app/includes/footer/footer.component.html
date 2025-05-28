@@ -25,6 +25,15 @@
     <span class="tab-label">Panier</span>
   </a>
 
+  <a
+  class="tab-button"
+  [class.disabled]="!idCommande"
+  (click)="handleSuiviClick()"
+>
+  <i class="fas fa-clipboard-list"></i>
+  <span class="tab-label">Suivi</span>
+</a>
+
  
   
 </div>
@@ -39,6 +48,12 @@
     <button (click)="fermerPopup()">Fermer</button>
   </div>
 </div>
+
+
+<!-- <div *ngIf="showNoCommandePopup" class="popup">
+  <p>🚫 Vous n'avez pas encore passé de commande, aucun suivi disponible.</p>
+  <button (click)="showNoCommandePopup = false">Fermer</button>
+</div> -->
 
   
   

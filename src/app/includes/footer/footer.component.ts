@@ -19,14 +19,20 @@ export class FooterComponent implements OnInit {
   tb:any
   message:any
   showContactPopup = false;
+  showNoCommandePopup = false;
+  idCommande: string | null = null; // à remplir dynamiquement
 
 
-  constructor(private panierService: PanierService,private router: Router, private route: ActivatedRoute,private socket:SoketserviceService) {}
+
+
+  constructor(private panierService: PanierService,private router: Router, private route: ActivatedRoute,private socket:SoketserviceService,private session:SessionserviceService) {}
 
   ngOnInit() {
     console.log("yesss");
     
     this.totalQuantite = this.panierService.getTotalQuantite();
+    // console.log("mon index md",this.idCommande);
+    
 
     // 🔄 Mettre à jour en temps réel
     this.panierService.panier$.subscribe(() => {
@@ -35,21 +41,30 @@ export class FooterComponent implements OnInit {
     this.tbs()
   }
 
+    
+
+
 
   tbs(){
-    this.router.events
-          .pipe(filter((event:any) => event instanceof NavigationEnd))
-          .subscribe(() => {
-            // Traverse la route active pour trouver le paramètre `tb`
-            let activeRoute = this.route.root;
-            while (activeRoute.firstChild) {
-              activeRoute = activeRoute.firstChild;
-            }
-    
-            this.tb = activeRoute.snapshot.paramMap.get('tb');
-            console.log("TB dans le footer :", this.tb);
-          });
-  }
+  this.router.events
+    .pipe(filter((event: any) => event instanceof NavigationEnd))
+    .subscribe(() => {
+      let activeRoute = this.route.root;
+      while (activeRoute.firstChild) {
+        activeRoute = activeRoute.firstChild;
+      }
+
+      const tb = activeRoute.snapshot.paramMap.get("tb");
+      if (tb) {
+        this.tb = tb;
+        this.idCommande = this.session.getItem("notif").index
+
+        console.log("✅ TB dans le footer :", this.tb);
+      } else {
+        console.warn("❌ Aucun paramètre 'tb' trouvé dans l'URL.");
+      }
+    });
+}
 
   
 
@@ -75,6 +90,17 @@ export class FooterComponent implements OnInit {
   fermerPopup() {
     this.showContactPopup = false;
   }
+
+
+  
+
+handleSuiviClick() {
+  if (!this.idCommande) {
+    this.showNoCommandePopup = true;
+  } else {
+    this.router.navigate(['/client/suivie', this.idCommande, this.tb]);
+  }
+}
 
   
 

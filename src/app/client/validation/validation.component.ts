@@ -188,8 +188,8 @@ export class ValidationComponent {
     sessionStorage.removeItem('panier');
     sessionStorage.removeItem('notif');
     this.cartItems = [];
-    this.router.navigate([`/client/cath/${this.tb}`])
     this.paniers.refreshPanier()
+    this.router.navigate([`/client/cath/${this.tb}`])
   }
 
   panier(){

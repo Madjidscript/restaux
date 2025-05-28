@@ -35,7 +35,7 @@ export class HearderComponent implements OnInit{
           activeRoute = activeRoute.firstChild;
         }
 
-        this.tb = activeRoute.snapshot.paramMap.get('tb');
+        this.tb = activeRoute.snapshot.paramMap.get("tb");
         console.log("TB dans le header :", this.tb);
         
       });

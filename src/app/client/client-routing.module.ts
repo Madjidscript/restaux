@@ -6,17 +6,19 @@ import { PanierComponent } from './panier/panier.component';
 import { CathComponent } from './cath/cath.component';
 import { SouscathComponent } from './souscath/souscath.component';
 import { ValidationComponent } from './validation/validation.component';
+import { SuivieComponent } from './suivie/suivie.component';
 
 const routes: Routes = [
   {
     path:"",component:ClientComponent,
     children:[
-      { path: "home/:tb", component: HomeComponent },
+  { path: "home/:tb", component: HomeComponent },
   { path: "panier/:tb", component: PanierComponent },
   { path: "cath/:tb", component: CathComponent },
   { path: "souscath/:id/:tb", component: SouscathComponent },
+  { path: "suivie/:id/:tb", component: SuivieComponent },
   { path: "validation/:tb", component: ValidationComponent },
-  { path: "**", redirectTo: "home/:tb" }  // redirection par défaut
+  { path: "**", redirectTo: "home/1" }  // redirection par défaut
     ]
   }
 ];

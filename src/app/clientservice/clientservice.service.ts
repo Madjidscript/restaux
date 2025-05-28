@@ -14,6 +14,9 @@ export class ClientserviceService {
   AllCathe() {
     return this.http.get(this.api_url+"/admin/cathegories", );
   }
+  detailcmmdbyindex(index:any) {
+    return this.http.get(this.api_url+`/detailcmdindex/${index}`,);
+  }
   AllsousCathebycath(body:any) {
     return this.http.post(this.api_url+"/admin/cathegoriesbycath", body);
   }
@@ -28,5 +31,10 @@ export class ClientserviceService {
 
   annulecmd(index:any,num:any) {
     return this.http.delete(this.api_url+`/admin/annulecommandesbyclient/${index}/${num}`,);
+  }
+
+
+  AllCommande() {
+    return this.http.get(this.api_url+"/admin/commandes", );
   }
 }
