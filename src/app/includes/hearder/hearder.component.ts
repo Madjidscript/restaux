@@ -61,7 +61,7 @@ export class HearderComponent implements OnInit{
     if (this.firstNotif && this.notifdata.message.length === 1) {
       console.log("Première notification reçue");
       this.firstNotif = false; // Ne plus l'afficher après
-      this.lireVoix(this.message);
+      // this.lireVoix(this.message);
     }
    
     this.showNotifPopup = true;
@@ -69,7 +69,7 @@ export class HearderComponent implements OnInit{
 
 
   lireVoix(msg: string) {
-    const duration = 3000;
+    const duration = 2000;
     const intervalTime = 1000;
     const startTime = Date.now();
   

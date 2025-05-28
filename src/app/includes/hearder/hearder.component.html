@@ -11,26 +11,32 @@
 
 
 <div class="popup-notif" *ngIf="showNotifPopup">
+  
   <h4>Mes notifications</h4>
 
-  <!-- 🎉 Message spécial première notification -->
+  
   <div *ngIf="firstNotif && notifdata?.message?.length === 1" class="first-time-msg">
-     <!-- Vous avez reçu votre première notification ! -->
+    
      🎉{{ notifdata.message[0]}}
   </div>
 
-  <!-- Liste des notifications -->
+  <div style=" overflow: hidden;" >
+    <div class="line"></div>
   <ul *ngIf="notifdata?.message?.length > 0">
+    
+   
     <li *ngFor="let msg of notifdata.message">
+      <div class="circle"></div>
       {{ msg }}
       <hr />
     </li>
   </ul>
 
-  <!-- Si aucune notification -->
+ 
   <ul *ngIf="!notifdata || !notifdata.message || notifdata.message.length === 0">
     <li class="no-notif">Pas de notification</li>
   </ul>
+  </div>
 
   <button (click)="fermerPopup()">Fermer</button>
 </div>

@@ -20,7 +20,7 @@ export class ValidationComponent {
   cartItems: any[] = [];
   tb:any
   notif:any
-  statut=false
+  statut:any
   commandeValidee = false;
   validationForm:FormGroup = new FormGroup({
     allergies: new FormControl('')
@@ -50,14 +50,14 @@ export class ValidationComponent {
 
   confirmerCommande() {
     this.commandeValidee = true;
-    this.statut=true
+    this.statut="en_attente"
     const allergies = this.validationForm.get('allergies')?.value;
      
     
     const commande = {
       num: this.tb,
       total: this.total.toString(),
-      statut: true,
+      statut: "en_attente",
       index: this.index,
       data: this.cartItems.map(item => ({
         id: item._id,
