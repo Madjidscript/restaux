@@ -83,8 +83,8 @@ export class ValidationComponent {
             num:commande.num,
             index:commande.index,
             message:[],
-            notiflength:0
-      
+            notiflength:0,
+            statut:"en_attente"      
           }
           if (sessionStorage.getItem('notif')) {
             console.log('supprimer et nouveau');
@@ -99,7 +99,8 @@ export class ValidationComponent {
               num:commande.num,
               index:commande.index,
               message:[],
-              notiflength:0
+              notiflength:0,
+              statut:"en_attente"
         
             }
             console.log("md",this.notif);
@@ -158,10 +159,10 @@ export class ValidationComponent {
         this.commandeValidee = false;
         this.statut=false
 
-        // setTimeout(() => {
+        setTimeout(() => {
 
-        //   this.router.navigate([`/client/cath/${this.tb}`])
-        // }, 5000);
+          this.router.navigate([`/client/cath/${this.tb}`])
+        }, 5000);
 
         }
       

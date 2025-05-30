@@ -20,3 +20,66 @@ loader-container {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
+
+
+
+  .progress-wrapper {
+    width: 90%;
+    max-width: 500px;
+    margin: auto;
+    text-align: center;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+  
+  .progress-bar {
+    position: relative;
+    height: 4px;
+    background-color: #ccc;
+    margin: 40px 0 20px;
+  }
+  
+  .progress-fill {
+    position: absolute;
+    height: 4px;
+    background-color: green;
+    top: 0;
+    left: 0;
+    transition: width 0.4s ease;
+    z-index: 1;
+  }
+  
+  .step {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 18px;
+    height: 18px;
+    background-color: #ccc;
+    border-radius: 50%;
+    z-index: 2;
+    border: 2px solid white;
+  }
+  
+  .step:nth-child(2) { left: 0%; }
+  .step:nth-child(3) { left: 50%; }
+  .step:nth-child(4) { left: 100%; }
+  
+  .step.active {
+    background-color: green;
+  }
+  
+  .labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  
+
+  .box{
+    width: auto;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }

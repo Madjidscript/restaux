@@ -24,7 +24,7 @@ export class HearderComponent implements OnInit{
   notifdata:any
   constructor(private router: Router, private route: ActivatedRoute,private socket:SoketserviceService,private session:SessionserviceService ){}
   ngOnInit() {
-    this.taille()
+    
     
     this.router.events
       .pipe(filter((event:any) => event instanceof NavigationEnd))
@@ -37,7 +37,7 @@ export class HearderComponent implements OnInit{
 
         this.tb = activeRoute.snapshot.paramMap.get("tb");
         console.log("TB dans le header :", this.tb);
-        
+        this.taille()
       });
 
      

@@ -1,23 +1,38 @@
-<!-- <div class="loader-container" *ngIf="loading">
+<div class="loader-container" *ngIf="loading">
     <div class="spinner"></div>
 </div>
 
 
-<div *ngIf="!loading">
+<div class="box" *ngIf="!loading">
+
+
+<div class="progress-wrapper">
 
     <h2>Suivi de votre commande</h2>
-<p>📦 Nombre de commandes avant vous : {{ length }}</p>
+    <p *ngIf="statut !='Servie'">📦 Nombre de commandes avant vous : {{ length }}</p>
+    <div class="progress-bar" >
+      <div class="progress-fill" [ngStyle]="{ width: progressWidth }"></div>
+  
+      <div class="step" [class.active]="true"></div>
+      <div class="step" [class.active]="statut === 'en_preparation' || statut === 'servie'"></div>
+      <div class="step" [class.active]=" statut === 'Servie'"></div>
+    </div>
+  
+    <div class="labels">
+      <span>En attente</span>
+      <span>En préparation</span>
+      <span>Servie</span>
+    </div>
+  </div>
+  
+  
+  
+  
+  
+  
+  
+  
 
-<div class="progress-bar">
-    <div class="dot" [class.active]="statut === 'en_attente' || statut === 'en_preparation' || statut === 'servie'"></div>
-    <div class="dot" [class.active]="statut === 'en_preparation' || statut === 'servie'"></div>
-    <div class="dot" [class.active]="statut === 'servie'"></div>
+
+
 </div>
-
-<div class="legende">
-  <span>En attente</span>
-  <span>En préparation</span>
-  <span>Servie</span>
-</div>
-
-</div> -->

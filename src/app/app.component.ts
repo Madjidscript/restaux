@@ -46,6 +46,7 @@ export class AppComponent implements OnInit {
         if (notifStr) {
           const notif = JSON.parse(notifStr);
           notif.message.push(this.message);
+          notif.statut=data.statut;
           notif.notiflength = notif.message.length;
         
           // Mets à jour sessionStorage
