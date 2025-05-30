@@ -17,7 +17,7 @@
     <span class="tab-label">Appeler un serveur</span>
   </a>
 
-  <a [routerLink]="['/client/panier', tb]" routerLinkActive="active" class="tab-button cart-tab">
+  <a [routerLink]="['/client/panier', tb]" routerLinkActive="active" class="tab-button cart-tab" *ngIf="totalQuantite>0">
     <div class="icon-wrapper">
       <i class="fas fa-shopping-cart"></i>
       <span class="badge"> {{ totalQuantite }} </span>
