@@ -10,13 +10,24 @@
       <div>total: {{total}} </div>
   
       <form [formGroup]="validationForm">
+        <div class="select-wrapper">
+          <label for="mode">Mode de consommation <sup style="color: orange;">*</sup> : </label>
+          <select id="mode" name="mode" formControlName="type_service" >
+                  <option value="" disabled selected hidden>Précisez votre mode de consommation</option>
+                <option value="sur_place">Sur place</option>
+                <option value="emporter">À emporter</option>
+          </select>
+        </div>
+
         <textarea formControlName="allergies" placeholder="Avez-vous des allergies ?"></textarea>
-      </form>
-  
-      <div class="buttons">
-        <button class="confirm-btn" (click)="confirmerCommande()">Confirmer</button>
+
+        <div class="buttons">
+        <button class="confirm-btn" (click)="confirmerCommande()" [disabled]="validationForm.invalid">Confirmer</button>
         <button class="clear-btn" (click)="viderPanier()">Vider le panier</button>
       </div>
+      </form>
+  
+      
     </div>
   
     

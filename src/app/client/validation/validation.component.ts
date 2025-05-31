@@ -23,7 +23,8 @@ export class ValidationComponent {
   statut:any
   commandeValidee = false;
   validationForm:FormGroup = new FormGroup({
-    allergies: new FormControl('')
+    allergies: new FormControl(''),
+    type_service : new FormControl('',Validators.required)
   });
   total: any;
   index:any
@@ -52,6 +53,7 @@ export class ValidationComponent {
     this.commandeValidee = true;
     this.statut="en_attente"
     const allergies = this.validationForm.get('allergies')?.value;
+    const service = this.validationForm.get('type_service')?.value;
      
     
     const commande = {
@@ -67,7 +69,8 @@ export class ValidationComponent {
         prixIni: item.prix_unitaire,
         nbre: item.quantite
       })),
-      alergit:allergies
+      alergit:allergies,
+      type_service:service
     };
 
     

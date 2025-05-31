@@ -18,7 +18,7 @@
   }
   
   textarea {
-    width: 100%;
+    width: 95%;
     height: 80px;
     margin-top: 15px;
     padding: 10px;
@@ -123,3 +123,37 @@
     background-color: #cc0000;
   }
   
+
+
+
+  .select-wrapper {
+  display: flex;
+  flex-direction: column;
+  // max-width: 300px;
+  width: 100%;
+
+  margin: 20px auto;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.select-wrapper label {
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #333;
+}
+
+.select-wrapper select {
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  font-size: 16px;
+  color: #333;
+  transition: border-color 0.3s ease;
+}
+
+.select-wrapper select:focus {
+  border-color: #ffc107;
+  outline: none;
+  box-shadow: 0 0 5px rgba(255, 193, 7, 0.5);
+}
