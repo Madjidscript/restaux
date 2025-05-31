@@ -35,14 +35,14 @@
 
   <div class="boxs">
     <!-- Message de confirmation -->
-    <div *ngIf="commandeValidee && statut" class="confirmation-message">
+    <div *ngIf="commandeValidee && !statuts" class="confirmation-message">
       <i class="fa-solid fa-circle-check"></i>
       <p>Commande effectuée avec succès !</p>
       <button class="cancel-btn" (click)="annulerCommande()">Annuler la commande</button>
     </div>
   
     <!-- Message d'annulation -->
-    <div *ngIf="!statut" class="confirmation-message annulee">
+    <div *ngIf="statuts " class="confirmation-message annulee">
       <i class="fa-solid fa-circle-xmark"></i>
       <p>Commande annulée avec succès !</p>
     </div>

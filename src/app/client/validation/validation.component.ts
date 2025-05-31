@@ -21,6 +21,7 @@ export class ValidationComponent {
   tb:any
   notif:any
   statut:any
+  statuts=false
   commandeValidee = false;
   validationForm:FormGroup = new FormGroup({
     allergies: new FormControl(''),
@@ -51,6 +52,7 @@ export class ValidationComponent {
 
   confirmerCommande() {
     this.commandeValidee = true;
+    // this.statuts =true
     this.statut="en_attente"
     const allergies = this.validationForm.get('allergies')?.value;
     const service = this.validationForm.get('type_service')?.value;
@@ -150,17 +152,17 @@ export class ValidationComponent {
      
     this.api.annulecmd(this.index,this.tb).subscribe({
       next:(res:any)=> {
-        console.log("mons data",res);
+        console.log("mons papa",res);
         
         if (res.status== "success"){
-
+        this.statuts=true
         
         sessionStorage.removeItem('commandeValidee');
         sessionStorage.removeItem('alergit');
         this.paniers.refreshPanier()
 
-        this.commandeValidee = false;
-        this.statut=false
+        
+
 
         setTimeout(() => {
 
