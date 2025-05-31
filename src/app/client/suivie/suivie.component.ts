@@ -100,6 +100,9 @@ export class SuivieComponent implements OnInit {
         this.progressWidth = '0%';
     }
   }
+
+
+
   
 
 }

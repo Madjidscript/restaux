@@ -10,13 +10,17 @@
 
     <h2>Suivi de votre commande</h2>
     <p *ngIf="statut !='Servie'">📦 Nombre de commandes avant vous : {{ length }}</p>
+    <!-- <p *ngIf="statut =='Servie'">📦 Merci pour votre patience, savourez bien !🍽️</p> -->
     <div class="progress-bar" >
       <div class="progress-fill" [ngStyle]="{ width: progressWidth }"></div>
   
       <div class="step" [class.active]="true"></div>
-      <div class="step" [class.active]="statut === 'en_preparation' || statut === 'servie'"></div>
+      <div class="step" [class.active]="statut === 'en_preparation' || statut === 'Servie'"></div>
       <div class="step" [class.active]=" statut === 'Servie'"></div>
     </div>
+
+
+
   
     <div class="labels">
       <span>En attente</span>
