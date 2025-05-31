@@ -17,6 +17,10 @@
                 <option value="sur_place">Sur place</option>
                 <option value="emporter">À emporter</option>
           </select>
+
+          <div class="error-message" *ngIf="validationForm.get('type_service')?.touched && validationForm.get('type_service')?.invalid">
+              Veuillez sélectionner un mode de consommation.
+            </div>
         </div>
 
         <textarea formControlName="allergies" placeholder="Avez-vous des allergies ?"></textarea>

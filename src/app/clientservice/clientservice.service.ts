@@ -15,6 +15,7 @@ export class ClientserviceService {
     return this.http.get(this.api_url+"/admin/cathegories", );
   }
   detailcmmdbyindex(index:any) {
+    
     return this.http.get(this.api_url+`/detailcmdindex/${index}`,);
   }
   AllsousCathebycath(body:any) {
