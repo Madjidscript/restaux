@@ -3,28 +3,73 @@
     <h2 *ngIf="!commandeValidee">Récapitulatif de votre commande</h2>
   
     <div *ngIf="!commandeValidee">
-      <div *ngFor="let item of cartItems" class="recap-item">
+      <!-- <div *ngFor="let item of cartItems" class="recap-item">
         {{ item.nom }} x{{ item.quantite }} - {{ item.prix_total }} $
       </div>
 
-      <div>total: {{total}} </div>
+      <div>total: {{total}} </div> -->
+
+      <div class="invoice-box" style="margin-bottom: 10px;">
+  <h2>🧾 Résumé de Commande</h2>
+
+  <div class="info">
+    <!-- <p><strong>Client :</strong> Jean Dupont</p> -->
+    <p><strong>Date :</strong> {{dateActuelle}} &nbsp;&nbsp; <strong>Heure :</strong> {{heureActuelle}} </p>
+    <p><strong>Table :</strong> {{tb}} &nbsp;&nbsp; 
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Qté</th>
+        <th>Plat / Boisson</th>
+        <th>Prix U.</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let item of cartItems">
+      <tr >
+        <td> {{ item.quantite }} </td>
+        <td>{{ item.nom }}</td>
+        <td> {{item.prix_unitaire}} <sub>fcfa</sub></td>
+        <td>{{ item.prix_total }} <sub>fcfa</sub></td>
+      </tr>
+      
+    </tbody>
+  </table>
+
+  <div class="total">Total TTC : {{total}} <sub>fcfa</sub></div>
+
+  <!-- <div class="info">
+    <p><strong>Méthode de paiement :</strong> Carte bancaire</p>
+    <p><strong>Remarques :</strong> Sans gluten pour la pizza</p>
+  </div> -->
+
+  <!-- <div class="footer">
+    Merci pour votre visite ! 🍕🥗
+  </div> -->
+</div>
   
       <form [formGroup]="validationForm">
-        <div class="select-wrapper">
-          <label for="mode">Mode de consommation <sup style="color: orange;">*</sup> : </label>
-          <select id="mode" name="mode" formControlName="type_service" >
-                  <option value="" disabled selected hidden>Précisez votre mode de consommation</option>
-                <option value="sur_place">Sur place</option>
-                <option value="emporter">À emporter</option>
-          </select>
+       
 
-          <div class="error-message" *ngIf="validationForm.get('type_service')?.touched && validationForm.get('type_service')?.invalid">
-              Veuillez sélectionner un mode de consommation.
-            </div>
-        </div>
+        
+          <div class="select-wrapper">
+          <label for="mode">Mode de consommation <sup style="color: orange;">*</sup> : </label>
+           <!-- <div class="box"> -->
+      <select class="select">
+        <option value="" disabled selected hidden>Précisez votre mode de consommation</option>
+        <option value="sur_place">Sur place</option>
+        <option value="emporter">À emporter</option>
+       
+      </select>    
+    <!-- </div> -->
+         </div>
 
         <textarea formControlName="allergies" placeholder="Avez-vous des allergies ?"></textarea>
-
+        <div class="error-message" *ngIf="validationForm.get('type_service')?.touched && validationForm.get('type_service')?.invalid">
+              Veuillez sélectionner un mode de consommation.
+          </div>
         <div class="buttons">
         <button class="confirm-btn" (click)="confirmerCommande()" [disabled]="validationForm.invalid">Confirmer</button>
         <button class="clear-btn" (click)="viderPanier()">Vider le panier</button>

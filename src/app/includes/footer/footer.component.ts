@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,ElementRef, ViewChild} from '@angular/core';
 import { ActivatedRoute, Router, RouterModule,NavigationEnd } from '@angular/router';
 import { PanierService } from '../../panierservice/panier.service';
 import { filter } from 'rxjs/operators';
 import { SessionserviceService } from '../../sessionservice/sessionservice.service';
 import { SoketserviceService } from '../../soketservice/soketservice.service';
 import { CommonModule } from '@angular/common';
+
+declare var bootstrap: any;
 
 
 @Component({
@@ -16,6 +18,8 @@ import { CommonModule } from '@angular/common';
 })
 export class FooterComponent implements OnInit {
   totalQuantite: number = 0;
+  @ViewChild('toastElement') toastEl!: ElementRef;
+
   tb:any
   message:any
   showContactPopup = false;
@@ -69,23 +73,31 @@ export class FooterComponent implements OnInit {
   
 
 
-  ouvrirPopup() {
-    this.showContactPopup = true;
   
-    // Émettre la demande de serveur ici (à ajuster selon ton implémentation Socket)
-    this.socket.sendMessage("demande_serveur", { numeroTable: this.tb })
+  ouvrirPopup() {
+  this.showContactPopup = true;
 
-    this.socket.onMessage("retourdemande",(data)=>{
-      console.log("data message",data);
-      this.message = data.texte +'a la table '+ data.numeroTable
+  // Attendre que l'élément toast soit visible dans le DOM
+  setTimeout(() => {
+    if (this.toastEl) {
+      const toastBootstrap = bootstrap.Toast.getOrCreateInstance(this.toastEl.nativeElement);
+      toastBootstrap.show();
+    }
+  });
 
-      const message = new SpeechSynthesisUtterance(this.message);
-      message.lang = navigator.language.startsWith('en') ? 'en-US' : 'fr-FR';
-    
-      speechSynthesis.speak(message);
-      
-    })
-  }
+  // Envoi du message socket
+  this.socket.sendMessage("demande_serveur", { numeroTable: this.tb });
+
+  // Réception du retour serveur
+  this.socket.onMessage("retourdemande", (data) => {
+    this.message = data.texte + ' à la table ' + data.numeroTable;
+
+    const message = new SpeechSynthesisUtterance(this.message);
+    message.lang = navigator.language.startsWith('en') ? 'en-US' : 'fr-FR';
+    speechSynthesis.speak(message);
+  });
+}
+
   
   fermerPopup() {
     this.showContactPopup = false;

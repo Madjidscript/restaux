@@ -28,7 +28,10 @@ export class ValidationComponent {
     type_service : new FormControl('',Validators.required)
   });
   total: any;
-  index:any
+  index:any;
+  maintenant: any;
+  dateActuelle: any;
+  heureActuelle: any;
 
   constructor( private router:Router,private activate:ActivatedRoute,private api:ClientserviceService,private session:SessionserviceService,private paniers:PanierService) {
    
@@ -47,6 +50,7 @@ export class ValidationComponent {
     this.total = this.cartItems.reduce((sum, item) => sum + item.prix_total, 0);
     console.log("mon tatal",this.total,this.cartItems);
     this.index = this.generateUniqueIndex();
+    this.heure()
     
   }
 
@@ -200,6 +204,26 @@ export class ValidationComponent {
 
   panier(){
     this.router.navigate([`/client/panier/${this.tb}`])
+  }
+
+
+
+
+  heure(){
+    this.maintenant = new Date();
+
+// Format français : jj/mm/aaaa
+this.dateActuelle = this.maintenant.toLocaleDateString('fr-FR');
+
+// Heure : hh:mm (24h)
+this.heureActuelle = this.maintenant.toLocaleTimeString('fr-FR', {
+  hour: '2-digit',
+  minute: '2-digit',
+  hour12: false
+});
+
+console.log('Date :', this.dateActuelle);   // ex : 01/06/2025
+console.log('Heure :', this.heureActuelle); // ex : 14:45
   }
 
 }
