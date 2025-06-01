@@ -163,6 +163,7 @@
     right: 10px;
     top: 7px;
     font-size: 20px;
+    background-color: #cc0000;
     // border: 1px solid black;
   }
 }
@@ -171,8 +172,10 @@
 .select {
   // -moz-appearance: none;
   // -webkit-appearance: none;
-  background: white;
+  // background-color: red;
+  
   margin-top: 5px;
+  border: 1px solid black;
   border-radius: 0;
   cursor: pointer;
   padding: 12px;
