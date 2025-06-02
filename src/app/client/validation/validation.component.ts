@@ -152,9 +152,8 @@ export class ValidationComponent {
   
 
   annulerCommande(){
-    
-     
-    this.api.annulecmd(this.index,this.tb).subscribe({
+    const statut = "deleted_by_user"
+    this.api.annulecmd(this.index,this.tb,statut).subscribe({
       next:(res:any)=> {
         console.log("mons papa",res);
         

@@ -30,8 +30,8 @@ export class ClientserviceService {
   //   return this.http.get(this.api_url+`/admin/commandes/${id}`, );
   // }
 
-  annulecmd(index:any,num:any) {
-    return this.http.delete(this.api_url+`/admin/annulecommandesbyclient/${index}/${num}`,);
+  annulecmd(index:any,num:any,statut:any) {
+    return this.http.delete(this.api_url+`/admin/annulecommandesbyclient/${index}/${num}/${statut}`,);
   }
 
 
