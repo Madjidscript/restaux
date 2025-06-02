@@ -37,6 +37,7 @@ export class FooterComponent implements OnInit {
     console.log("yesss");
     
     this.totalQuantite = this.panierService.getTotalQuantite();
+    this.recupstatut()
     // console.log("mon index md",this.idCommande);
     
 
