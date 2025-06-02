@@ -37,7 +37,7 @@ export class FooterComponent implements OnInit {
     console.log("yesss");
     
     this.totalQuantite = this.panierService.getTotalQuantite();
-    this.recupstatut()
+    
     // console.log("mon index md",this.idCommande);
     
 
@@ -118,13 +118,7 @@ handleSuiviClick() {
 }
 
 
- recupstatut() {
-    this.session.notif$.subscribe((data: any) => {
-      this.notifdata = data;
-      this.statut = data?.statut 
-      console.log('mon statut :', this.statut);
-    });
-  }
+ 
 
   
 

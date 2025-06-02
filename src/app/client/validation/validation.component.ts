@@ -162,7 +162,8 @@ export class ValidationComponent {
         
         sessionStorage.removeItem('commandeValidee');
         sessionStorage.removeItem('alergit');
-        sessionStorage.removeItem('notif');
+        // sessionStorage.removeItem('notif');
+        this.session.removeItem("notif")
         this.paniers.refreshPanier()
 
         
