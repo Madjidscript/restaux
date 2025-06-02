@@ -164,6 +164,13 @@ export class ValidationComponent {
         sessionStorage.removeItem('alergit');
         this.paniers.refreshPanier()
 
+        const notifStr = sessionStorage.getItem('notif');
+        if (notifStr) {
+           const notif = JSON.parse(notifStr);
+           notif.statut= "deleted_by_user"
+        }
+       
+
         
 
 
