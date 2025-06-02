@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ClientserviceService } from '../../clientservice/clientservice.service';
 import { SessionserviceService } from '../../sessionservice/sessionservice.service';
 import { PanierService } from '../../panierservice/panier.service';
 
-
+declare var bootstrap:any
 @Component({
   selector: 'app-validation',
   standalone: true,
@@ -16,6 +16,7 @@ import { PanierService } from '../../panierservice/panier.service';
 })
 export class ValidationComponent {
 
+   @ViewChild('toastElement') toastEl!: ElementRef;
  
   cartItems: any[] = [];
   tb:any
@@ -23,6 +24,8 @@ export class ValidationComponent {
   statut:any
   statuts=false
   commandeValidee = false;
+  showContactPopup = false;
+
   validationForm:FormGroup = new FormGroup({
     allergies: new FormControl(''),
     type_service : new FormControl('',Validators.required)
@@ -55,6 +58,14 @@ export class ValidationComponent {
   }
 
   confirmerCommande() {
+
+   const typeService = this.validationForm.get('type_service')?.value;
+
+  if (!typeService) {
+    this.ouvrirPopup()
+    return;
+  }
+
     this.commandeValidee = true;
     // this.statuts =true
     this.statut="en_attente"
@@ -227,6 +238,23 @@ this.heureActuelle = this.maintenant.toLocaleTimeString('fr-FR', {
 
 console.log('Date :', this.dateActuelle);   // ex : 01/06/2025
 console.log('Heure :', this.heureActuelle); // ex : 14:45
+  }
+
+  ouvrirPopup() {
+  this.showContactPopup = true;
+
+  // Attendre que l'élément toast soit visible dans le DOM
+  setTimeout(() => {
+    if (this.toastEl) {
+      const toastBootstrap = bootstrap.Toast.getOrCreateInstance(this.toastEl.nativeElement);
+      toastBootstrap.show();
+    }
+  });
+   }
+
+
+  fermerPopup() {
+    this.showContactPopup = false;
   }
 
 }

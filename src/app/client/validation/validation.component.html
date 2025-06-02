@@ -67,11 +67,11 @@
          </div>
 
         <textarea formControlName="allergies" placeholder="Avez-vous des allergies ?"></textarea>
-        <div class="error-message" *ngIf="validationForm.get('type_service')?.touched && validationForm.get('type_service')?.invalid">
+        <!-- <div class="error-message" *ngIf="validationForm.get('type_service')?.touched && validationForm.get('type_service')?.invalid">
               Veuillez sélectionner un mode de consommation.
-          </div>
+          </div> -->
         <div class="buttons">
-        <button class="confirm-btn" (click)="confirmerCommande()" [disabled]="validationForm.invalid">Confirmer</button>
+        <button class="confirm-btn" (click)="confirmerCommande()">Confirmer</button>
         <button class="clear-btn" (click)="viderPanier()">Vider le panier</button>
       </div>
       </form>
@@ -95,5 +95,26 @@
       <i class="fa-solid fa-circle-xmark"></i>
       <p>Commande annulée avec succès !</p>
     </div>
+  </div> 
+
+
+
+
+  <div
+  class="toast position-fixed top-0 end-0 m-3"
+  style="z-index: 1000;"
+  role="alert"
+  aria-live="assertive"
+  aria-atomic="true"
+  *ngIf="showContactPopup"
+  #toastElement
+>
+  <div class="toast-header">
+    <strong class="me-auto">Erreur</strong>
+    <button type="button" class="btn-close" (click)="fermerPopup()" aria-label="Fermer"></button>
   </div>
+  <div class="toast-body">
+    <p>Veuillez choisir un mode de consommation avant de confirmer la commande.</p>
+  </div>
+</div>
   
