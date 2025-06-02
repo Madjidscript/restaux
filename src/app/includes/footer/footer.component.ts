@@ -25,6 +25,8 @@ export class FooterComponent implements OnInit {
   showContactPopup = false;
   showNoCommandePopup = false;
   idCommande: string | null = null; // à remplir dynamiquement
+  notifdata: any;
+  statut: any;
 
 
 
@@ -113,6 +115,15 @@ handleSuiviClick() {
     this.router.navigate(['/client/suivie', this.idCommande, this.tb]);
   }
 }
+
+
+ recupstatut() {
+    this.session.notif$.subscribe((data: any) => {
+      this.notifdata = data;
+      this.statut = data?.statut 
+      console.log('mon statut :', this.statut);
+    });
+  }
 
   
 
