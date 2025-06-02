@@ -27,8 +27,7 @@
 
   <a
   class="tab-button"
-  [class.disabled]="!idCommande || statut === 'deleted_by_user' || statut === 'deleted_by_admin'"
-  
+  [class.disabled]="!idCommande || statut === 'deleted_by_user' || statut === 'deleted_by_admin'"  
   (click)="handleSuiviClick()"
 >
   <i class="fas fa-clipboard-list"></i>
