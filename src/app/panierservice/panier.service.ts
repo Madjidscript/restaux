@@ -44,7 +44,7 @@ export class PanierService {
     // const index = panier.findIndex((p: any) => p._id === item.id_cath);
     
     const index = panier.findIndex((p: any) => 
-      p._id === item.id_cath && p.nom === item.nom
+      p._id === item._id && p.nom === item.nom
     );
     
 
@@ -53,7 +53,8 @@ export class PanierService {
       panier[index].prix_total = panier[index].quantite * panier[index].prix_unitaire;
     } else {
       panier.push({
-        _id: item.id_cath,
+        // _id: item.id_cath,
+        _id: item._id,
         nom: item.nom,
         image: item.image,
         prix_unitaire: item.prix,
