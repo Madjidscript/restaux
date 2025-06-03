@@ -54,17 +54,27 @@
        
 
         
-          <div class="select-wrapper">
+          <!-- <div class="select-wrapper">
           <label for="mode">Mode de consommation <sup style="color: orange;">*</sup> : </label>
-           <!-- <div class="box"> -->
+         
       <select class="select" formControlName="type_service">
         <option value="" disabled selected hidden>Précisez votre mode de consommation</option>
         <option value="sur_place">Sur place</option>
         <option value="emporter">À emporter</option>
        
       </select>    
-    <!-- </div> -->
-         </div>
+   
+         </div> -->
+
+         <div class="select-wrapper">
+  <label for="mode">Mode de consommation <sup style="color: orange;">*</sup> :</label>
+  <select class="select" formControlName="type_service" id="mode">
+    <option value="" disabled selected hidden>Précisez votre mode de consommation </option>
+    <option value="sur_place">Sur place</option>
+    <option value="emporter">À emporter</option>
+  </select>
+</div>
+
 
         <textarea formControlName="allergies" placeholder="Avez-vous des allergies ?"></textarea>
         <!-- <div class="error-message" *ngIf="validationForm.get('type_service')?.touched && validationForm.get('type_service')?.invalid">

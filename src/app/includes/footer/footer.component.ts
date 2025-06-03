@@ -5,6 +5,7 @@ import { filter } from 'rxjs/operators';
 import { SessionserviceService } from '../../sessionservice/sessionservice.service';
 import { SoketserviceService } from '../../soketservice/soketservice.service';
 import { CommonModule } from '@angular/common';
+import { ClientserviceService } from '../../clientservice/clientservice.service';
 
 declare var bootstrap: any;
 
@@ -21,6 +22,7 @@ export class FooterComponent implements OnInit {
   @ViewChild('toastElement') toastEl!: ElementRef;
 
   tb:any
+  token:any
   message:any
   showContactPopup = false;
   showNoCommandePopup = false;
@@ -31,7 +33,7 @@ export class FooterComponent implements OnInit {
 
 
 
-  constructor(private panierService: PanierService,private router: Router, private route: ActivatedRoute,private socket:SoketserviceService,private session:SessionserviceService) {}
+  constructor(private panierService: PanierService,private router: Router, private route: ActivatedRoute,private socket:SoketserviceService,private session:SessionserviceService,private api:ClientserviceService) {}
 
   ngOnInit() {
     console.log("yesss");
@@ -44,8 +46,10 @@ export class FooterComponent implements OnInit {
     // 🔄 Mettre à jour en temps réel
     this.panierService.panier$.subscribe(() => {
       this.totalQuantite = this.panierService.getTotalQuantite();
-    });
     this.tbs()
+
+    });
+
   }
 
     
@@ -61,9 +65,13 @@ export class FooterComponent implements OnInit {
         activeRoute = activeRoute.firstChild;
       }
 
-      const tb = activeRoute.snapshot.paramMap.get("tb");
-      if (tb) {
-        this.tb = tb;
+      const token = activeRoute.snapshot.paramMap.get("tb");
+      if (token) {
+        console.log("tokeeee",token);
+        
+        this.token = token;
+        this.gettb()
+
         this.idCommande = this.session.getItem("notif").index
 
         console.log("✅ TB dans le footer :", this.tb);
@@ -113,11 +121,28 @@ handleSuiviClick() {
   if (!this.idCommande) {
     this.showNoCommandePopup = true;
   } else {
-    this.router.navigate(['/client/suivie', this.idCommande, this.tb]);
+    this.router.navigate(['/client/suivie', this.idCommande, this.token]);
   }
 }
 
 
+   gettb(){
+      this.api.sigleqr(this.token).subscribe({
+        next:(res:any)=>{
+          console.log("ma reponse depuis footer",res);
+          this.tb = res.numeroTable
+          
+        },
+        error:(err:any)=> {
+         console.log("mon footer",err);
+          
+        },
+        complete() {
+          console.log("ok");
+          
+        },
+      })
+    }
  
 
   

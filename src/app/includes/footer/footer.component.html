@@ -7,7 +7,7 @@
     <span class="tab-label">Accueil</span>
   </a> -->
 
-  <a [routerLink]="['/client/cath', tb]" routerLinkActive="active" class="tab-button">
+  <a [routerLink]="['/client/cath', token]" routerLinkActive="active" class="tab-button">
     <i class="fas fa-utensils"></i>
     <span class="tab-label">Cath</span>
   </a>
@@ -17,7 +17,7 @@
     <span class="tab-label">Appeler un serveur</span>
   </a>
 
-  <a [routerLink]="['/client/panier', tb]" routerLinkActive="active" class="tab-button cart-tab" *ngIf="totalQuantite>0">
+  <a [routerLink]="['/client/panier', token]" routerLinkActive="active" class="tab-button cart-tab" *ngIf="totalQuantite>0">
     <div class="icon-wrapper">
       <i class="fas fa-shopping-cart"></i>
       <span class="badge"> {{ totalQuantite }} </span>

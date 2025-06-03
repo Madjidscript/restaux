@@ -14,8 +14,11 @@ import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 })
 export class CathComponent implements OnInit {
   ngOnInit(): void {
+    this.token =this.activate.snapshot.paramMap.get("tb")
     this.getallcath()
-    this.tb =this.activate.snapshot.paramMap.get("tb")
+
+    console.log("madjid",this.token);
+    
     this.searchForm.get('searchTerm')?.valueChanges.subscribe(value => {
       this.filterData(value || '');
     });
@@ -27,6 +30,7 @@ export class CathComponent implements OnInit {
   filteredData: any[] = [];
   voixActive = false;
   tb:any
+  token:any
   loading=false
   baseUrl = environment.apiUrl + '/';
   searchForm = new FormGroup({
@@ -43,6 +47,8 @@ export class CathComponent implements OnInit {
         console.log("ma reponse",res);
         this.data = res.recup
         this.filteredData = this.data;
+        this.gettb()
+
         
       },
   
@@ -70,7 +76,7 @@ export class CathComponent implements OnInit {
   }
 
    nav(id:any){
-    this.router.navigate([`/client/souscath/${id}/${this.tb}`])
+    this.router.navigate([`/client/souscath/${id}/${this.token}`])
     this.activerVoix()
    }
 
@@ -94,6 +100,25 @@ export class CathComponent implements OnInit {
     sessionStorage.setItem('voixActive', 'true');
     this.voixActive = true;
   }
+
+
+  gettb(){
+      this.api.sigleqr(this.token).subscribe({
+        next:(res:any)=>{
+          console.log("ma reponse depuis cath",res);
+          this.tb = res.numeroTable
+          
+        },
+        error:(err:any)=> {
+         console.log("mon ersr",err);
+          
+        },
+        complete() {
+          console.log("ok");
+          
+        },
+      })
+    }
   
 
 

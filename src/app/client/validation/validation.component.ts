@@ -20,6 +20,7 @@ export class ValidationComponent {
  
   cartItems: any[] = [];
   tb:any
+  token:any
   notif:any
   statut:any
   statuts=false
@@ -49,7 +50,9 @@ export class ValidationComponent {
   ngOnInit() {
     this.cartItems = JSON.parse(sessionStorage.getItem('panier') || '[]');
     this.commandeValidee = sessionStorage.getItem('commandeValidee') === 'true';
-    this.tb=this.activate.snapshot.paramMap.get("tb")
+    this.token=this.activate.snapshot.paramMap.get("tb")
+    this.gettb()
+
     this.total = this.cartItems.reduce((sum, item) => sum + item.prix_total, 0);
     console.log("mon tatal",this.total,this.cartItems);
     this.index = this.generateUniqueIndex();
@@ -134,7 +137,7 @@ export class ValidationComponent {
         setTimeout(() => {
         sessionStorage.removeItem('commandeValidee');
         sessionStorage.removeItem('voixActive');
-        this.router.navigate([`/client/cath/${this.tb}`])
+        this.router.navigate([`/client/cath/${this.token}`])
           
         }, 8000);
           
@@ -256,5 +259,25 @@ console.log('Heure :', this.heureActuelle); // ex : 14:45
   fermerPopup() {
     this.showContactPopup = false;
   }
+
+
+  gettb(){
+      this.api.sigleqr(this.token).subscribe({
+        next:(res:any)=>{
+          console.log("ma reponse depuis validation",res.numeroTable);
+          this.tb = res.numeroTable
+          
+        },
+        error:(err:any)=> {
+         console.log("mon footer",err);
+          
+        },
+        complete() {
+          console.log("ok");
+          
+        },
+      })
+    }
+ 
 
 }

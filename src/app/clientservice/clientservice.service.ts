@@ -34,6 +34,10 @@ export class ClientserviceService {
     return this.http.delete(this.api_url+`/admin/annulecommandesbyclient/${index}/${num}/${statut}`,);
   }
 
+  sigleqr(token:any,) {
+    return this.http.get(this.api_url+`/admin/sigleqrcode/${token}`,);
+  }
+
 
   AllCommande() {
     return this.http.get(this.api_url+"/admin/commandes", );

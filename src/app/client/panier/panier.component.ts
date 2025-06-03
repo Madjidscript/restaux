@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { environment } from '../../../environments/environment.prod';
 import { PanierService } from '../../panierservice/panier.service';
+import { ClientserviceService } from '../../clientservice/clientservice.service';
 
 @Component({
   selector: 'app-panier',
@@ -16,6 +17,7 @@ export class PanierComponent implements OnInit {
 
   cartItems: any[] = [];
   tb:any
+  token:any
   loading=false
   subtotal: number = 0;
   total: number = 0;
@@ -27,10 +29,11 @@ export class PanierComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadCart();
-    this.tb = this.activate.snapshot.paramMap.get("tb")
+    this.token = this.activate.snapshot.paramMap.get("tb")
+    this.gettb()
   }
 
-  constructor(private panierService:PanierService,private router:Router,private activate:ActivatedRoute){}
+  constructor(private panierService:PanierService,private router:Router,private activate:ActivatedRoute,private api:ClientserviceService){}
 
   loadCart(): void {
     const storedCart = sessionStorage.getItem('panier');
@@ -90,7 +93,26 @@ export class PanierComponent implements OnInit {
   }
 
   validerCommande() {
-    this.router.navigate(['/client/validation', this.tb]); // Redirection vers une page de validation
+    this.router.navigate(['/client/validation', this.token]); // Redirection vers une page de validation
   }
+
+   gettb(){
+      this.api.sigleqr(this.token).subscribe({
+        next:(res:any)=>{
+          console.log("ma reponse depuis cath",res);
+          this.tb = res.numeroTable
+          
+        },
+        error:(err:any)=> {
+         console.log("mon ersr",err);
+          
+        },
+        complete() {
+          console.log("ok");
+          
+        },
+      })
+    }
+  
 
 }

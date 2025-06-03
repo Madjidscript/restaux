@@ -4,6 +4,7 @@ import { filter } from 'rxjs/operators';
 import { SoketserviceService } from '../../soketservice/soketservice.service';
 import { SessionserviceService } from '../../sessionservice/sessionservice.service';
 import { CommonModule } from '@angular/common';
+import { ClientserviceService } from '../../clientservice/clientservice.service';
 
 @Component({
   selector: 'app-hearder',
@@ -14,6 +15,7 @@ import { CommonModule } from '@angular/common';
 })
 export class HearderComponent implements OnInit{
   tb:any
+  token:any
   length:any =0
   message:any
   showNotifPopup = false;
@@ -22,7 +24,7 @@ export class HearderComponent implements OnInit{
   
   voixActive = false;
   notifdata:any
-  constructor(private router: Router, private route: ActivatedRoute,private socket:SoketserviceService,private session:SessionserviceService ){}
+  constructor(private router: Router, private route: ActivatedRoute,private socket:SoketserviceService,private session:SessionserviceService,private api:ClientserviceService ){}
   ngOnInit() {
     
     
@@ -35,9 +37,10 @@ export class HearderComponent implements OnInit{
           activeRoute = activeRoute.firstChild;
         }
 
-        this.tb = activeRoute.snapshot.paramMap.get("tb");
+        this.token = activeRoute.snapshot.paramMap.get("tb");
         console.log("TB dans le header :", this.tb);
         this.taille()
+        this.gettb()
       });
 
      
@@ -91,6 +94,24 @@ export class HearderComponent implements OnInit{
       this.showNotifPopup = false;
     }
      
+
+    gettb(){
+      this.api.sigleqr(this.token).subscribe({
+        next:(res:any)=>{
+          console.log("ma reponse depuis hearder",res);
+          this.tb = res.numeroTable
+          
+        },
+        error:(err:any)=> {
+         console.log("mon err hearder",err);
+          
+        },
+        complete() {
+          console.log("ok");
+          
+        },
+      })
+    }
  
 
 
