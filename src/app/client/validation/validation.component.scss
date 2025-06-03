@@ -264,3 +264,13 @@
         border: none;
       }
     }
+
+
+    .toast-header{
+      width: 100%;
+      height: auto;
+      display: flex;
+      justify-content: space-between;
+      background-color: #cc0000;
+      color: white;
+    }
