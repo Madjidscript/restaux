@@ -5,11 +5,12 @@ import { FooterComponent } from './includes/footer/footer.component';
 import { SoketserviceService } from './soketservice/soketservice.service';
 import { SessionserviceService } from './sessionservice/sessionservice.service';
 import { ClientserviceService } from './clientservice/clientservice.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HearderComponent,FooterComponent],
+  imports: [RouterOutlet, HearderComponent,FooterComponent,CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
