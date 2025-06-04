@@ -1,0 +1,12 @@
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  filter: grayscale(1);
+}
+
+/* Style centré pour le message de fermeture */
+.closed-message {
+  text-align: center;
+  margin-top: 100px;
+  font-size: 1.5rem;
+}

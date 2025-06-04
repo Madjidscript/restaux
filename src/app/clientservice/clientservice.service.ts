@@ -42,4 +42,8 @@ export class ClientserviceService {
   AllCommande() {
     return this.http.get(this.api_url+"/admin/commandes", );
   }
+
+  gettatut() {
+    return this.http.get(this.api_url+"/admin/getstatut");
+  }
 }

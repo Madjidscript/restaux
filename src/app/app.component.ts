@@ -4,6 +4,7 @@ import { HearderComponent } from "./includes/hearder/hearder.component";
 import { FooterComponent } from './includes/footer/footer.component';
 import { SoketserviceService } from './soketservice/soketservice.service';
 import { SessionserviceService } from './sessionservice/sessionservice.service';
+import { ClientserviceService } from './clientservice/clientservice.service';
 
 @Component({
   selector: 'app-root',
@@ -18,9 +19,11 @@ export class AppComponent implements OnInit {
   
   voixActive = false;
   notifdata:any
-  constructor(private socket:SoketserviceService ,private session:SessionserviceService){}
+  isOpen: boolean|any;
+  constructor(private socket:SoketserviceService ,private session:SessionserviceService,private api:ClientserviceService){}
 
   ngOnInit(): void {
+    this.getstatut()
     this.notifdata = this.session.getItem('notif');
     console.log("ma notif",this.notifdata);
 
@@ -93,6 +96,22 @@ export class AppComponent implements OnInit {
     
   }
   
+getstatut(){
+    this.api.gettatut().subscribe({
+      next:(res:any)=> {
+        console.log("mon satut response",res);
+        this.isOpen = res.isOpen
+        
+      },
+      error:(err:any)=> {
+        console.log("mon err",err);
+      },
+      complete() {
+        console.log("ok");
+        
+      },
+    })
 
+  }
   
 }
