@@ -1,8 +1,18 @@
-<app-hearder></app-hearder>
+<!-- Header avec style désactivé si le resto est fermé -->
+<app-hearder [class.disabled]="!isOpen"></app-hearder>
 
-<div>
+<!-- Si le resto est ouvert, on affiche la page normalement -->
+<div *ngIf="isOpen; else closedTemplate">
+  <router-outlet></router-outlet>
+</div>
 
-    <router-outlet></router-outlet></div>
+<!-- Footer avec style désactivé si le resto est fermé -->
+<app-footer [class.disabled]="!isOpen"></app-footer>
 
-<app-footer></app-footer>
-
+<!-- Template affichée si le resto est fermé -->
+<ng-template #closedTemplate>
+  <div class="closed-message">
+    <h2>🚫 Le restaurant est actuellement fermé ou en pause.</h2>
+    <p>Merci de revenir plus tard.</p>
+  </div>
+</ng-template>
