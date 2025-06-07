@@ -17,6 +17,7 @@ export class SouscathComponent implements OnInit {
   totalQuantite: any;
   loading=false
   tb: any;
+  token: any;
   filteredData: any[] = [];
 
   
@@ -40,7 +41,9 @@ export class SouscathComponent implements OnInit {
   ngOnInit() {
     this.id = this.activate.snapshot.paramMap.get("id");
     console.log("mon id", this.id);
-    // this.tb = this.activate.snapshot.paramMap.get("tb")
+    this.token = this.activate.snapshot.paramMap.get("tb")
+    console.log("madjid tb",this.tb);
+    
     // console.log("mon tbfff",this.tb);
 
     this.searchForm.get('searchTerm')?.valueChanges.subscribe(value => {
@@ -75,6 +78,8 @@ export class SouscathComponent implements OnInit {
           console.log("response",res);
           this.data =res.data
         this.filteredData = this.data;
+    this.gettb()
+
 
           
         },
@@ -120,6 +125,27 @@ export class SouscathComponent implements OnInit {
     this.panierService.panier$.subscribe(() => {
       this.totalQuantite = this.panierService.getTotalQuantite();
     });
+    }
+
+
+
+    
+  gettb(){
+      this.api.sigleqr(this.token).subscribe({
+        next:(res:any)=>{
+          console.log("ma reponse depuis cath",res);
+          this.tb = res.numeroTable
+          
+        },
+        error:(err:any)=> {
+         console.log("mon ersr",err);
+          
+        },
+        complete() {
+          console.log("ok");
+          
+        },
+      })
     }
   
 

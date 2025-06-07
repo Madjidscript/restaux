@@ -41,8 +41,24 @@
   </form>
 </div>
 
+<div *ngIf="!tb "
+  style="
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+  "
+>
+  Cher client, cette table n'existe pas
+</div>
+
+
+
 <!-- Affichage des articles -->
-<div *ngIf="!loading">
+<div *ngIf="!loading && tb">
   <div class="menu-list">
     <div class="menu-item" *ngFor="let item of filteredData">
       <div class="item-text">
@@ -66,7 +82,9 @@
 </div>
 
 <!-- Message si rien n'est trouvé -->
-<div *ngIf="!loading && filteredData.length === 0" class="no-result">
+<div *ngIf="!loading && tb && filteredData.length === 0" class="no-result">
   Aucun résultat trouvé.
 </div>
+
+
 

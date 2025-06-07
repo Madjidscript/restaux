@@ -17,7 +17,7 @@ export class CathComponent implements OnInit {
     this.token =this.activate.snapshot.paramMap.get("tb")
     this.getallcath()
 
-    console.log("madjid",this.token);
+    console.log("madjid",this.token,this.tb);
     
     this.searchForm.get('searchTerm')?.valueChanges.subscribe(value => {
       this.filterData(value || '');

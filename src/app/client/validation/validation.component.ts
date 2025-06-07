@@ -48,10 +48,13 @@ export class ValidationComponent {
   }
 
   ngOnInit() {
-    this.cartItems = JSON.parse(sessionStorage.getItem('panier') || '[]');
     this.commandeValidee = sessionStorage.getItem('commandeValidee') === 'true';
     this.token=this.activate.snapshot.paramMap.get("tb")
     this.gettb()
+    this.cartItems = JSON.parse(sessionStorage.getItem('panier') || '[]');
+
+    console.log("tok",this.token);
+    
 
     this.total = this.cartItems.reduce((sum, item) => sum + item.prix_total, 0);
     console.log("mon tatal",this.total,this.cartItems);
@@ -216,7 +219,7 @@ export class ValidationComponent {
     sessionStorage.removeItem('notif');
     this.cartItems = [];
     this.paniers.refreshPanier()
-    this.router.navigate([`/client/cath/${this.tb}`])
+    this.router.navigate([`/client/cath/${this.token}`])
   }
 
   panier(){

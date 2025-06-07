@@ -28,9 +28,12 @@ export class PanierComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    this.loadCart();
     this.token = this.activate.snapshot.paramMap.get("tb")
     this.gettb()
+    this.loadCart();
+
+    console.log("md",this.tb);
+    
   }
 
   constructor(private panierService:PanierService,private router:Router,private activate:ActivatedRoute,private api:ClientserviceService){}
@@ -38,7 +41,10 @@ export class PanierComponent implements OnInit {
   loadCart(): void {
     const storedCart = sessionStorage.getItem('panier');
     this.cartItems = storedCart ? JSON.parse(storedCart) : [];
-    this.loading =true
+    // if (this.cartItems.length >0) {
+    //   this.loading =true
+    // }
+        
 
     // Met à jour les calculs
     this.updateTotals();

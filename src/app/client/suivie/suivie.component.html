@@ -2,11 +2,16 @@
     <div class="spinner"></div>
 </div>
 
+ <div *ngIf="statut == 'deleted_by_admin'" 
+       style="height: 60vh; display: flex; justify-content: center; align-items: center; text-align: center;">
+    <h2 style="color: red;">❌ Votre commande a été supprimée par l'administrateur.</h2>
+  </div>
+<div class="box" *ngIf="!loading && statut !== 'deleted_by_admin'">
 
-<div class="box" *ngIf="!loading">
+  
 
 
-<div class="progress-wrapper">
+<div class="progress-wrapper" >
 
     <h2>Suivi de votre commande</h2>
     <p *ngIf="statut =='en_preparation' || statut === 'en_attente'">📦 Nombre de commandes avant vous : {{ length }}</p>
@@ -42,4 +47,22 @@
 
 
 
+</div>
+
+
+
+
+
+<div 
+  style="
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+  "
+>
+  Cher client, cette table n'existe pas
 </div>

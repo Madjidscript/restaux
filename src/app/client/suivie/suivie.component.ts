@@ -24,6 +24,7 @@ export class SuivieComponent implements OnInit {
   progressWidth: string = '0%';
   ngOnInit(): void {
     this.getallcmd()
+    this.recupstatut()
     
     
     

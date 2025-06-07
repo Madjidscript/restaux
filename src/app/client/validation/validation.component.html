@@ -1,4 +1,19 @@
-<div class="validation-page" *ngIf="cartItems.length > 0">
+
+<div *ngIf="!tb || !cartItems"
+  style="
+    height: 100vh !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+  "
+>
+  Cher client, cette table n'existe pas
+</div>
+
+<div class="validation-page" *ngIf="cartItems.length > 0 && tb ">
   
     <h2 *ngIf="!commandeValidee">Récapitulatif de votre commande</h2>
   
@@ -12,7 +27,7 @@
       <div class="invoice-box" style="margin-bottom: 10px;">
   <h2>🧾 Résumé de Commande</h2>
 
-  <div class="info">
+  <div class="info" >
     <!-- <p><strong>Client :</strong> Jean Dupont</p> -->
     <p><strong>Date :</strong> {{dateActuelle}} &nbsp;&nbsp; <strong>Heure :</strong> {{heureActuelle}} </p>
     <p><strong>Table :</strong> {{tb}} &nbsp;&nbsp; 
@@ -101,7 +116,7 @@
     </div>
   
     <!-- Message d'annulation -->
-    <div *ngIf="statuts " class="confirmation-message annulee">
+    <div *ngIf="statuts && tb " class="confirmation-message annulee">
       <i class="fa-solid fa-circle-xmark"></i>
       <p>Commande annulée avec succès !</p>
     </div>
@@ -128,3 +143,5 @@
   </div>
 </div>
   
+
+

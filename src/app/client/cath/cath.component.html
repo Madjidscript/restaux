@@ -14,7 +14,23 @@
   </form>
 </div>
 
-<div *ngIf="!loading">
+
+<div *ngIf="!tb"
+  style="
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+  "
+>
+  Cher client, cette table n'existe pas
+</div>
+  
+
+<div *ngIf="!loading && tb">
   <h2 class="title">Our Menu</h2>
 
   <div class="card-container">
@@ -30,14 +46,15 @@
   </div>
 </div>
 
-<div *ngIf="!loading && filteredData.length === 0" class="no-result">
+<div *ngIf="!loading && tb && filteredData.length === 0" class="no-result">
   Aucune catégorie trouvée.
 </div>
 
 
 
 
-  
+
+
 
 
 <!-- <div *ngIf="!loading">
