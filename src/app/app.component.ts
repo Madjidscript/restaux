@@ -25,6 +25,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.getstatut()
+    this.recupstatut()
     this.notifdata = this.session.getItem('notif');
     console.log("ma notif",this.notifdata);
 
@@ -113,6 +114,14 @@ getstatut(){
       },
     })
 
+  }
+
+  recupstatut(){
+    this.socket.onMessage("statut",data=> {
+      console.log("mon data socket state");
+      
+
+    }  )
   }
   
 }
