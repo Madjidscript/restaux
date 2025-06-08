@@ -14,8 +14,9 @@ import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 })
 export class CathComponent implements OnInit {
   ngOnInit(): void {
-    this.token =this.activate.snapshot.paramMap.get("tb")
-    this.getallcath()
+    this.gettb()
+
+    // this.getallcath()
 
     console.log("madjid",this.token,this.tb);
     
@@ -29,6 +30,7 @@ export class CathComponent implements OnInit {
   data:any
   filteredData: any[] = [];
   voixActive = false;
+  isReady = false;
   tb:any
   token:any
   loading=false
@@ -47,8 +49,7 @@ export class CathComponent implements OnInit {
         console.log("ma reponse",res);
         this.data = res.recup
         this.filteredData = this.data;
-        this.gettb()
-
+        // this.gettb()
         
       },
   
@@ -103,23 +104,24 @@ export class CathComponent implements OnInit {
 
 
   gettb(){
-      this.api.sigleqr(this.token).subscribe({
-        next:(res:any)=>{
-          console.log("ma reponse depuis cath",res);
-          this.tb = res.numeroTable
-          
-        },
-        error:(err:any)=> {
-         console.log("mon ersr",err);
-          
-        },
-        complete() {
-          console.log("ok");
-          
-        },
-      })
-    }
-  
+  this.loading = true;
+    this.token =this.activate.snapshot.paramMap.get("tb")
+  this.api.sigleqr(this.token).subscribe({
+    next: (res: any) => {
+      console.log("ma reponse depuis cath", res);
+      this.tb = res.numeroTable;
+      this.getallcath();
+    },
+    error: (err: any) => {
+      console.log("mon ersr", err);
+      this.tb = null;
+      this.loading = false; // ← ici, sinon le spinner reste bloqué
+    },
+    complete: () => {
+      console.log("ok");
+    },
+  });
+}
 
 
 

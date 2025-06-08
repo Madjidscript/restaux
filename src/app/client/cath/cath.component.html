@@ -1,9 +1,10 @@
+<!-- Spinner -->
 <div class="loader-container" *ngIf="loading">
-    <div class="spinner"></div>
+  <div class="spinner"></div>
 </div>
 
-
-<div class="search-container" style="margin-top: 80px;">
+<!-- Zone de recherche -->
+<div class="search-container" *ngIf="!loading && tb" style="margin-top: 80px;">
   <form [formGroup]="searchForm">
     <input
       type="text"
@@ -14,8 +15,8 @@
   </form>
 </div>
 
-
-<div *ngIf="!tb && !loading"
+<!-- Message si table introuvable -->
+<div *ngIf="!loading && !tb"
   style="
     height: 50vh;
     display: flex;
@@ -24,12 +25,11 @@
     text-align: center;
     font-size: 1.5rem;
     font-weight: bold;
-  "
->
+  ">
   Cher client, cette table n'existe pas
 </div>
-  
 
+<!-- Menu -->
 <div *ngIf="!loading && tb">
   <h2 class="title">Our Menu</h2>
 
@@ -44,29 +44,9 @@
       <h4>{{ item.nom }}</h4>
     </div>
   </div>
+
+  <!-- Message si aucune catégorie trouvée -->
+  <div *ngIf="filteredData.length === 0" class="no-result">
+    Aucune catégorie trouvée.
+  </div>
 </div>
-
-<div *ngIf="!loading && tb && filteredData.length === 0" class="no-result">
-  Aucune catégorie trouvée.
-</div>
-
-
-
-
-
-
-
-
-<!-- <div *ngIf="!loading">
-    <h2 class="title">Our Menu</h2>
-    
-    <div class="card-container" >
-      
-      <div class="card" *ngFor="let item of data" (click)="nav(item._id)" style="cursor: pointer;">
-        <img [src]="formatImagePath(item.image)" alt="Image" />
-  
-        <h4>{{ item.nom }}</h4>
-      </div>
-    </div>
-</div> -->
-  
