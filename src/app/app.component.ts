@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
   constructor(private socket:SoketserviceService ,private session:SessionserviceService,private api:ClientserviceService){}
 
   ngOnInit(): void {
-    this.getstatut()
+    // this.getstatut()
     this.recupstatut()
     this.notifdata = this.session.getItem('notif');
     console.log("ma notif",this.notifdata);
@@ -118,7 +118,8 @@ getstatut(){
 
   recupstatut(){
     this.socket.onMessage("statut",data=> {
-      console.log("mon data socket state");
+      console.log("mon data socket state",data.statut.isOpen);
+       this.isOpen=data.statut.isOpen
       
 
     }  )
