@@ -7,7 +7,8 @@
 <app-footer></app-footer> -->
 
 <!-- Header avec style désactivé si le resto est fermé -->
-<app-hearder [class.disabled]="!isOpen"></app-hearder>
+<div>
+    <app-hearder  [class.disabled]="!isOpen"></app-hearder>
 
 <!-- Si le resto est ouvert, on affiche la page normalement -->
 <div *ngIf="isOpen; else closedTemplate">
@@ -16,6 +17,7 @@
 
 <!-- Footer avec style désactivé si le resto est fermé -->
 <app-footer [class.disabled]="!isOpen"></app-footer>
+</div>
 
 <!-- Template affichée si le resto est fermé -->
 <ng-template #closedTemplate>

@@ -20,7 +20,9 @@ export class AppComponent implements OnInit {
   
   voixActive = false;
   notifdata:any
-  isOpen: boolean|any;
+  isOpen: any;
+  isLoaded: boolean = false; // 🔹 Ajouté ici
+
   constructor(private socket:SoketserviceService ,private session:SessionserviceService,private api:ClientserviceService){}
 
   ngOnInit(): void {
@@ -104,10 +106,14 @@ getstatut(){
       next:(res:any)=> {
         console.log("mon satut response",res);
         this.isOpen = res.isOpen
+        this.isLoaded = true; // ✅ Une fois les données reçues, on autorise l’affichage
+
         
       },
       error:(err:any)=> {
         console.log("mon err",err);
+        this.isLoaded = true; // ✅ Une fois les données reçues, on autorise l’affichage
+
       },
       complete() {
         console.log("ok");
@@ -121,6 +127,8 @@ getstatut(){
     this.socket.onMessage("statut",data=> {
       console.log("mon data socket state",data.statut.isOpen);
        this.isOpen=data.statut.isOpen
+      this.isLoaded = true; // ✅ Une fois les données reçues, on autorise l’affichage
+
       
 
     }  )
