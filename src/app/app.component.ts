@@ -24,8 +24,9 @@ export class AppComponent implements OnInit {
   constructor(private socket:SoketserviceService ,private session:SessionserviceService,private api:ClientserviceService){}
 
   ngOnInit(): void {
-    // this.getstatut()
     this.recupstatut()
+    this.getstatut()
+
     this.notifdata = this.session.getItem('notif');
     console.log("ma notif",this.notifdata);
 
