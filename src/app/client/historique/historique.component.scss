@@ -92,10 +92,14 @@
 }
 
 .statut.attente {
-  background-color: #ff9800;
+  background-color: yellow;
 }
 
-.statut.livre {
+.statut.en_preparation {
+  background-color: orange;
+}
+
+.statut.Servie {
   background-color: #4caf50;
 }
 
