@@ -1,6 +1,6 @@
-<!-- <div class="loader-container" *ngIf="loading">
+<div class="loader-container" *ngIf="loading">
     <div class="spinner"></div>
-</div> -->
+</div>
 <!-- <div *ngIf="!tb || !cartItems"
   style="
     height: 100vh !important;
@@ -15,7 +15,7 @@
   Cher client, cette table n'existe pas
 </div> -->
 
-<div class="validation-page" *ngIf="  cartItems.length > 0 ">
+<div class="validation-page" *ngIf="!loading &&  cartItems.length > 0 ">
   
     <h2 *ngIf="!commandeValidee">Récapitulatif de votre commande</h2>
   

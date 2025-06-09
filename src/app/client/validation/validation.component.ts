@@ -24,6 +24,7 @@ export class ValidationComponent {
   notif:any
   statut:any
   statuts=false
+  loading=false
   commandeValidee = false;
   showContactPopup = false;
 
@@ -48,6 +49,14 @@ export class ValidationComponent {
   }
 
   ngOnInit() {
+   this.loadCart()
+    
+  }
+
+  loadCart(): void {
+  this.loading = true;
+
+  setTimeout(() => {  // Simule un petit délai pour afficher le "patientez"
     this.cartItems = JSON.parse(sessionStorage.getItem('panier') || '[]');
     this.commandeValidee = sessionStorage.getItem('commandeValidee') === 'true';
     this.token=this.activate.snapshot.paramMap.get("tb")
@@ -59,8 +68,14 @@ export class ValidationComponent {
     console.log("mon tatal",this.total,this.cartItems);
     this.index = this.generateUniqueIndex();
     this.heure()
-    
+
+   
+    this.loading = false; // Toujours le mettre ici, à la fin
+  }, 500); // Délai de 0.5s pour laisser apparaître le loader
+
   }
+
+
 
   confirmerCommande() {
 
