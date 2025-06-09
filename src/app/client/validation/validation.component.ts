@@ -91,7 +91,7 @@ export class ValidationComponent {
     this.statut="en_attente"
     const allergies = this.validationForm.get('allergies')?.value;
     const service = this.validationForm.get('type_service')?.value;
-     
+     const emont = sessionStorage.getItem("emon_id")
     
     const commande = {
       num: this.tb,
@@ -107,7 +107,9 @@ export class ValidationComponent {
         nbre: item.quantite
       })),
       alergit:allergies,
-      type_service:service
+      type_service:service,
+      emon_id:emont
+
     };
 
     

@@ -15,8 +15,11 @@ export class ClientserviceService {
     return this.http.get(this.api_url+"/admin/cathegories", );
   }
   detailcmmdbyindex(index:any) {
-    
     return this.http.get(this.api_url+`/detailcmdindex/${index}`,);
+  }
+
+   getallcmdbyemonid(emon_id:any) {
+    return this.http.get(this.api_url+`/getallcmdbyemonid/${emon_id}`,);
   }
   AllsousCathebycath(body:any) {
     return this.http.post(this.api_url+"/admin/cathegoriesbycath", body);

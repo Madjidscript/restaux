@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule, RouterOutlet } from '@angular/router';
 import { HearderComponent } from "./includes/hearder/hearder.component";
 import { FooterComponent } from './includes/footer/footer.component';
 import { SoketserviceService } from './soketservice/soketservice.service';
@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HearderComponent,FooterComponent,CommonModule],
+  imports: [RouterOutlet, HearderComponent,FooterComponent,CommonModule,RouterModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -23,11 +23,20 @@ export class AppComponent implements OnInit {
   isOpen: any;
   isLoaded: boolean = false; // 🔹 Ajouté ici
 
-  constructor(private socket:SoketserviceService ,private session:SessionserviceService,private api:ClientserviceService){}
+  constructor(private socket:SoketserviceService ,private session:SessionserviceService,private api:ClientserviceService,private route:Router,private activate:ActivatedRoute){}
 
   ngOnInit(): void {
     this.recupstatut()
     this.getstatut()
+    this.activate.queryParamMap.subscribe(params => {
+    const fromScan = params.get('from');
+    console.log("my from",fromScan);
+    
+
+    if (fromScan === 'scan') {
+      this.clientid(); // on déclenche la génération du emon_id
+    }
+  });
 
     this.notifdata = this.session.getItem('notif');
     console.log("ma notif",this.notifdata);
@@ -132,6 +141,15 @@ getstatut(){
       
 
     }  )
+  }
+
+  clientid(){
+   let emon_id = localStorage.getItem("emon_id");
+
+   if (!emon_id) {
+  emon_id = crypto.randomUUID(); // ou une lib UUID
+  localStorage.setItem("emon_id", emon_id);
+  }
   }
   
 }
