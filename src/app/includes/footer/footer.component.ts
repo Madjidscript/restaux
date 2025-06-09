@@ -37,8 +37,9 @@ export class FooterComponent implements OnInit {
   constructor(private panierService: PanierService,private router: Router, private route: ActivatedRoute,private socket:SoketserviceService,private session:SessionserviceService,private api:ClientserviceService) {}
 
   ngOnInit() {
-    console.log("yesss");
     this.emon_id = localStorage.getItem("emon_id");
+    console.log("yesss",this.emon_id);
+
     
     this.totalQuantite = this.panierService.getTotalQuantite();
     
