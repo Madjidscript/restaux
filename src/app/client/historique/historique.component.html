@@ -1,4 +1,4 @@
-<div class="historique-container" *ngIf="commandes.length > 0; else noData">
+<div class="historique-container" *ngIf="commandes.length > 0; ">
   <h2>Historique de vos commandes</h2>
 
   <div class="commande-card" *ngFor="let cmd of commandes">
@@ -34,6 +34,5 @@
   </div>
 </div>
 
-<ng-template #noData>
-  <p class="no-history">Aucune commande enregistrée pour ce client.</p>
-</ng-template>
+
+  <p  *ngIf="commandes.length == 0" class="no-history">Aucune commande enregistrée pour ce client.</p>
