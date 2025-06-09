@@ -7,6 +7,7 @@ import { CathComponent } from './cath/cath.component';
 import { SouscathComponent } from './souscath/souscath.component';
 import { ValidationComponent } from './validation/validation.component';
 import { SuivieComponent } from './suivie/suivie.component';
+import { HistoriqueComponent } from './historique/historique.component';
 
 const routes: Routes = [
   {
@@ -18,7 +19,7 @@ const routes: Routes = [
   { path: "souscath/:id/:tb", component: SouscathComponent },
   { path: "suivie/:id/:tb", component: SuivieComponent },
   { path: "validation/:tb", component: ValidationComponent },
-  { path: "historique/:tb", component: ValidationComponent },
+  { path: "historique/:tb", component: HistoriqueComponent },
   { path: "**", redirectTo: "home/1" }  // redirection par défaut
     ]
   }

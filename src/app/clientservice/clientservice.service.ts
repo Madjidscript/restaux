@@ -19,7 +19,7 @@ export class ClientserviceService {
   }
 
    getallcmdbyemonid(emon_id:any) {
-    return this.http.get(this.api_url+`/getallcmdbyemonid/${emon_id}`,);
+    return this.http.get(this.api_url+`/admin/getallcmdbyemonid/${emon_id}`,);
   }
   AllsousCathebycath(body:any) {
     return this.http.post(this.api_url+"/admin/cathegoriesbycath", body);

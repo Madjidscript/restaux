@@ -1,23 +1,15 @@
 .historique-container {
+  padding: 1rem;
   max-width: 800px;
   margin: auto;
-  padding: 1rem;
-  font-family: Arial, sans-serif;
-}
-
-h2 {
-  text-align: center;
-  margin-bottom: 1.5rem;
-  color: #333;
 }
 
 .commande-card {
-  background-color: #f8f8f8;
-  border-left: 5px solid #007bff;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
   padding: 1rem;
   margin-bottom: 1rem;
   border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .commande-header {
@@ -27,9 +19,9 @@ h2 {
 }
 
 .statut {
-  padding: 0.3rem 0.6rem;
-  border-radius: 4px;
-  font-size: 0.9rem;
+  font-weight: bold;
+  padding: 0.2rem 0.6rem;
+  border-radius: 5px;
   color: white;
 }
 
@@ -41,24 +33,26 @@ h2 {
   background-color: green;
 }
 
-.commande-detail p {
+.commande-detail p,
+.articles ul {
   margin: 0.3rem 0;
-}
-
-.articles {
-  margin-top: 0.8rem;
 }
 
 .articles ul {
   padding-left: 1.2rem;
 }
 
-.articles li {
-  margin-bottom: 0.2rem;
+.articles img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-right: 0.5rem;
+  vertical-align: middle;
 }
 
 .no-history {
   text-align: center;
-  color: gray;
-  margin-top: 2rem;
+  font-style: italic;
+  color: #888;
 }

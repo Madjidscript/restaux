@@ -1,32 +1,38 @@
-<!-- zzz<div class="historique-container" *ngIf="commandes.length > 0; else noData">
-  <h2>Historique des commandes</h2>
-  
+<div class="historique-container" *ngIf="commandes.length > 0; else noData">
+  <h2>Historique de vos commandes</h2>
+
   <div class="commande-card" *ngFor="let cmd of commandes">
     <div class="commande-header">
-      <strong>Commande n°:</strong> {{ cmd._id }}
-      <span class="statut" [class.attente]="cmd.statut === 'en_attente'" 
-                          [class.livre]="cmd.statut === 'livrée'">
+      <strong>Commande :</strong> {{ cmd._id }}
+      <span class="statut" 
+            [class.attente]="cmd.statut === 'en_attente'" 
+            [class.livre]="cmd.statut === 'livrée'">
         {{ cmd.statut }}
       </span>
     </div>
 
     <div class="commande-detail">
-      <p><strong>Table:</strong> {{ cmd.num }}</p>
-      <p><strong>Total:</strong> {{ cmd.total }} FCFA</p>
-      <p><strong>Date:</strong> {{ cmd.date | date:'short' }}</p>
+      <p><strong>Table :</strong> {{ cmd.num }}</p>
+      <p><strong>Total :</strong> {{ cmd.total }} FCFA</p>
+      <p><strong>Type de service :</strong> {{ cmd.type_service }}</p>
     </div>
 
     <div class="articles">
-      <h4>Articles commandés:</h4>
+      <h4>Articles :</h4>
       <ul>
         <li *ngFor="let article of cmd.data">
+          <img [src]="'http://127.0.0.1:5000/' + article.image" alt="{{ article.nom }}" />
           {{ article.nom }} - {{ article.nbre }} x {{ article.prixIni }} FCFA
         </li>
       </ul>
+    </div>
+
+    <div *ngIf="cmd.alergit?.length > 0">
+      <p><strong>Allergies mentionnées :</strong> {{ cmd.alergit.join(', ') }}</p>
     </div>
   </div>
 </div>
 
 <ng-template #noData>
-  <p class="no-history">Aucune commande trouvée.</p>
-</ng-template> -->
+  <p class="no-history">Aucune commande enregistrée pour ce client.</p>
+</ng-template>
