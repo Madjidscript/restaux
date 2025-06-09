@@ -48,13 +48,12 @@ export class ValidationComponent {
   }
 
   ngOnInit() {
+    this.cartItems = JSON.parse(sessionStorage.getItem('panier') || '[]');
     this.commandeValidee = sessionStorage.getItem('commandeValidee') === 'true';
     this.token=this.activate.snapshot.paramMap.get("tb")
-    this.gettb()
-    this.cartItems = JSON.parse(sessionStorage.getItem('panier') || '[]');
-
     console.log("tok",this.token);
     
+    this.gettb()
 
     this.total = this.cartItems.reduce((sum, item) => sum + item.prix_total, 0);
     console.log("mon tatal",this.total,this.cartItems);

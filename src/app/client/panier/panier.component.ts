@@ -29,28 +29,44 @@ export class PanierComponent implements OnInit {
 
   ngOnInit(): void {
     this.token = this.activate.snapshot.paramMap.get("tb")
-    this.gettb()
-    this.loadCart();
+    this.loadCart()
 
-    console.log("md",this.tb);
     
   }
 
   constructor(private panierService:PanierService,private router:Router,private activate:ActivatedRoute,private api:ClientserviceService){}
 
-  loadCart(): void {
-    const storedCart = sessionStorage.getItem('panier');
-    this.cartItems = storedCart ? JSON.parse(storedCart) : [];
-    // if (this.cartItems.length >0) {
-    //   this.loading =true
-    // }
+  // loadCart(): void {
+  //   this.loading = true
+  //   const storedCart = sessionStorage.getItem('panier');
+  //   this.cartItems = storedCart ? JSON.parse(storedCart) : [];
+  //   console.log('my cartitems',this.cartItems);
+    
+  //   if (this.cartItems.length >0) {
+  //     this.loading =false
+  //   }
         
 
-    // Met à jour les calculs
-    this.updateTotals();
-    this.update()
+  //   // Met à jour les calculs
+  //   this.updateTotals();
+  //   this.update()
 
-  }
+  // }
+
+  loadCart(): void {
+  this.loading = true;
+
+  setTimeout(() => {  // Simule un petit délai pour afficher le "patientez"
+    const storedCart = sessionStorage.getItem('panier');
+    this.cartItems = storedCart ? JSON.parse(storedCart) : [];
+
+    this.updateTotals();
+    this.update();
+
+    this.loading = false; // Toujours le mettre ici, à la fin
+  }, 500); // Délai de 0.5s pour laisser apparaître le loader
+}
+
 
   updateTotals(): void {
     this.subtotal = this.cartItems.reduce((sum, item) => sum + item.prix_total, 0);
@@ -102,23 +118,7 @@ export class PanierComponent implements OnInit {
     this.router.navigate(['/client/validation', this.token]); // Redirection vers une page de validation
   }
 
-   gettb(){
-      this.api.sigleqr(this.token).subscribe({
-        next:(res:any)=>{
-          console.log("ma reponse depuis cath",res);
-          this.tb = res.numeroTable
-          
-        },
-        error:(err:any)=> {
-         console.log("mon ersr",err);
-          
-        },
-        complete() {
-          console.log("ok");
-          
-        },
-      })
-    }
+   
   
 
 }

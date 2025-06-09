@@ -1,4 +1,6 @@
-
+<!-- <div class="loader-container" *ngIf="loading">
+    <div class="spinner"></div>
+</div> -->
 <!-- <div *ngIf="!tb || !cartItems"
   style="
     height: 100vh !important;
@@ -13,7 +15,7 @@
   Cher client, cette table n'existe pas
 </div> -->
 
-<div class="validation-page" *ngIf="cartItems.length > 0 && tb ">
+<div class="validation-page" *ngIf="  cartItems.length > 0 ">
   
     <h2 *ngIf="!commandeValidee">Récapitulatif de votre commande</h2>
   
@@ -116,7 +118,7 @@
     </div>
   
     <!-- Message d'annulation -->
-    <div *ngIf="statuts && tb " class="confirmation-message annulee">
+    <div *ngIf="statuts  " class="confirmation-message annulee">
       <i class="fa-solid fa-circle-xmark"></i>
       <p>Commande annulée avec succès !</p>
     </div>

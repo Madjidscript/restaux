@@ -1,7 +1,7 @@
 
-<!-- <div class="loader-container" *ngIf="!loading">
+<div class="loader-container" *ngIf="loading">
     <div class="spinner"></div>
-</div> -->
+</div>
 
  <!-- <div *ngIf="!tb || !cartItems"
   style="
@@ -20,7 +20,7 @@
 
 
 
-<div class="dark-content" *ngIf=" totalQuantite > 0 && tb">
+<div class="dark-content" *ngIf=" !loading && totalQuantite > 0 ">
     <!-- <div class="order-header">
       <h3>Commande No #18</h3>
     </div> -->
@@ -65,7 +65,7 @@
   </div>
 
 
-  <div *ngIf="loading && tb && totalQuantite <= 0" class="empty-cart">
+  <div *ngIf="!loading  && totalQuantite <= 0" class="empty-cart">
     <i class="fas fa-shopping-basket"></i>
     <p style="color: red;">Veuillez ajouter des plats à votre panier.</p>
   </div>
