@@ -1,1 +1,32 @@
-<p>historique works!</p>
+<!-- zzz<div class="historique-container" *ngIf="commandes.length > 0; else noData">
+  <h2>Historique des commandes</h2>
+  
+  <div class="commande-card" *ngFor="let cmd of commandes">
+    <div class="commande-header">
+      <strong>Commande n°:</strong> {{ cmd._id }}
+      <span class="statut" [class.attente]="cmd.statut === 'en_attente'" 
+                          [class.livre]="cmd.statut === 'livrée'">
+        {{ cmd.statut }}
+      </span>
+    </div>
+
+    <div class="commande-detail">
+      <p><strong>Table:</strong> {{ cmd.num }}</p>
+      <p><strong>Total:</strong> {{ cmd.total }} FCFA</p>
+      <p><strong>Date:</strong> {{ cmd.date | date:'short' }}</p>
+    </div>
+
+    <div class="articles">
+      <h4>Articles commandés:</h4>
+      <ul>
+        <li *ngFor="let article of cmd.data">
+          {{ article.nom }} - {{ article.nbre }} x {{ article.prixIni }} FCFA
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<ng-template #noData>
+  <p class="no-history">Aucune commande trouvée.</p>
+</ng-template> -->

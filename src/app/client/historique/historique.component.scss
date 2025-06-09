@@ -1,0 +1,64 @@
+.historique-container {
+  max-width: 800px;
+  margin: auto;
+  padding: 1rem;
+  font-family: Arial, sans-serif;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.commande-card {
+  background-color: #f8f8f8;
+  border-left: 5px solid #007bff;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.commande-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.statut {
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  color: white;
+}
+
+.statut.attente {
+  background-color: orange;
+}
+
+.statut.livre {
+  background-color: green;
+}
+
+.commande-detail p {
+  margin: 0.3rem 0;
+}
+
+.articles {
+  margin-top: 0.8rem;
+}
+
+.articles ul {
+  padding-left: 1.2rem;
+}
+
+.articles li {
+  margin-bottom: 0.2rem;
+}
+
+.no-history {
+  text-align: center;
+  color: gray;
+  margin-top: 2rem;
+}
