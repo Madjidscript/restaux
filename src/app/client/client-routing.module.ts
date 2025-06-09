@@ -18,6 +18,7 @@ const routes: Routes = [
   { path: "souscath/:id/:tb", component: SouscathComponent },
   { path: "suivie/:id/:tb", component: SuivieComponent },
   { path: "validation/:tb", component: ValidationComponent },
+  { path: "historique/:tb", component: ValidationComponent },
   { path: "**", redirectTo: "home/1" }  // redirection par défaut
     ]
   }

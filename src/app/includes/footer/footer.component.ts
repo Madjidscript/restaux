@@ -29,6 +29,7 @@ export class FooterComponent implements OnInit {
   idCommande: string | null = null; // à remplir dynamiquement
   notifdata: any;
   statut: any;
+  emon_id:any
 
 
 
@@ -37,6 +38,7 @@ export class FooterComponent implements OnInit {
 
   ngOnInit() {
     console.log("yesss");
+    this.emon_id = sessionStorage.getItem("emon_id");
     
     this.totalQuantite = this.panierService.getTotalQuantite();
     
@@ -50,6 +52,10 @@ export class FooterComponent implements OnInit {
 
     });
 
+  }
+
+  handleHistoriqueClick(){
+    this.router.navigate([`/client/historique`,this.token])
   }
 
     

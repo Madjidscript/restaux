@@ -34,6 +34,15 @@
   <span class="tab-label">Suivi</span>
 </a>
 
+<a
+  class="tab-button"
+  [class.disabled]="!emon_id"  
+  (click)="handleHistoriqueClick()"
+>
+  <i class="fas fa-history"></i>
+  <span class="tab-label">Historique</span>
+</a>
+
  
   
 </div>
