@@ -143,14 +143,28 @@ getstatut(){
     }  )
   }
 
-  clientid(){
-   let emon_id = localStorage.getItem("emon_id");
-   console.log("yy",emon_id)
+  // clientid(){
+  //  let emon_id = localStorage.getItem("emon_id");
+  //  console.log("yy",emon_id)
 
-   if (!emon_id) {
-  emon_id = crypto.randomUUID(); // ou une lib UUID
-  localStorage.setItem("emon_id", emon_id);
+  //  if (!emon_id) {
+  // emon_id = crypto.randomUUID(); // ou une lib UUID
+  // localStorage.setItem("emon_id", emon_id);
+  // }
+  // }
+
+
+  clientid() {
+  let emon_id = localStorage.getItem("emon_id");
+
+  if (!emon_id) {
+    emon_id = crypto.randomUUID(); 
+    localStorage.setItem("emon_id", emon_id);
+    console.log('Nouveau emon_id généré:', emon_id);
+  } else {
+    console.log('Ancien emon_id conservé:', emon_id);
   }
-  }
+}
+
   
 }
