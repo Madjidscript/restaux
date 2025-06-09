@@ -2,6 +2,7 @@
   padding: 1rem;
   max-width: 800px;
   margin: auto;
+  margin-top: 50px;
 }
 
 .commande-card {
@@ -26,6 +27,10 @@
 }
 
 .statut.attente {
+  background-color: yellow;
+}
+
+.statut.preparation {
   background-color: orange;
 }
 
@@ -95,7 +100,7 @@
   background-color: yellow;
 }
 
-.statut.en_preparation {
+.statut.preparation {
   background-color: orange;
 }
 

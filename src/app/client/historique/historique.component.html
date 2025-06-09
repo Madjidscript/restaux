@@ -6,7 +6,7 @@
       <strong>Commande :</strong> {{ cmd._id }}
       <span class="statut" 
             [class.attente]="cmd.statut === 'en_attente'" 
-            [class.attente]="cmd.statut === 'en_preparation'" 
+            [class.preparation]="cmd.statut === 'en_preparation'" 
             [class.livre]="cmd.statut === 'Servie'">
         {{ cmd.statut }}
       </span>
