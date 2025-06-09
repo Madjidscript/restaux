@@ -30,7 +30,7 @@ export class HistoriqueComponent implements OnInit {
 
 
   getcmmtby(){
-    this.emon_id = sessionStorage.getItem("emon_id");
+    this.emon_id = localStorage.getItem("emon_id");
 
     this.api.getallcmdbyemonid(this.emon_id).subscribe({
       next:(res:any)=>  {

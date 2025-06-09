@@ -38,7 +38,7 @@ export class FooterComponent implements OnInit {
 
   ngOnInit() {
     console.log("yesss");
-    this.emon_id = sessionStorage.getItem("emon_id");
+    this.emon_id = localStorage.getItem("emon_id");
     
     this.totalQuantite = this.panierService.getTotalQuantite();
     
