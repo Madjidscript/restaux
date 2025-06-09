@@ -54,5 +54,109 @@
 .no-history {
   text-align: center;
   font-style: italic;
+  color: red;
+}
+
+
+.historique-container {
+  padding: 1rem;
+  max-width: 100%;
+}
+
+.commande-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.commande-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.commande-header strong {
+  font-size: 1rem;
+}
+
+.statut {
+  font-weight: bold;
+  font-size: 0.9rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 5px;
+  width: fit-content;
+  color: #fff;
+}
+
+.statut.attente {
+  background-color: #ff9800;
+}
+
+.statut.livre {
+  background-color: #4caf50;
+}
+
+.commande-detail p,
+.articles ul {
+  margin: 0.3rem 0;
+  font-size: 0.95rem;
+}
+
+.articles ul {
+  padding-left: 1.2rem;
+  list-style-type: disc;
+}
+
+.articles img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-right: 0.5rem;
+  vertical-align: middle;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.3rem 0;
+  flex-wrap: wrap;
+}
+
+.no-history {
+  text-align: center;
+  font-style: italic;
   color: #888;
+  font-size: 0.95rem;
+  padding: 1rem;
+}
+
+/* ✅ Responsive pour petits écrans */
+@media screen and (max-width: 600px) {
+  .commande-header {
+    font-size: 0.9rem;
+  }
+
+  .statut {
+    font-size: 0.8rem;
+    padding: 0.2rem 0.5rem;
+  }
+
+  .articles img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .commande-detail p {
+    font-size: 0.9rem;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+    text-align: center;
+  }
 }

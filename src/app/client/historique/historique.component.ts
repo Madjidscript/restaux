@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { environment } from '../../../environments/environment.prod';
 import { ClientserviceService } from '../../clientservice/clientservice.service';
 
 @Component({
@@ -13,6 +14,7 @@ import { ClientserviceService } from '../../clientservice/clientservice.service'
 export class HistoriqueComponent implements OnInit {
   commandes:any
   data:any
+  baseUrl = environment.apiUrl + '/';
   emon_id:any;
   constructor(private api:ClientserviceService){}
   ngOnInit(): void {
@@ -22,23 +24,9 @@ export class HistoriqueComponent implements OnInit {
   }
 
 
-//   getcmmt(){
-    
-//     this.commandes = [
-//   {
-//     _id: "663d7d12f1",
-//     num: "Table 4",
-//     total: "12000",
-//     statut: "livrée",
-//     date: "2024-06-07T12:30:00",
-//     data: [
-//       { nom: "Pizza", nbre: 2, prixIni: 3000 },
-//       { nom: "Coca", nbre: 1, prixIni: 1000 }
-//     ]
-//   }
-// ];
-//   }
-
+ formatImagePath(path: string): string {
+    return this.baseUrl + path.replace(/\\/g, '/');
+  }
 
 
   getcmmtby(){

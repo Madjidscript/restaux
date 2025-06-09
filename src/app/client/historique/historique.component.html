@@ -21,7 +21,7 @@
       <h4>Articles :</h4>
       <ul>
         <li *ngFor="let article of cmd.data">
-          <img [src]="'http://127.0.0.1:5000/' + article.image" alt="{{ article.nom }}" />
+          <img [src]="formatImagePath(article.image)" alt="{{ article.nom }}" />
           {{ article.nom }} - {{ article.nbre }} x {{ article.prixIni }} FCFA
         </li>
       </ul>
