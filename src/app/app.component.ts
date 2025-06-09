@@ -144,11 +144,12 @@ getstatut(){
   }
 
   clientid(){
-   let emon_id = localStorage.getItem("emon_id");
+   let emon_id = sessionStorage.getItem("emon_id");
+   console.log("yy",emon_id)
 
    if (!emon_id) {
   emon_id = crypto.randomUUID(); // ou une lib UUID
-  localStorage.setItem("emon_id", emon_id);
+  sessionStorage.setItem("emon_id", emon_id);
   }
   }
   

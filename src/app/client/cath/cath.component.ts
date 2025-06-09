@@ -15,6 +15,8 @@ import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 export class CathComponent implements OnInit {
   ngOnInit(): void {
     this.gettb()
+     let emon_id = sessionStorage.getItem("emon_id");
+   console.log("yy",emon_id)
 
     // this.getallcath()
 
@@ -79,6 +81,8 @@ export class CathComponent implements OnInit {
    nav(id:any){
     this.router.navigate([`/client/souscath/${id}/${this.token}`])
     this.activerVoix()
+   
+
    }
 
 
