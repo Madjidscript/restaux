@@ -157,7 +157,7 @@ export class ValidationComponent {
         setTimeout(() => {
         sessionStorage.removeItem('commandeValidee');
         sessionStorage.removeItem('voixActive');
-        this.router.navigate([`/client/cath/${this.token}?from=scan`])
+        this.router.navigate([`/client/cath/${this.token}`])
           
         }, 8000);
           
@@ -207,7 +207,7 @@ export class ValidationComponent {
 
         setTimeout(() => {
 
-          this.router.navigate([`/client/cath/${this.token}?from=scan`])
+          this.router.navigate([`/client/cath/${this.token}`])
         }, 5000);
 
         }
