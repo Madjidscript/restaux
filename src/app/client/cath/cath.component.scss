@@ -120,7 +120,7 @@
   --neutral-dark: #2C3E50;
   --warm-bg: #FAFAFA;
   --warm-gray: #7F8C8D;
-  --card-shadow: rgba(255, 107, 53, 0.1);
+  --card-shadow: rgba(237, 85, 29, 0.1);
 }
 
 /* Loader */
@@ -213,7 +213,9 @@
 .card {
   background: white;
   border-radius: 16px;
-  box-shadow: 0 8px 25px var(--card-shadow);
+  // box-shadow: 0 8px 25px var(--card-shadow);
+  box-shadow: 0 15px 40px rgba(255, 107, 53, 0.2);
+
   padding: 16px;
   text-align: center;
   cursor: pointer;

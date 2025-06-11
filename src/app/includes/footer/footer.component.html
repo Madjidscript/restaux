@@ -13,8 +13,9 @@
   </a>
 
   <a (click)="ouvrirPopup()" class="tab-button" routerLinkActive="active">
-    <i class="fas fa-concierge-bell"></i> <!-- Icône de service -->
-    <span class="tab-label">Appeler un serveur</span>
+    <!-- <i class="fas fa-concierge-bell"></i> -->
+     <i class="fas fa-phone"></i> <!-- Icône de téléphone -->
+    <span class="tab-label">serveur</span>
   </a>
 
   <a [routerLink]="['/client/panier', token]" routerLinkActive="active" class="tab-button cart-tab" *ngIf="totalQuantite>0">

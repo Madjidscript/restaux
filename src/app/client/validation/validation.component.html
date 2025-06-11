@@ -83,13 +83,26 @@
    
          </div> -->
 
-         <div class="select-wrapper">
+         <!-- <div class="select-wrapper">
   <label for="mode" class="lb">Mode de consommation <sup style="color: black;">*</sup> :</label>
   <select class="select" formControlName="type_service" id="mode">
     <option value="" disabled selected hidden>Précisez votre mode de consommation </option>
     <option value="sur_place">Sur place</option>
     <option value="emporter">À emporter</option>
   </select>
+</div> -->
+  <div class="radio-wrapper">
+  <label class="lb">Mode de consommation <sup style="color: black;">*</sup> :</label>
+
+  <div class="radio-option">
+    <input type="radio" id="sur_place" formControlName="type_service" value="sur_place" />
+    <label for="sur_place">Sur place</label>
+  </div>
+
+  <div class="radio-option">
+    <input type="radio" id="emporter" formControlName="type_service" value="emporter" />
+    <label for="emporter">À emporter</label>
+  </div>
 </div>
 
 
