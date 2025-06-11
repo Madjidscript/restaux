@@ -1,117 +1,413 @@
-.header {
-    background-color: #f8f8f8;
-    padding: 10px 16px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-  }
+// .header {
+//     background-color: #f8f8f8;
+//     padding: 10px 16px;
+//     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+//     position: fixed;
+//     top: 0;
+//     left: 0;
+//     right: 0;
+//   }
   
-  .toolbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+//   .toolbar {
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+//   }
+  
+//   .left-title {
+//     font-size: 20px;
+//     font-weight: bold;
+//     cursor: pointer;
+//   }
+  
+//   .icon-wrapper {
+//     position: relative;
+//     font-size: 24px;
+//     color: #333;
+//     cursor: pointer;
+//   }
+  
+//   .badge {
+//     position: absolute;
+//     top: -8px;
+//     right: -8px;
+//     background-color: red;
+//     color: white;
+//     font-size: 12px;
+//     padding: 2px 6px;
+//     border-radius: 50%;
+//     font-weight: bold;
+//   }
+  
+
+
+//   .popup-notif {
+//     position: fixed;
+//     top: 20px;
+//     right: 20px;
+//     background: #ffffff;
+//     border: 1px solid #ddd;
+//     border-radius: 10px;
+//     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+//     padding: 20px;
+//     width: 300px;
+//     z-index: 9999;
+//     animation: slideDown 0.3s ease-in-out;
+//     overflow: hidden;
+//   }
+  
+//   .popup-notif h4 {
+//     margin: 0 0 10px;
+//     font-size: 1.2em;
+//     color: #333;
+//   }
+  
+//   .popup-notif ul {
+//     list-style: none;
+//     padding: 0;
+//     margin: 0;
+//   }
+  
+//   .popup-notif li {
+//     font-size: 1em;
+//     color: #444;
+//     margin-bottom: 5px;
+//   }
+  
+//   .popup-notif hr {
+//     border: none;
+//     border-top: 1px solid #eee;
+//     margin: 10px 0;
+//   }
+  
+//   .popup-notif .no-notif {
+//     color: red;
+//     font-weight: bold;
+//     text-align: center;
+//   }
+  
+//   .popup-notif button {
+//     margin-top: 10px;
+//     width: 100%;
+//     background-color: #007bff;
+//     border: none;
+//     color: white;
+//     padding: 10px;
+//     border-radius: 8px;
+//     cursor: pointer;
+//     font-size: 1em;
+//     transition: background-color 0.3s ease;
+//   }
+  
+//   .popup-notif button:hover {
+//     background-color: #0056b3;
+//   }
+  
+//   @keyframes slideDown {
+//     from {
+//       opacity: 0;
+//       transform: translateY(-20%);
+//     }
+//     to {
+//       opacity: 1;
+//       transform: translateY(0);
+//     }
+//   }
+  
+  
+
+
+.header {
+  background: linear-gradient(135deg, #FF6B35 0%, #F39C12 100%);
+  padding: 12px 20px;
+  box-shadow: 0 4px 20px rgba(255, 107, 53, 0.25);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.left-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #FFFFFF;
+  cursor: pointer;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+}
+
+.left-title:hover {
+  transform: scale(1.05);
+  text-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* ===== ICÔNE NOTIFICATION ===== */
+.icon-wrapper {
+  position: relative;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.icon-wrapper:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.icon-wrapper:active {
+  transform: translateY(0);
+}
+
+.bell-icon {
+  width: 24px;
+  height: 24px;
+  color: #FFFFFF;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: linear-gradient(135deg, #C0392B 0%, #E74C3C 100%);
+  color: #FFFFFF;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 7px;
+  border-radius: 50%;
+  min-width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(192, 57, 43, 0.4);
+  border: 2px solid #FFFFFF;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/* ===== POPUP NOTIFICATIONS ===== */
+.popup-notif {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  background: #FFFFFF;
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 15px 40px rgba(255, 107, 53, 0.2);
+  padding: 24px;
+  width: 320px;
+  max-width: calc(100vw - 40px);
+  z-index: 9999;
+  animation: slideDown 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  overflow: hidden;
+  border-top: 4px solid #FF6B35;
+}
+
+.popup-notif h4 {
+  margin: 0 0 16px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #2C3E50;
+  text-align: center;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #FAFAFA;
+}
+
+.first-time-msg {
+  background: linear-gradient(135deg, #F39C12 0%, #FF6B35 100%);
+  color: #FFFFFF;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  font-weight: 600;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(243, 156, 18, 0.3);
+}
+
+.line {
+  height: 2px;
+  background: linear-gradient(90deg, #FF6B35 0%, #F39C12 100%);
+  margin-bottom: 16px;
+  border-radius: 2px;
+}
+
+.popup-notif ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.popup-notif li {
+  font-size: 14px;
+  color: #2C3E50;
+  margin-bottom: 12px;
+  padding: 12px;
+  background: #FAFAFA;
+  border-radius: 10px;
+  position: relative;
+  padding-left: 40px;
+  transition: all 0.3s ease;
+  border-left: 3px solid #FF6B35;
+}
+
+.popup-notif li:hover {
+  background: #F8F9FA;
+  transform: translateX(4px);
+}
+
+.circle {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  background: #FF6B35;
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.2);
+}
+
+.popup-notif hr {
+  display: none; /* Masqué car on utilise les cartes */
+}
+
+.no-notif {
+  color: #7F8C8D !important;
+  font-weight: 600;
+  text-align: center;
+  font-style: italic;
+  background: #F8F9FA !important;
+  border-left: 3px solid #7F8C8D !important;
+}
+
+.popup-notif button {
+  margin-top: 20px;
+  width: 100%;
+  background: linear-gradient(135deg, #FF6B35 0%, #F39C12 100%);
+  border: none;
+  color: #FFFFFF;
+  padding: 14px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.popup-notif button:hover {
+  background: linear-gradient(135deg, #E55A2B 0%, #E67E22 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+}
+
+.popup-notif button:active {
+  transform: translateY(0);
+}
+
+/* ===== MESSAGE TABLE INEXISTANTE ===== */
+.table-not-found {
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #C0392B;
+  background: linear-gradient(135deg, #FAFAFA 0%, #F8F9FA 100%);
+  padding: 40px 20px;
+  border-radius: 16px;
+  margin: 100px 20px 20px;
+  box-shadow: 0 8px 25px rgba(192, 57, 43, 0.1);
+  border: 2px solid rgba(192, 57, 43, 0.1);
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 480px) {
+  .header {
+    padding: 10px 16px;
   }
   
   .left-title {
-    font-size: 20px;
-    font-weight: bold;
-    cursor: pointer;
+    font-size: 18px;
   }
   
-  .icon-wrapper {
-    position: relative;
-    font-size: 24px;
-    color: #333;
-    cursor: pointer;
+  .popup-notif {
+    right: 10px;
+    left: 10px;
+    width: auto;
+    top: 70px;
+  }
+  
+  .bell-icon {
+    width: 20px;
+    height: 20px;
   }
   
   .badge {
-    position: absolute;
-    top: -8px;
-    right: -8px;
-    background-color: red;
-    color: white;
-    font-size: 12px;
-    padding: 2px 6px;
-    border-radius: 50%;
-    font-weight: bold;
+    font-size: 10px;
+    padding: 3px 6px;
+    min-width: 18px;
+    height: 18px;
   }
-  
+}
 
+/* ===== SCROLLBAR PERSONNALISÉE ===== */
+.popup-notif ul::-webkit-scrollbar {
+  width: 4px;
+}
 
-  .popup-notif {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: #ffffff;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-    padding: 20px;
-    width: 300px;
-    z-index: 9999;
-    animation: slideDown 0.3s ease-in-out;
-    overflow: hidden;
-  }
-  
-  .popup-notif h4 {
-    margin: 0 0 10px;
-    font-size: 1.2em;
-    color: #333;
-  }
-  
-  .popup-notif ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .popup-notif li {
-    font-size: 1em;
-    color: #444;
-    margin-bottom: 5px;
-  }
-  
-  .popup-notif hr {
-    border: none;
-    border-top: 1px solid #eee;
-    margin: 10px 0;
-  }
-  
-  .popup-notif .no-notif {
-    color: red;
-    font-weight: bold;
-    text-align: center;
-  }
-  
-  .popup-notif button {
-    margin-top: 10px;
-    width: 100%;
-    background-color: #007bff;
-    border: none;
-    color: white;
-    padding: 10px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1em;
-    transition: background-color 0.3s ease;
-  }
-  
-  .popup-notif button:hover {
-    background-color: #0056b3;
-  }
-  
-  @keyframes slideDown {
-    from {
-      opacity: 0;
-      transform: translateY(-20%);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  
+.popup-notif ul::-webkit-scrollbar-track {
+  background: #FAFAFA;
+  border-radius: 4px;
+}
+
+.popup-notif ul::-webkit-scrollbar-thumb {
+  background: #FF6B35;
+  border-radius: 4px;
+}
+
+.popup-notif ul::-webkit-scrollbar-thumb:hover {
+  background: #E55A2B;
+}

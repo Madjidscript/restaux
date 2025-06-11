@@ -187,7 +187,15 @@ li {
     width: 64px;
     height: 64px;
     border: 8px solid rgba(0, 0, 0, 0.1);
-    border-left-color: #ffc107; /* couleur principale */
+    border-left-color: black; /* couleur principale */
     border-radius: 50%;
     animation: spin 1s linear infinite;
+  }
+
+
+  strong{
+    color:#FF6B35 ;
+  }
+  h4{
+    color:#FF6B35;
   }

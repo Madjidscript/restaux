@@ -55,7 +55,7 @@
     </tbody>
   </table>
 
-  <div class="total">Total TTC : {{total}} <sub>fcfa</sub></div>
+  <div class="total">Total TTC : <span class="tt">{{total}} </span><sub>fcfa</sub></div>
 
   <!-- <div class="info">
     <p><strong>Méthode de paiement :</strong> Carte bancaire</p>
@@ -84,7 +84,7 @@
          </div> -->
 
          <div class="select-wrapper">
-  <label for="mode">Mode de consommation <sup style="color: orange;">*</sup> :</label>
+  <label for="mode" class="lb">Mode de consommation <sup style="color: black;">*</sup> :</label>
   <select class="select" formControlName="type_service" id="mode">
     <option value="" disabled selected hidden>Précisez votre mode de consommation </option>
     <option value="sur_place">Sur place</option>

@@ -12,7 +12,7 @@
     <span class="tab-label">Cath</span>
   </a>
 
-  <a (click)="ouvrirPopup()" class="tab-button">
+  <a (click)="ouvrirPopup()" class="tab-button" routerLinkActive="active">
     <i class="fas fa-concierge-bell"></i> <!-- Icône de service -->
     <span class="tab-label">Appeler un serveur</span>
   </a>
@@ -28,22 +28,28 @@
   <a
   class="tab-button"
   [class.disabled]="!idCommande "  
-  (click)="handleSuiviClick()"
+  [routerLink]="['/client/suivie', token]"
+
+  routerLinkActive="active"
 >
   <i class="fas fa-clipboard-list"></i>
   <span class="tab-label">Suivi</span>
 </a>
+  <!-- (click)="handleSuiviClick()" -->
 
 <a 
   class="tab-button"
   [class.disabled]="!emon_id"  
-  (click)="handleHistoriqueClick()"
+  
+[routerLink]="['/client/historique', token]"
+
+  routerLinkActive="active"
 >
   <i class="fas fa-history"></i>
   <span class="tab-label">Historique</span>
 </a>
 
- 
+ <!-- (click)="handleHistoriqueClick()" -->
   
 </div>
 

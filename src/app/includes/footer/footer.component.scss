@@ -40,7 +40,7 @@
     position: absolute;
     top: -6px;
     right: -10px;
-    background-color: red;
+    background-color: #FF6B35;
     color: #fff;
     border-radius: 50%;
     padding: 2px 6px;
@@ -130,3 +130,356 @@
     box-shadow: 0 0 10px #ccc;
   }
   
+
+/* ===== FOOTER RESTAURANT - PALETTE CHALEUR & APPÉTIT ===== */
+
+.tab-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  background: linear-gradient(180deg, #FFFFFF 0%, #FAFAFA 100%);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0 -4px 20px rgba(255, 107, 53, 0.15);
+  z-index: 1000;
+  border-top: 2px solid rgba(255, 107, 53, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 8px 4px;
+}
+
+/* ===== BOUTONS NAVIGATION ===== */
+.tab-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #7F8C8D;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 8px 6px;
+  border-radius: 12px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  min-width: 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.tab-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(243, 156, 18, 0.1) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 12px;
+}
+
+.tab-button:hover::before {
+  opacity: 1;
+}
+
+.tab-button:hover {
+  color: #FF6B35;
+  transform: translateY(-2px);
+}
+
+.tab-button:active {
+  transform: translateY(0);
+}
+
+/* ===== ÉTAT ACTIF ===== */
+.tab-button.active {
+  color: #FF6B35;
+  background: linear-gradient(135deg, rgba(255, 107, 53, 0.15) 0%, rgba(243, 156, 18, 0.15) 100%);
+  box-shadow: 0 4px 15px rgba(255, 107, 53, 0.2);
+  border: 1px solid rgba(255, 107, 53, 0.2);
+}
+
+.tab-button.active .tab-icon {
+  color: #FF6B35;
+  filter: drop-shadow(0 2px 4px rgba(255, 107, 53, 0.3));
+}
+
+/* ===== CONTENEUR ICÔNES ===== */
+.icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  margin-bottom: 4px;
+  transition: all 0.3s ease;
+}
+
+.tab-icon {
+  width: 20px;
+  height: 20px;
+  transition: all 0.3s ease;
+}
+
+.tab-button:hover .tab-icon {
+  transform: scale(1.1);
+  color: #FF6B35;
+}
+
+/* ===== LABELS ===== */
+.tab-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  line-height: 1;
+  transition: color 0.3s ease;
+}
+
+.tab-button:hover .tab-label {
+  color: #FF6B35;
+}
+
+/* ===== BOUTON SERVEUR SPÉCIAL ===== */
+.server-button {
+  background: linear-gradient(135deg, #FF6B35 0%, #F39C12 100%);
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.server-button::before {
+  display: none;
+}
+
+.server-button:hover {
+  background: linear-gradient(135deg, #E55A2B 0%, #E67E22 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+  color: #FFFFFF !important;
+}
+
+.server-button .tab-icon,
+.server-button .tab-label {
+  color: #FFFFFF !important;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+}
+
+.server-button:hover .tab-icon {
+  transform: scale(1.1);
+  animation: bellRing 0.6s ease-in-out;
+}
+
+@keyframes bellRing {
+  0%, 100% { transform: scale(1.1) rotate(0deg); }
+  25% { transform: scale(1.1) rotate(-10deg); }
+  75% { transform: scale(1.1) rotate(10deg); }
+}
+
+/* ===== PANIER AVEC BADGE ===== */
+.cart-tab {
+  position: relative;
+}
+
+.icon-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  // background: linear-gradient(135deg, #C0392B 0%, #E74C3C 100%);
+  background-color: #FF6B35;
+  color: #FFFFFF;
+  border-radius: 50%;
+  padding: 4px 7px;
+  font-size: 10px;
+  font-weight: 700;
+  min-width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(192, 57, 43, 0.4);
+  border: 2px solid #FFFFFF;
+  animation: cartPulse 2s infinite;
+}
+
+@keyframes cartPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/* ===== ÉTAT DÉSACTIVÉ ===== */
+.tab-button.disabled {
+  pointer-events: none;
+  opacity: 0.4;
+  color: #BDC3C7 !important;
+}
+
+.tab-button.disabled .tab-icon {
+  color: #BDC3C7 !important;
+}
+
+.tab-button.disabled .tab-label {
+  color: #BDC3C7 !important;
+}
+
+/* ===== TOAST SERVEUR ===== */
+.server-toast {
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  background: #FFFFFF;
+  border-radius: 16px;
+  box-shadow: 0 15px 40px rgba(255, 107, 53, 0.2);
+  width: 320px;
+  max-width: calc(100vw - 40px);
+  z-index: 9999;
+  animation: toastSlideIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  overflow: hidden;
+  border-top: 4px solid #FF6B35;
+}
+
+.toast-header {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px 12px;
+  border-bottom: 1px solid #FAFAFA;
+}
+
+.toast-icon {
+  width: 20px;
+  height: 20px;
+  color: #FF6B35;
+  margin-right: 12px;
+}
+
+.toast-title {
+  flex: 1;
+  font-size: 16px;
+  font-weight: 700;
+  color: #2C3E50;
+}
+
+.toast-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #7F8C8D;
+  cursor: pointer;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.toast-close:hover {
+  background: #F8F9FA;
+  color: #2C3E50;
+}
+
+.toast-body {
+  padding: 12px 20px 16px;
+  color: #2C3E50;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+@keyframes toastSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 480px) {
+  .tab-bar {
+    height: 65px;
+    padding: 6px 2px;
+  }
+  
+  .tab-button {
+    padding: 6px 4px;
+    min-width: 50px;
+  }
+  
+  .tab-label {
+    font-size: 10px;
+  }
+  
+  .tab-icon {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .icon-container {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .cart-badge {
+    font-size: 9px;
+    padding: 3px 6px;
+    min-width: 16px;
+    height: 16px;
+  }
+  
+  .server-toast {
+    right: 10px;
+    left: 10px;
+    width: auto;
+    top: 90px;
+  }
+}
+
+@media (max-width: 360px) {
+  .tab-label {
+    font-size: 9px;
+  }
+  
+  .tab-button {
+    min-width: 45px;
+  }
+}
+
+/* ===== ANIMATIONS D'APPARITION ===== */
+.tab-button {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.tab-button:nth-child(1) { animation-delay: 0.1s; }
+.tab-button:nth-child(2) { animation-delay: 0.2s; }
+.tab-button:nth-child(3) { animation-delay: 0.3s; }
+.tab-button:nth-child(4) { animation-delay: 0.4s; }
+.tab-button:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
