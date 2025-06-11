@@ -411,3 +411,26 @@
 .popup-notif ul::-webkit-scrollbar-thumb:hover {
   background: #E55A2B;
 }
+
+
+
+
+/* Loader */
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f9f9f9;
+}
+.spinner {
+  width: 64px;
+  height: 64px;
+  border: 8px solid rgba(0,0,0,0.1);
+  border-left-color: black;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

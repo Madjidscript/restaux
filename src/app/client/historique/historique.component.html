@@ -1,7 +1,7 @@
 <div class="loader-container" *ngIf="loading">
   <div class="spinner"></div>
 </div>
-
+sssssssss
 <!-- <div class="historique-container" *ngIf="commandes.length > 0 ">
   <h2>Historique de vos commandes</h2>
 
@@ -86,8 +86,8 @@
 </div>
 
 <!-- Cas 2 : Aucune commande -->
-<div *ngIf="statut === 'empty'" class="no-history">
-  <p>Aucune commande enregistrée pour ce client.</p>
+<div *ngIf="commandes.length == 0" class="empty-message">
+  <p>cher client votre historique est vide.</p>
 </div>
 
 <!-- Cas 3 : Erreur -->

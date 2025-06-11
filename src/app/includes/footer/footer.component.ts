@@ -58,7 +58,7 @@ export class FooterComponent implements OnInit {
   handleHistoriqueClick(){
     this.router.navigate(["/client/historique",this.token])
   }
-
+// [routerLink]="['/client/historique', token]"
     
 
 

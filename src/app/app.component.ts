@@ -21,13 +21,12 @@ export class AppComponent implements OnInit {
   voixActive = false;
   notifdata:any
   isOpen: any;
-  isLoaded: boolean = false; // 🔹 Ajouté ici
+  loading: boolean = false; // 🔹 Ajouté ici
 
   constructor(private socket:SoketserviceService ,private session:SessionserviceService,private api:ClientserviceService,private route:Router,private activate:ActivatedRoute){}
 
   ngOnInit(): void {
-    this.recupstatut()
-    this.getstatut()
+    
     this.activate.queryParamMap.subscribe(params => {
     const fromScan = params.get('from');
     console.log("my from",fromScan);
@@ -37,6 +36,9 @@ export class AppComponent implements OnInit {
       this.clientid(); // on déclenche la génération du emon_id
     }
   });
+
+  this.recupstatut()
+  this.getstatut()
 
     this.notifdata = this.session.getItem('notif');
     console.log("ma notif",this.notifdata);
@@ -111,21 +113,24 @@ export class AppComponent implements OnInit {
   }
   
 getstatut(){
+  this.loading = true; // ✅ Une fois les données reçues, on autorise l’affichage
+
     this.api.gettatut().subscribe({
       next:(res:any)=> {
         console.log("mon satut response",res);
         this.isOpen = res.isOpen
-        this.isLoaded = true; // ✅ Une fois les données reçues, on autorise l’affichage
 
         
       },
       error:(err:any)=> {
         console.log("mon err",err);
-        this.isLoaded = true; // ✅ Une fois les données reçues, on autorise l’affichage
+        this.loading = false; // ✅ Une fois les données reçues, on autorise l’affichage
 
       },
-      complete() {
+      complete:()=> {
         console.log("ok");
+        this.loading = false; // ✅ Une fois les données reçues, on autorise l’affichage
+
         
       },
     })
@@ -133,14 +138,16 @@ getstatut(){
   }
 
   recupstatut(){
-    this.socket.onMessage("statut",data=> {
+    this.loading=true
+    setTimeout(() => {
+      this.socket.onMessage("statut",data=> {
       console.log("mon data socket state",data.statut.isOpen);
        this.isOpen=data.statut.isOpen
-      this.isLoaded = true; // ✅ Une fois les données reçues, on autorise l’affichage
 
       
 
     }  )
+    }, 500);
   }
 
   // clientid(){

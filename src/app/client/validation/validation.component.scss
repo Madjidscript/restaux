@@ -74,9 +74,10 @@
     flex-direction: column;
     justify-content: center;   /* centre verticalement */
     align-items: center;       /* centre horizontalement */
-    height: 100vh;       
+    height: auto;       
     text-align: center;
     color: #28a745;
+    margin-top: 30px;
     // background-color: red;
   }
 //   // .confirmation-message {
@@ -315,11 +316,13 @@
 /* Page de validation */
 .validation-page {
   max-width: 600px;
+  height: auto;
   margin: 40px auto;
   padding: 20px;
   background: #ffffff;
   border-radius: 12px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  // background-color: #b30000;
 }
 .validation-page h2 {
   text-align: center;

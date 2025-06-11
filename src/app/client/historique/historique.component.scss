@@ -199,3 +199,13 @@ li {
   h4{
     color:#FF6B35;
   }
+
+  .empty-message {
+  height: 100vh; /* hauteur de la page */
+  display: flex;
+  justify-content: center; /* centre horizontalement */
+  align-items: center;     /* centre verticalement */
+  text-align: center;
+  color: #666;
+  font-size: 18px;
+}

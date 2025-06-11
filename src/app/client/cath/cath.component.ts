@@ -96,7 +96,7 @@ export class CathComponent implements OnInit {
       return;
     }
   
-    const message = new SpeechSynthesisUtterance("Bienvenue ! Nous sommes ravis de vous accueillir. Veuillez commencer votre commande.");
+    const message = new SpeechSynthesisUtterance("Bienvenue ! Nous sommes ravis de vous accueillir. Veuillez effectuer votre commande.");
     message.lang = navigator.language.startsWith('en') ? 'en-US' : 'fr-FR';
     
     speechSynthesis.speak(message);
