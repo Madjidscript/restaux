@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { environment } from '../../../environments/environment.prod';
 import { ClientserviceService } from '../../clientservice/clientservice.service';
 
+
 @Component({
   selector: 'app-historique',
   standalone: true,
@@ -12,8 +13,10 @@ import { ClientserviceService } from '../../clientservice/clientservice.service'
   styleUrl: './historique.component.scss'
 })
 export class HistoriqueComponent implements OnInit {
-  commandes:any
+  commandes: any[] = [];
   data:any
+  statut:any
+  loading=false
   baseUrl = environment.apiUrl + '/';
   emon_id:any;
   constructor(private api:ClientserviceService){}
@@ -29,21 +32,39 @@ export class HistoriqueComponent implements OnInit {
   }
 
 
-  getcmmtby(){
-    this.emon_id = localStorage.getItem("emon_id");
+  getcmmtby() {
+    this.loading=true
+  this.emon_id = localStorage.getItem("emon_id");
 
-    this.api.getallcmdbyemonid(this.emon_id).subscribe({
-      next:(res:any)=>  {
-        console.log("mon api",res);
-        this.commandes = res.commandes
-      },
-      error:(err:any)=> {
-        console.log("mon err",err);
-        
-      },
-    })
-  
+  this.api.getallcmdbyemonid(this.emon_id).subscribe({
+    next: (res: any) => {
+      this.statut=res.status
+            console.log("Réponse brute :", res,"statut",this.statut);
+
+
+      // Vérifie si res.commandes existe et est un objet
+      if (res.commandes && Array.isArray(res.commandes)) {
+      this.commandes = res.commandes.filter((cmd: any) => cmd.statut === 'Servie');
+      console.log("Commandes filtrées :", this.commandes);
+      } else {
+       this.commandes = [];
+      }
+
+
+      console.log("Commandes transformées :", this.commandes,typeof(this.commandes));
+    },
+    error: (err: any) => {
+      console.error("Erreur API :", err);
+      this.commandes = [];
+     this.loading=false
+
+    },
+    complete:()=> {
+      this.loading=false
+    },
+  });
 }
+
 }
 
 

@@ -1,4 +1,55 @@
-<div class="historique-container" *ngIf="commandes.length > 0; ">
+<div class="loader-container" *ngIf="loading">
+  <div class="spinner"></div>
+</div>
+
+<!-- <div class="historique-container" *ngIf="commandes.length > 0 ">
+  <h2>Historique de vos commandes</h2>
+
+  <div class="commande-card" *ngFor="let cmd of commandes">
+    <div class="commande-header">
+      <strong>Commande :</strong> {{ cmd._id }}
+      <span class="statut" 
+            [class.attente]="cmd.statut === 'en_attente'" 
+            [class.preparation]="cmd.statut === 'en_preparation'" 
+            [class.livre]="cmd.statut === 'Servie'">
+        {{ cmd.statut }}
+      </span>
+    </div>
+
+    <div class="commande-detail">
+      <p><strong>Table :</strong> {{ cmd.num }}</p>
+      <p><strong>Total :</strong> {{ cmd.total }} FCFA</p>
+      <p><strong>Type de service :</strong> {{ cmd.type_service }}</p>
+    </div>
+
+    <div class="articles">
+      <h4>Articles :</h4>
+      <ul>
+        <li *ngFor="let article of cmd.data">
+          <img [src]="formatImagePath(article.image)" alt="{{ article.nom }}" />
+          {{ article.nom }} - {{ article.nbre }} x {{ article.prixIni }} FCFA
+        </li>
+      </ul>
+    </div>
+
+    <div *ngIf="cmd.alergit?.length > 0">
+      <p><strong>Allergies mentionnées :</strong> {{ cmd.alergit.join(', ') }}</p>
+    </div>
+  </div>
+
+ 
+</div> 
+
+ <div *ngIf="statut == 'empty'" class="no-history">
+      <p >Aucune commande enregistrée pour ce client.</p>
+
+</div>
+
+ -->
+
+
+ <!-- Cas 1 : Commandes disponibles -->
+<div class="historique-container" *ngIf="statut === 'success' && commandes.length > 0 && !loading">
   <h2>Historique de vos commandes</h2>
 
   <div class="commande-card" *ngFor="let cmd of commandes">
@@ -34,5 +85,13 @@
   </div>
 </div>
 
+<!-- Cas 2 : Aucune commande -->
+<div *ngIf="statut === 'empty'" class="no-history">
+  <p>Aucune commande enregistrée pour ce client.</p>
+</div>
 
-  <p  *ngIf="commandes.length == 0" class="no-history">Aucune commande enregistrée pour ce client.</p>
+<!-- Cas 3 : Erreur -->
+<div *ngIf="statut === 'error'" class="no-history">
+  <p>Une erreur est survenue lors du chargement de vos commandes.</p>
+</div>
+
