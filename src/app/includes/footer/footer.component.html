@@ -25,7 +25,7 @@
     <span class="tab-label">Panier</span>
   </a>
 
-  <a
+  <!-- <a
   class="tab-button"
   [class.disabled]="!idCommande "  
   [routerLink]="['/client/suivie', token]"
@@ -34,8 +34,20 @@
 >
   <i class="fas fa-clipboard-list"></i>
   <span class="tab-label">Suivi</span>
-</a>
+</a> -->
   <!-- (click)="handleSuiviClick()" -->
+
+  <a
+  class="tab-button"
+  [class.disabled]="!idCommande"
+  [routerLink]="idCommande ? ['/client/suivie', token] : null"
+  [routerLinkActive]="idCommande ? 'active' : ''"
+  (click)="!idCommande && $event.preventDefault()"
+>
+  <i class="fas fa-clipboard-list"></i>
+  <span class="tab-label">Suivi</span>
+</a>
+
 
 <a 
   class="tab-button"

@@ -487,3 +487,23 @@
     transform: translateY(0);
   }
 }
+
+
+
+
+
+
+
+
+
+.tab-button.disabled {
+  // background-color: #BDC3C7; /* gris désactivé */
+  pointer-events: none;
+  cursor: not-allowed;
+  color: #fff;
+}
+
+.tab-button.disabled i {
+  font-size: 1rem;
+  color: #BDC3C7 !important;
+}
