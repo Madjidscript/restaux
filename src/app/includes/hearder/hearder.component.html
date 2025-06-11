@@ -1,8 +1,8 @@
-<!-- <div class="loader-container" *ngIf="loading">
+<div class="loader-container" *ngIf="loading">
   <div class="spinner"></div>
-</div> -->
+</div>
 
-<header class="header" >
+<header class="header" *ngIf="!loading && tb" >
     <div class="toolbar">
       <h1 class="left-title" >N°:{{tb}}</h1>
   
@@ -12,6 +12,19 @@
       </div>
     </div>
 </header>
+
+<div *ngIf="!tb && !loading"
+  style="
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+  ">
+  Cher client, cette table n'existe pas
+</div>
 
 
 <div class="popup-notif" *ngIf="showNotifPopup">
@@ -47,15 +60,3 @@
 
 
   
-<div *ngIf="!tb"
-  style="
-    height: 50vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    font-size: 1.5rem;
-    font-weight: bold;
-  ">
-  Cher client, cette table n'existe pas
-</div>

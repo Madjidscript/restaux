@@ -10,7 +10,7 @@
  <div class="loader-container" *ngIf="loading">
   <div class="spinner"></div>
 </div>
-<app-hearder  [class.disabled]="!isOpen&& !loading"></app-hearder>
+<app-hearder  [class.disabled]="!isOpen && !loading"></app-hearder>
 
 <!-- Si le resto est ouvert, on affiche la page normalement -->
 <div *ngIf="isOpen !loading">

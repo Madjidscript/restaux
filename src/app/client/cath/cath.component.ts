@@ -114,6 +114,8 @@ export class CathComponent implements OnInit {
     next: (res: any) => {
       console.log("ma reponse depuis cath", res);
       this.tb = res.numeroTable;
+      console.log("lidy",this.token);
+      
       this.getallcath();
     },
     error: (err: any) => {

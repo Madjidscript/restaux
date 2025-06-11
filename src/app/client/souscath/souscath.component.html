@@ -30,7 +30,7 @@
 
 
   <!-- Barre de recherche fixée -->
-<div class="search-container" style="margin-top: 80px;">
+<div class="search-container" style="margin-top: 80px;" *ngIf="!loading && tb && token">
   <form [formGroup]="searchForm">
     <input
       type="text"

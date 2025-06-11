@@ -18,13 +18,16 @@ export class HearderComponent implements OnInit{
   token:any
   length:any =0
   message:any
+  loading=false
   showNotifPopup = false;
   firstNotif = true; // au début
+  tableInvalide = false;
+
 
   
   voixActive = false;
   notifdata:any
-  constructor(private router: Router, private route: ActivatedRoute,private socket:SoketserviceService,private session:SessionserviceService,private api:ClientserviceService ){}
+  constructor(private router: Router, private route: ActivatedRoute,private socket:SoketserviceService,private session:SessionserviceService,private api:ClientserviceService,private activate :ActivatedRoute ){}
   ngOnInit() {
     
     
@@ -95,24 +98,55 @@ export class HearderComponent implements OnInit{
     }
      
 
-    gettb(){
-      this.api.sigleqr(this.token).subscribe({
-        next:(res:any)=>{
-          console.log("ma reponse depuis hearder",res);
-          this.tb = res.numeroTable
+    // gettb(){
+    //   this.loading =true
+    //   this.api.sigleqr(this.token).subscribe({
+    //     next:(res:any)=>{
+    //       console.log("ma reponse depuis hearder",res);
+    //       this.tb = res.numeroTable
           
-        },
-        error:(err:any)=> {
-         console.log("mon err hearder",err);
+    //     },
+    //     error:(err:any)=> {
+    //      console.log("mon err hearder",err);
+    //       this.loading =false
+
           
-        },
-        complete() {
-          console.log("ok");
+    //     },
+    //     complete:()=> {
+    //       console.log("ok");
+    //       this.loading =false
+
           
-        },
-      })
-    }
+    //     },
+    //   })
+    // }
  
+
+    gettb(){
+  if (!this.token) {
+    this.loading = false;
+    return;
+  }
+
+  this.loading = true;
+  this.api.sigleqr(this.token).subscribe({
+    next: (res: any) => {
+      console.log("ma reponse depuis hearder", res);
+      this.tb = res.numeroTable;
+    },
+    error: (err: any) => {
+      console.log("mon err hearder", err);
+      this.tb = null;
+      this.loading = false;
+      this.tableInvalide=true
+    },
+    complete: () => {
+      console.log("ok");
+      this.loading = false;
+    },
+  });
+}
+
 
 
 }

@@ -4,7 +4,7 @@
 </div>
 
 <!-- Zone de recherche -->
-<div class="search-container" *ngIf="!loading && tb" style="margin-top: 80px;">
+<div class="search-container" *ngIf="!loading && tb && token" style="margin-top: 80px;">
   <form [formGroup]="searchForm">
     <input
       type="text"
