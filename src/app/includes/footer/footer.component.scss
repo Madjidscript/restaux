@@ -114,11 +114,15 @@
   
 
 
-
   .tab-button.disabled {
     pointer-events: none;
     opacity: 0.4;
+    color: #7F8C8D;
   }
+  .tab-button.disabled.fa-clipboard-list{
+    background-color: #BDC3C7;
+  }
+
   .popup {
     position: fixed;
     top: 20%;
