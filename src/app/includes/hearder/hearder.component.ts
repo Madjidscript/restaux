@@ -28,33 +28,13 @@ export class HearderComponent implements OnInit{
   voixActive = false;
   notifdata:any
   constructor(private router: Router, private route: ActivatedRoute,private socket:SoketserviceService,private session:SessionserviceService,private api:ClientserviceService,private activate :ActivatedRoute ){}
-  // ngOnInit() {
-    
-    
-  //   this.router.events
-  //     .pipe(filter((event:any) => event instanceof NavigationEnd))
-  //     .subscribe(() => {
-  //       // Traverse la route active pour trouver le paramètre `tb`
-  //       let activeRoute = this.route.root;
-  //       while (activeRoute.firstChild) {
-  //         activeRoute = activeRoute.firstChild;
-  //       }
-
-  //       this.token = activeRoute.snapshot.paramMap.get("tb");
-  //       console.log("TB dans le header :", this.tb);
-  //       this.taille()
-  //       this.gettb()
-  //     });
-
-     
-  // }
+ 
 
   ngOnInit() {
     this.loading = true
   this.taille(); // écoute des notifications
 
-  // Ecoute les changements de route et lit le paramètre `tb`
-  // this.route.paramMap.subscribe(params => {
+  
      this.router.events
       .pipe(filter((event:any) => event instanceof NavigationEnd))
       .subscribe(() => {
