@@ -28,10 +28,34 @@ export class HearderComponent implements OnInit{
   voixActive = false;
   notifdata:any
   constructor(private router: Router, private route: ActivatedRoute,private socket:SoketserviceService,private session:SessionserviceService,private api:ClientserviceService,private activate :ActivatedRoute ){}
+  // ngOnInit() {
+    
+    
+  //   this.router.events
+  //     .pipe(filter((event:any) => event instanceof NavigationEnd))
+  //     .subscribe(() => {
+  //       // Traverse la route active pour trouver le paramètre `tb`
+  //       let activeRoute = this.route.root;
+  //       while (activeRoute.firstChild) {
+  //         activeRoute = activeRoute.firstChild;
+  //       }
+
+  //       this.token = activeRoute.snapshot.paramMap.get("tb");
+  //       console.log("TB dans le header :", this.tb);
+  //       this.taille()
+  //       this.gettb()
+  //     });
+
+     
+  // }
+
   ngOnInit() {
-    
-    
-    this.router.events
+    this.loading = true
+  this.taille(); // écoute des notifications
+
+  // Ecoute les changements de route et lit le paramètre `tb`
+  // this.route.paramMap.subscribe(params => {
+     this.router.events
       .pipe(filter((event:any) => event instanceof NavigationEnd))
       .subscribe(() => {
         // Traverse la route active pour trouver le paramètre `tb`
@@ -39,15 +63,24 @@ export class HearderComponent implements OnInit{
         while (activeRoute.firstChild) {
           activeRoute = activeRoute.firstChild;
         }
-
+ 
         this.token = activeRoute.snapshot.paramMap.get("tb");
-        console.log("TB dans le header :", this.tb);
-        this.taille()
-        this.gettb()
-      });
+        
+      this.gettb(); 
 
-     
-  }
+    if (this.tb) {
+      console.log("tok1",this.token,"tb1",this.tb);
+      // Récupérer le numéro de table
+    } else if(!this.tb) {
+      // this.tb = null;
+      this.tableInvalide = true;
+      this.loading = false;
+      console.log("tok2",this.token,this.tb);
+
+    }
+  });
+}
+
 
 
   taille() {
@@ -122,26 +155,21 @@ export class HearderComponent implements OnInit{
     // }
  
 
-    gettb(){
-  if (!this.token) {
-    this.loading = false;
-    return;
-  }
-
+   gettb() {
   this.loading = true;
+  this.tableInvalide = false;
+  
   this.api.sigleqr(this.token).subscribe({
     next: (res: any) => {
-      console.log("ma reponse depuis hearder", res);
+      console.log("Réponse header :", res);
       this.tb = res.numeroTable;
     },
     error: (err: any) => {
-      console.log("mon err hearder", err);
+      console.error("Erreur header :", err);
       this.tb = null;
-      this.loading = false;
-      this.tableInvalide=true
+      this.tableInvalide = true;
     },
     complete: () => {
-      console.log("ok");
       this.loading = false;
     },
   });

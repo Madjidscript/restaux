@@ -8,12 +8,12 @@
   
       <div class="icon-wrapper" (click)="notif()" *ngIf="length>0" >
         <i class="fas fa-bell"  ></i>
-        <span class="badge"> {{length}} </span> <!-- nombre de notifications -->
+        <span class="badge"> {{length}} </span> 
       </div>
     </div>
 </header>
 
-<div *ngIf="!tb && !loading"
+<div *ngIf="tableInvalide && !loading && !tb"
   style="
     height: 50vh;
     display: flex;
