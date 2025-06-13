@@ -192,7 +192,7 @@ export class SouscathComponent implements OnInit {
           }
         }, 1200);
         
-      }, 500); // Délai court pour l'effet visuel
+      }, 300); // Délai court pour l'effet visuel
       
     } catch (error) {
       // Gestion d'erreur
