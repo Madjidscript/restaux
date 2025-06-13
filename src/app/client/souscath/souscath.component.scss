@@ -477,7 +477,7 @@
   // background: linear-gradient(135deg, var(--success-green) 0%, var(--success-light) 100%);
   color: black;
   border: none;
-  padding: 12px 14px;
+  padding: 4px 8px;
   border-radius: 12px;
   font-weight: 700;
   font-size: 10px;
@@ -485,15 +485,15 @@
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
   text-transform: uppercase;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.1px;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   border: 2px solid rgba(255, 255, 255, 0.2);
   overflow: hidden;
-  min-width: 100px;
+  width: auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 4px;
 }
 
 /* Effet de brillance */
