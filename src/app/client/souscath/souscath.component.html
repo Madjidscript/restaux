@@ -70,8 +70,18 @@
 
         <div style="display: flex; justify-content: space-between;">
           <div class="price">{{ item.prix }} <sub>Fcfa</sub></div>
-          <button type="button" class="add-btn" (click)="addToCart(item)">
+          <!-- <button type="button" class="add-btn" (click)="addToCart(item)">
             Ajouter
+          </button> -->
+          <button 
+            type="button" 
+            class="add-btn" 
+            [class.loading]="isButtonLoading(item)"
+            [disabled]="isButtonLoading(item)"
+            (click)="addToCart(item, $event)">
+            
+            <span *ngIf="!isButtonLoading(item)" style="z-index: 1000;">Ajouter</span>
+            <span *ngIf="isButtonLoading(item)" style="z-index: 1000;">Ajout...</span>
           </button>
         </div>
       </div>

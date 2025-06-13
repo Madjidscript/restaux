@@ -246,3 +246,567 @@
   font-weight: 700;
   text-shadow: 0 2px 4px rgba(255, 107, 53, 0.1);
 }
+
+
+
+
+
+
+
+
+// bolt css
+
+
+.price {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--primary-orange) 0%, var(--accent-gold) 100%);
+  color: #E67E22;
+  font-weight: 700;
+  padding: 12px 20px;
+  border-radius: 16px;
+  font-size: 16px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(255, 107, 53, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  letter-spacing: 0.5px;
+  min-width: 100px;
+}
+
+/* Effet de brillance */
+.price::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.6s ease;
+}
+
+.price:hover::before {
+  left: 100%;
+}
+
+/* Effet au survol */
+.price:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
+  background: linear-gradient(135deg, #E55A2B 0%, #E67E22 100%);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Animation de pulsation pour attirer l'attention */
+.price {
+  animation: priceGlow 3s ease-in-out infinite;
+}
+
+@keyframes priceGlow {
+  0%, 100% { 
+    box-shadow: 0 6px 20px rgba(255, 107, 53, 0.3);
+  }
+  50% { 
+    box-shadow: 0 8px 25px rgba(255, 107, 53, 0.5);
+  }
+}
+
+/* Style pour le sous-texte "Fcfa" */
+.price sub {
+  font-size: 12px;
+  font-weight: 600;
+  margin-left: 4px;
+  opacity: 0.9;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+/* Icône de devise (optionnelle) */
+.price::after {
+  content: '💰';
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  font-size: 14px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Variante avec étiquette de prix */
+.price-tag {
+  position: relative;
+  background: linear-gradient(135deg, var(--primary-orange) 0%, var(--accent-gold) 100%);
+  color: #FFFFFF;
+  font-weight: 700;
+  padding: 14px 24px 14px 20px;
+  border-radius: 12px 20px 20px 12px;
+  font-size: 16px;
+  box-shadow: 0 6px 20px rgba(255, 107, 53, 0.3);
+  transition: all 0.3s ease;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.price-tag::before {
+  content: '';
+  position: absolute;
+  left: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  border-right: 10px solid var(--primary-orange);
+  filter: drop-shadow(-2px 0 4px rgba(255, 107, 53, 0.3));
+}
+
+.price-tag::after {
+  content: '';
+  position: absolute;
+  left: -4px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  background: #FFFFFF;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px rgba(255, 107, 53, 0.3);
+}
+
+.price-tag:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
+}
+
+/* Style compact pour mobile */
+@media (max-width: 480px) {
+  .price {
+    padding: 10px 16px;
+    font-size: 14px;
+    min-width: 80px;
+    border-radius: 12px;
+  }
+  
+  .price sub {
+    font-size: 10px;
+  }
+  
+  .price::after {
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+    top: -6px;
+    right: -6px;
+  }
+  
+  .price-tag {
+    padding: 12px 20px 12px 16px;
+    font-size: 14px;
+  }
+}
+
+/* Style alternatif avec bordure dorée */
+.price-premium {
+  background: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 100%);
+  color: var(--primary-orange);
+  border: 3px solid;
+  border-image: linear-gradient(135deg, var(--primary-orange) 0%, var(--accent-gold) 100%) 1;
+  box-shadow: 0 6px 20px rgba(255, 107, 53, 0.2);
+  font-weight: 800;
+  text-shadow: none;
+}
+
+.price-premium:hover {
+  background: linear-gradient(135deg, var(--primary-orange) 0%, var(--accent-gold) 100%);
+  color: #FFFFFF;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Animation d'apparition */
+.price {
+  animation: priceAppear 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes priceAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+
+
+
+
+
+// btn add
+
+
+:root {
+  --primary-orange: #FF6B35;
+  --secondary-red: #C0392B;
+  --accent-gold: #F39C12;
+  --neutral-dark: #2C3E50;
+  --warm-bg: #FAFAFA;
+  --warm-gray: #7F8C8D;
+  --card-shadow: rgba(255, 107, 53, 0.1);
+  --success-green: #27AE60;
+  --success-light: #2ECC71;
+}
+
+/* Style principal du bouton Ajouter */
+.add-btn {
+  position: relative;
+  // background: linear-gradient(135deg, var(--success-green) 0%, var(--success-light) 100%);
+  color: black;
+  border: none;
+  padding: 12px 14px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 10px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+  min-width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* Effet de brillance */
+.add-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.6s ease;
+}
+
+.add-btn:hover::before {
+  left: 100%;
+}
+
+/* État normal au survol */
+.add-btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(39, 174, 96, 0.4);
+  background: linear-gradient(135deg, #229954 0%, #27AE60 100%);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* État actif (au clic) */
+.add-btn:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 2px 10px rgba(39, 174, 96, 0.3);
+}
+
+/* Icône panier (optionnelle) */
+.add-btn::after {
+  content: '🛒';
+  font-size: 13px;
+  margin-left: 3px;
+  transition: transform 0.3s ease;
+}
+
+.add-btn:hover::after {
+  transform: scale(1.2) rotate(10deg);
+}
+
+/* ===== ÉTATS DE FEEDBACK ===== */
+
+/* État "Ajouté avec succès" */
+.add-btn.success {
+  background: linear-gradient(135deg, var(--primary-orange) 0%, var(--accent-gold) 100%);
+  animation: successPulse 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.add-btn.success::after {
+  content: '✓';
+  font-size: 18px;
+  margin-left: 0;
+  animation: checkmark 0.6s ease;
+}
+
+@keyframes successPulse {
+  0% { 
+    transform: scale(1);
+    box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+  }
+  50% { 
+    transform: scale(1.1);
+    box-shadow: 0 8px 30px rgba(255, 107, 53, 0.5);
+  }
+  100% { 
+    transform: scale(1);
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+  }
+}
+
+@keyframes checkmark {
+  0% { 
+    transform: scale(0) rotate(-180deg);
+    opacity: 0;
+  }
+  50% { 
+    transform: scale(1.3) rotate(0deg);
+    opacity: 1;
+  }
+  100% { 
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+/* État de chargement */
+.add-btn.loading {
+  background: linear-gradient(135deg, var(--warm-gray) 0%, #95A5A6 100%);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.add-btn.loading::after {
+  content: '';
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid #FFFFFF;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-left: 0;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ===== VARIANTES DE STYLE ===== */
+
+/* Bouton avec compteur */
+.add-btn-counter {
+  position: relative;
+  background: linear-gradient(135deg, var(--success-green) 0%, var(--success-light) 100%);
+  color: #FFFFFF;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  min-width: 120px;
+}
+
+.add-btn-counter .counter {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: var(--primary-orange);
+  color: #FFFFFF;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 50%;
+  min-width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(255, 107, 53, 0.4);
+  border: 2px solid #FFFFFF;
+  animation: counterPop 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes counterPop {
+  0% { transform: scale(0); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+/* Bouton avec effet de vague */
+.add-btn-wave {
+  position: relative;
+  background: linear-gradient(135deg, var(--success-green) 0%, var(--success-light) 100%);
+  color: #E67E22;
+  border: none;
+  padding: 12px 14px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+}
+
+.add-btn-wave::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+}
+
+.add-btn-wave.clicked::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 480px) {
+  .add-btn {
+    padding: 10px 12px;
+    font-size: 12px;
+    min-width: 80px;
+    border-radius: 10px;
+  }
+  
+  .add-btn::after {
+    font-size: 14px;
+  }
+  
+  .add-btn-counter {
+    padding: 10px 16px;
+    min-width: 100px;
+  }
+  
+  .add-btn-counter .counter {
+    width: 18px;
+    height: 18px;
+    font-size: 11px;
+    top: -6px;
+    right: -6px;
+  }
+}
+
+/* ===== ANIMATIONS D'APPARITION ===== */
+.add-btn {
+  animation: buttonAppear 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes buttonAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* ===== EFFET DE PARTICULES (OPTIONNEL) ===== */
+.add-btn.particles {
+  position: relative;
+}
+
+.add-btn.particles::after {
+  content: '✨';
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  font-size: 20px;
+  animation: sparkle 1.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes sparkle {
+  0%, 100% { 
+    opacity: 0;
+    transform: scale(0.5) rotate(0deg);
+  }
+  50% { 
+    opacity: 1;
+    transform: scale(1) rotate(180deg);
+  }
+}
+
+/* ===== NOTIFICATION TOAST (OPTIONNELLE) ===== */
+.toast-notification {
+  position: fixed;
+  top: 50px;
+  right: 20px;
+  background: linear-gradient(135deg, var(--success-green) 0%, var(--success-light) 100%);
+  color: #FFFFFF;
+  padding: 16px 24px;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(39, 174, 96, 0.3);
+  z-index: 9999;
+  animation: slideInRight 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.toast-notification::before {
+  content: '✓';
+  font-size: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100px) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+/* Animation de sortie pour le toast */
+.toast-notification.fade-out {
+  animation: slideOutRight 0.4s ease-in-out forwards;
+}
+
+@keyframes slideOutRight {
+  from {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100px) scale(0.8);
+  }
+}

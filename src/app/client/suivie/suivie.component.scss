@@ -87,4 +87,88 @@
 
 
 
-  
+  /* Labels des étapes */
+.labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 20px;
+  color: var(--neutral-dark);
+}
+
+.labels span {
+  padding: 8px 12px;
+  background: rgba(255, 107, 53, 0.05);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 107, 53, 0.1);
+}
+
+.labels span:hover {
+  background: rgba(255, 107, 53, 0.1);
+  transform: translateY(-2px);
+}
+
+
+
+/* Titre principal */
+.progress-wrapper h2 {
+  color: var(--primary-orange);
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 0 30px;
+  text-shadow: 0 2px 4px rgba(255, 107, 53, 0.2);
+  letter-spacing: 0.5px;
+  position: relative;
+}
+
+.progress-wrapper h2::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-orange) 0%, var(--accent-gold) 100%);
+  border-radius: 2px;
+}
+
+
+
+/* Messages informatifs */
+.progress-wrapper p {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 20px 0 30px;
+  padding: 16px 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.progress-wrapper p:first-of-type {
+  background: linear-gradient(135deg, var(--accent-gold) 0%, var(--primary-orange) 100%);
+  color: #E67E22;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  animation: pulse 2s infinite;
+}
+
+.progress-wrapper p:last-of-type {
+  background: linear-gradient(135deg, var(--success-green) 0%, var(--success-light) 100%);
+  color: #E67E22;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  animation: celebration 1s ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+@keyframes celebration {
+  0% { transform: scale(0.9) rotate(-2deg); }
+  50% { transform: scale(1.05) rotate(2deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
