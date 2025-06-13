@@ -477,10 +477,10 @@
   // background: linear-gradient(135deg, var(--success-green) 0%, var(--success-light) 100%);
   color: black;
   border: none;
-  padding: 4px 8px;
+  padding: 4px 6px;
   border-radius: 12px;
   font-weight: 700;
-  font-size: 10px;
+  font-size: 8px;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
@@ -489,11 +489,11 @@
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   border: 2px solid rgba(255, 255, 255, 0.2);
   overflow: hidden;
-  width: auto;
+  width: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
+  gap: 2px;
 }
 
 /* Effet de brillance */
@@ -529,8 +529,8 @@
 /* Icône panier (optionnelle) */
 .add-btn::after {
   content: '🛒';
-  font-size: 13px;
-  margin-left: 3px;
+  font-size: 6px;
+  margin-left: 1px;
   transition: transform 0.3s ease;
 }
 
@@ -549,7 +549,7 @@
 
 .add-btn.success::after {
   content: '✓';
-  font-size: 18px;
+  font-size: 12px;
   margin-left: 0;
   animation: checkmark 0.6s ease;
 }
