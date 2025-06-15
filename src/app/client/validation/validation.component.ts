@@ -20,6 +20,8 @@ export class ValidationComponent {
  
   cartItems: any[] = [];
   tb:any
+  total2:any
+  promo:any
   token:any
   notif:any
   statut:any
@@ -37,6 +39,8 @@ export class ValidationComponent {
   maintenant: any;
   dateActuelle: any;
   heureActuelle: any;
+  reduct: any;
+  totaux: any;
 
   constructor( private router:Router,private activate:ActivatedRoute,private api:ClientserviceService,private session:SessionserviceService,private paniers:PanierService) {
    
@@ -65,7 +69,26 @@ export class ValidationComponent {
     this.gettb()
 
     this.total = this.cartItems.reduce((sum, item) => sum + item.prix_total, 0);
-    console.log("mon tatal",this.total,this.cartItems);
+    const reductionData = sessionStorage.getItem('reductionData');
+     this.promo = sessionStorage.getItem('codePromo');
+     console.log("doidou",this.promo);
+     if (this.total2) {
+     this.totaux = this.total2;
+     console.log('totaux1',this.totaux);
+     
+     }else{
+      this.totaux = this.total;
+     console.log('totaux2',this.totaux);
+
+     }
+     
+
+    if (reductionData) {
+       const parsedData = JSON.parse(reductionData);
+       this.total2 = parsedData.totalwithreduct;
+       this.reduct = parsedData.reduction;
+    }    
+    console.log("mon tatal",this.total,this.cartItems,this.total2);
     this.index = this.generateUniqueIndex();
     this.heure()
 
@@ -92,13 +115,14 @@ export class ValidationComponent {
     const allergies = this.validationForm.get('allergies')?.value;
     const service = this.validationForm.get('type_service')?.value;
      const emont = localStorage.getItem("emon_id");
-
+     
     
     const commande = {
       num: this.tb,
-      total: this.total.toString(),
+      total: this.totaux.toString(),
       statut: "en_attente",
       index: this.index,
+      promo: this.promo,
       data: this.cartItems.map(item => ({
         id: item._id,
         image: item.image,
@@ -157,6 +181,8 @@ export class ValidationComponent {
         setTimeout(() => {
         sessionStorage.removeItem('commandeValidee');
         sessionStorage.removeItem('voixActive');
+        sessionStorage.removeItem('reductionData');
+        sessionStorage.removeItem('codePromo');
         this.router.navigate([`/client/cath/${this.token}`])
           
         }, 8000);

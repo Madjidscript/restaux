@@ -29,6 +29,10 @@ export class ClientserviceService {
     return this.http.post(this.api_url+"/admin/validationcmmd", body);
   }
 
+   verifcoupon(code:any) {
+    return this.http.get(this.api_url+`/admin/verifcoupon/${code}`);
+  }
+
   // Editstatut(id:any) {
   //   return this.http.get(this.api_url+`/admin/commandes/${id}`, );
   // }

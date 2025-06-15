@@ -354,3 +354,27 @@
   font-size: 18px;
   color: #ff0000;
 }
+
+
+.coupon-section {
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  input {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+}
+
+.success-msg {
+  color: green;
+  font-weight: bold;
+}
+
+.error-msg {
+  color: red;
+  font-weight: bold;
+}

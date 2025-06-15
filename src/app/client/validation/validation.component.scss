@@ -543,3 +543,29 @@ textarea:focus {
   color: #ff6b35;
 }
 
+
+
+.total {
+  font-size: 18px;
+  margin-top: 10px;
+  color: #333;
+
+  .tt {
+    font-weight: bold;
+    margin-left: 8px;
+    color: #999;
+    transition: all 0.3s ease;
+  }
+
+  &.total-reduct {
+    color: #2c7a25; // couleur verte pour la réduction
+    font-weight: 600;
+
+    .tt.final {
+      color: #2c7a25;
+      font-size: 20px;
+    }
+  }
+}
+
+

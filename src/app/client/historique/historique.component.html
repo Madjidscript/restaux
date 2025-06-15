@@ -1,7 +1,6 @@
 <div class="loader-container" *ngIf="loading">
   <div class="spinner"></div>
 </div>
-sssssssss
 <!-- <div class="historique-container" *ngIf="commandes.length > 0 ">
   <h2>Historique de vos commandes</h2>
 
@@ -72,7 +71,7 @@ sssssssss
     <div class="articles">
       <h4>Articles :</h4>
       <ul>
-        <li *ngFor="let article of cmd.data" sty>
+        <li *ngFor="let article of cmd.data" >
           <img [src]="formatImagePath(article.image)" alt="{{ article.nom }}" />
           {{ article.nom }} - {{ article.nbre }} x {{ article.prixIni }} FCFA
         </li>

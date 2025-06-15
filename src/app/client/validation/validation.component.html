@@ -55,7 +55,22 @@
     </tbody>
   </table>
 
-  <div class="total">Total TTC : <span class="tt">{{total}} </span><sub>fcfa</sub></div>
+  <!-- <div class="total">Total TTC : <span class="tt">{{total}} </span><sub>fcfa</sub></div> -->
+
+  <div class="total">
+  Total TTC : 
+  <span class="tt" [ngStyle]="{'text-decoration': reduct ? 'line-through' : 'none'}">
+    {{ total | number:'1.0-0' }} FCFA
+  </span>
+</div>
+
+<div class="total" *ngIf="reduct">
+  Total après réduction ({{ reduct }}%) : 
+  <span class="tt">
+    {{ total2 | number:'1.0-0' }} FCFA
+  </span>
+</div>
+
 
   <!-- <div class="info">
     <p><strong>Méthode de paiement :</strong> Carte bancaire</p>

@@ -58,8 +58,53 @@
         <span>{{ total }} $</span>
       </div>
     </div>
+ 
 
-    <button class="validate-btn" (click)="validerCommande()">Valider ma commande</button>
+    <!-- coupon -->
+
+  <div class="coupon-section">
+  <label for="coupon">Code Promo</label>
+ <input
+  type="text"
+  id="coupon"
+  [formControl]="codePromoControl"
+  placeholder="Entrez votre code promo"
+  [readonly]="couponValide"  
+/>
+<!-- On bloque la saisie seulement si le code est validé -->
+<button (click)="appliquerCodePromo()" [disabled]="couponValide">Appliquer</button>
+
+<!-- <button (click)="clearPromo()" *ngIf="couponValide">Supprimer le code promo</button> -->
+
+<div
+  [style.color]="couponValide ? 'green' : 'red'"
+  style="margin-top: 8px; font-weight: bold;"
+>
+  {{ promoMessage }}
+</div>
+
+
+  <button *ngIf="couponValide" (click)="clearPromo()">Supprimer le code promo</button>
+</div>
+
+<div class="summary">
+  <div class="line" *ngIf="couponValide">
+    <span>Réduction ({{ reductionPourcentage ? reduction + '%' : reduction + ' $' }})</span>
+    <span>- {{ reductionAmount | number:'1.2-2' }} $</span>
+  </div>
+
+  <div class="line total">
+    <span>Total à payer</span>
+    <span>{{ total | number:'1.2-2' }} $</span>
+  </div>
+</div>
+
+
+
+<!-- (click)="validerCommande()" -->
+    
+
+    <button class="validate-btn" [routerLink]="['/client/validation',token]" routerLinkActive="router-link-active"  >Valider ma commande</button>
 
 
   </div>
