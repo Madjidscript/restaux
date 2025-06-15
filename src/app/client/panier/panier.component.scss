@@ -378,3 +378,25 @@
   color: red;
   font-weight: bold;
 }
+
+.btn-promo {
+  background-color: #ff6b35;
+  color: white;
+  font-weight: 600;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+
+  &:hover {
+    background-color: #e65a27;
+  }
+
+  &:disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+}

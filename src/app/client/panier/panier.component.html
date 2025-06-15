@@ -72,7 +72,7 @@
   [readonly]="couponValide"  
 />
 <!-- On bloque la saisie seulement si le code est validé -->
-<button (click)="appliquerCodePromo()" [disabled]="couponValide">Appliquer</button>
+<button (click)="appliquerCodePromo()" [disabled]="couponValide" class="btn-promo">Appliquer</button>
 
 <!-- <button (click)="clearPromo()" *ngIf="couponValide">Supprimer le code promo</button> -->
 

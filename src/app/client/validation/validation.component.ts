@@ -185,7 +185,7 @@ export class ValidationComponent {
         sessionStorage.removeItem('codePromo');
         this.router.navigate([`/client/cath/${this.token}`])
           
-        }, 8000);
+        }, 10000);
           
         }
         
