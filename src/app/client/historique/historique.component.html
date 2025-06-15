@@ -63,8 +63,12 @@
     </div>
 
     <div class="commande-detail">
-      <p><strong>Table :</strong> {{ cmd.num }}</p>
-      <p><strong>Total :</strong> {{ cmd.total }} FCFA</p>
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <p><strong>Table :</strong> {{ cmd.num }}</p> <p><strong>code promo :</strong> {{ cmd.promo ||"pas de code" }}</p>
+      </div>
+      <div  style="display: flex; justify-content: space-between; align-items: center;">
+        <p><strong>Total :</strong> {{ cmd.total }} FCFA</p>  <p><strong>reduction :</strong> {{ cmd.reduct || "pas de reduction" }}% </p>
+      </div>
       <p><strong>Type de service :</strong> {{ cmd.type_service }}</p>
     </div>
 

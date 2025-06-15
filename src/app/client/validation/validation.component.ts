@@ -69,10 +69,22 @@ export class ValidationComponent {
     this.gettb()
 
     this.total = this.cartItems.reduce((sum, item) => sum + item.prix_total, 0);
-    const reductionData = sessionStorage.getItem('reductionData');
+    const reductionData = sessionStorage.getItem('reductionData') ;
+    // this.reduct = reductionData ? reductionData.reduction : 0;
      this.promo = sessionStorage.getItem('codePromo');
      console.log("doidou",this.promo);
-     if (this.total2) {
+    
+     
+
+    if (reductionData) {
+       const parsedData = JSON.parse(reductionData);
+       this.total2 = parsedData.totalwithreduct;
+       this.reduct = parsedData.reduction;
+       console.log("reduct",this.reduct);
+
+    }    
+    console.log("mon tatal",this.total,this.cartItems,this.total2);
+     if (this.promo) {
      this.totaux = this.total2;
      console.log('totaux1',this.totaux);
      
@@ -81,14 +93,6 @@ export class ValidationComponent {
      console.log('totaux2',this.totaux);
 
      }
-     
-
-    if (reductionData) {
-       const parsedData = JSON.parse(reductionData);
-       this.total2 = parsedData.totalwithreduct;
-       this.reduct = parsedData.reduction;
-    }    
-    console.log("mon tatal",this.total,this.cartItems,this.total2);
     this.index = this.generateUniqueIndex();
     this.heure()
 
@@ -123,6 +127,8 @@ export class ValidationComponent {
       statut: "en_attente",
       index: this.index,
       promo: this.promo,
+      reduct: this.reduct,
+      heure: this.heureActuelle,
       data: this.cartItems.map(item => ({
         id: item._id,
         image: item.image,
