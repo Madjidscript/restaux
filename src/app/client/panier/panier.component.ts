@@ -159,7 +159,7 @@ export class PanierComponent implements OnInit {
             totalwithreduct: this.total
           }));
         } else {
-          this.promoMessage = "❌ Code promo invalide.";
+          this.promoMessage = response.message || "❌ Code promo invalide.";
         }
       },
       error: (err: any) => {
