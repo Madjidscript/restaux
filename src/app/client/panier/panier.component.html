@@ -84,7 +84,12 @@
 </div>
 
 
-  <button *ngIf="couponValide" (click)="clearPromo()">Supprimer le code promo</button>
+<button 
+  *ngIf="couponValide" 
+  (click)="clearPromo()" 
+  class="btn-remove-promo">
+  Supprimer le code promo
+</button>
 </div>
 
 <div class="summary">
