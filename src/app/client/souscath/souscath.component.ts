@@ -184,6 +184,8 @@ export class SouscathComponent implements OnInit {
         
         // Afficher la notification toast
         this.showSuccessToast(item.nom);
+        console.log("my toaqst", this.toastMessage);
+        
         
         // Retirer l'état de succès après l'animation
         setTimeout(() => {
@@ -192,7 +194,7 @@ export class SouscathComponent implements OnInit {
           }
         }, 1200);
         
-      }, 300); // Délai court pour l'effet visuel
+      }, 600); // Délai court pour l'effet visuel
       
     } catch (error) {
       // Gestion d'erreur
