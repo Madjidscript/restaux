@@ -41,10 +41,8 @@ export class ClientserviceService {
   // }
 
   annulecmd(index:any,num:any,statut:any) {
-      const headers = {
-  'x-client-id': localStorage.getItem('emon_id') || ''
-};
-    return this.http.delete(this.api_url+`/admin/annulecommandesbyclient/${index}/${num}/${statut}`, { headers });
+     
+    return this.http.delete(this.api_url+`/admin/annulecommandesbyclient/${index}/${num}/${statut}`, );
   }
 
   // sigleqr(token:any,) {
@@ -54,11 +52,7 @@ export class ClientserviceService {
   sigleqr(token: any) {
   const clientId = localStorage.getItem("emon_id");
 
-  return this.http.get(this.api_url + `/admin/sigleqrcode/${token}`, {
-    headers: {
-      'x-client-id': clientId || ''
-    }
-  });
+  return this.http.get(this.api_url + `/admin/sigleqrcode/${token}?sessionId=${clientId}`, )
 }
 
 
