@@ -26,7 +26,10 @@ export class ClientserviceService {
   }
 
   validationcmmd(body:any) {
-    return this.http.post(this.api_url+"/admin/validationcmmd", body);
+    const headers = {
+  'x-client-id': localStorage.getItem('emon_id') || ''
+};
+    return this.http.post(this.api_url+"/admin/validationcmmd", body, { headers });
   }
 
    verifcoupon(code:any) {
@@ -38,12 +41,25 @@ export class ClientserviceService {
   // }
 
   annulecmd(index:any,num:any,statut:any) {
-    return this.http.delete(this.api_url+`/admin/annulecommandesbyclient/${index}/${num}/${statut}`,);
+      const headers = {
+  'x-client-id': localStorage.getItem('emon_id') || ''
+};
+    return this.http.delete(this.api_url+`/admin/annulecommandesbyclient/${index}/${num}/${statut}`, { headers });
   }
 
-  sigleqr(token:any,) {
-    return this.http.get(this.api_url+`/admin/sigleqrcode/${token}`,);
-  }
+  // sigleqr(token:any,) {
+  //   return this.http.get(this.api_url+`/admin/sigleqrcode/${token}`,);
+  // }
+
+  sigleqr(token: any) {
+  const clientId = localStorage.getItem("emon_id");
+
+  return this.http.get(this.api_url + `/admin/sigleqrcode/${token}`, {
+    headers: {
+      'x-client-id': clientId || ''
+    }
+  });
+}
 
 
   AllCommande() {
