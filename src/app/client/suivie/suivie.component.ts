@@ -22,9 +22,12 @@ export class SuivieComponent implements OnInit {
   notifdata: any;
 
   progressWidth: string = '0%';
+  autresCommandes: any;
   ngOnInit(): void {
     this.getallcmd()
     this.recupstatut()
+    console.log("autres commandes", this.autresCommandes);
+    
     
     
     
@@ -73,7 +76,14 @@ export class SuivieComponent implements OnInit {
           this.data2 = [];
           this.length = 0;
         }
+
+        const emon_id = localStorage.getItem('emon_id');
+
+         this.autresCommandes = commandesValides.filter(
+       (cmd: any) => cmd.emon_id !== emon_id && cmd.index !== this.index
+        );
          },
+  
       error: (err: any) => {
         console.error('Erreur lors de la récupération des commandes :', err);
         this.loading = false;

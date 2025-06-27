@@ -35,7 +35,70 @@
       <span>En préparation</span>
       <span>Servie</span>
     </div>
+
+
+   
+
+  <!-- <div *ngFor="let cmd of autresCommandes" class="mini-carte">
+    <div>
+      <strong>Commande #{{ cmd.index }}</strong>
+      <p>Date : {{ cmd.date | date:'short' }}</p>
+      <p>Statut : 
+        <span [ngClass]="{
+          'attente': cmd.statut === 'en_attente',
+          'preparation': cmd.statut === 'en_preparation',
+          'servie': cmd.statut === 'Servie'
+        }">{{ cmd.statut }}</span>
+      </p>
+    </div>
+  </div> -->
+
+  
+
+
+
+ <div class="autres-commandes" style="margin-bottom: 30px;" *ngIf="autresCommandes.length > 0">
+  <h3 style="margin-top: 30px;">📋 Autres commandes en cours</h3>
+<div class="table-responsive">
+  <table class="table-commandes">
+    <thead>
+      <tr>
+        <th>#Commande</th>
+        <th>Date</th>
+        <th>Heure</th>
+        <th>Type</th>
+        <th>Table</th>
+        <th>Total</th>
+        <th>Statut</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cmd of autresCommandes">
+        <td>{{ cmd.index }}</td>
+        <td>{{ cmd.date | date: 'shortDate' }}</td>
+        <td>{{ cmd.heure }}</td>
+        <td>{{ cmd.type_service | titlecase }}</td>
+        <td>{{ cmd.num }}</td>
+        <td><strong>{{ cmd.total }} FCFA</strong></td>
+        <td>
+          <span [ngClass]="{
+            'statut-attente': cmd.statut === 'en_attente',
+            'statut-preparation': cmd.statut === 'en_preparation',
+            'statut-servie': cmd.statut === 'Servie'
+          }">{{ cmd.statut }}</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
   </div>
+
+
+
+
+  
+
   
   
   
@@ -48,6 +111,8 @@
 
 
 </div>
+
+
 
 
 
