@@ -12,8 +12,9 @@
       </div>
     </div>
 </header>
+  *ngIf="tableInvalide && !loading && !tb || statut=='403'"
+<div  *ngIf="!loading && (statut === '403' || tableInvalide && !tb)"
 
-<div *ngIf="tableInvalide && !loading && !tb || statut=='403'"
   style="
     height: 100vh;
     display: flex;
