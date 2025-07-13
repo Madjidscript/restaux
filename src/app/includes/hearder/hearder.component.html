@@ -12,7 +12,7 @@
       </div>
     </div>
 </header>
-  *ngIf="tableInvalide && !loading && !tb || statut=='403'"
+  <!-- *ngIf="tableInvalide && !loading && !tb || statut=='403'" -->
 <div  *ngIf="!loading && (statut === '403' || tableInvalide && !tb)"
 
   style="
@@ -26,7 +26,7 @@
     overflow: hidden;
   ">
   <!-- Cher client, cette table n'existe pas -->
-   {{message2 ||"`Vous êtes déjà connecté à une autre table  Veuillez patienter ou libérer cette table."}}
+   {{message2 ||"Vous êtes déjà connecté à une autre table  Veuillez patienter ou libérer cette table."}}
 </div>
 
 
