@@ -18,6 +18,7 @@ export class HearderComponent implements OnInit{
   token:any
   length:any =0
   message:any
+  statut:any
   message2:any
   loading=false
   showNotifPopup = false;
@@ -143,6 +144,7 @@ export class HearderComponent implements OnInit{
   this.api.sigleqr(this.token).subscribe({
     next: (res: any) => {
       console.log("Réponse header :", res);
+      this.statut = res?.status;
       this.message2 = res?.message;
       this.tb = res.numeroTable;
     },
