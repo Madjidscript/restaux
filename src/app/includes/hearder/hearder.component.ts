@@ -160,5 +160,14 @@ export class HearderComponent implements OnInit{
 }
 
 
+recupstatut() {
+    this.session.notif$.subscribe((data: any) => {
+      this.notifdata = data;
+      this.statut = data?.statut 
+      console.log('mon statut :', this.statut);
+    });
+  }
+
+
 
 }

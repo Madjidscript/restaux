@@ -161,17 +161,70 @@ getstatut(){
   // }
 
 
-  clientid() {
-  let emon_id = localStorage.getItem("emon_id");
+//   clientid() {
+//   let emon_id = localStorage.getItem("emon_id");
 
+//   if (!emon_id) {
+//     emon_id = crypto.randomUUID(); 
+//     localStorage.setItem("emon_id", emon_id);
+//     console.log('Nouveau emon_id généré:', emon_id);
+//   } else {
+//     console.log('Ancien emon_id conservé:', emon_id);
+//   }
+// }
+
+
+clientid() {
+  // Gestion de emon_id
+  let emon_id = localStorage.getItem("emon_id");
   if (!emon_id) {
-    emon_id = crypto.randomUUID(); 
+    emon_id = crypto.randomUUID();
     localStorage.setItem("emon_id", emon_id);
     console.log('Nouveau emon_id généré:', emon_id);
   } else {
     console.log('Ancien emon_id conservé:', emon_id);
   }
+
+  // Gestion de session_qr_id
+  let session_qr_id = localStorage.getItem("session_qr_id");
+  const now = Date.now();
+  const expirationDuration = 90 * 60 * 1000; // 1h30 en millisecondes
+
+  if (!session_qr_id) {
+    const new_session_id = crypto.randomUUID();
+    localStorage.setItem("session_qr_id", new_session_id);
+    localStorage.setItem("session_qr_id_created_at", now.toString());
+    console.log('session_qr_id créé:', new_session_id);
+
+    // Planifie suppression dans 1h30
+    setTimeout(() => {
+      localStorage.removeItem("session_qr_id");
+      localStorage.removeItem("session_qr_id_created_at");
+      console.log("session_qr_id supprimé après 1h30");
+    }, expirationDuration);
+
+  } else {
+    const createdAt = parseInt(localStorage.getItem("session_qr_id_created_at") || "0", 10);
+    const elapsed = now - createdAt;
+
+    if (elapsed > expirationDuration) {
+      localStorage.removeItem("session_qr_id");
+      localStorage.removeItem("session_qr_id_created_at");
+      console.log("session_qr_id expiré et supprimé");
+    } else {
+      const remaining = expirationDuration - elapsed;
+      console.log("session_qr_id encore valide pour", remaining / 1000, "secondes");
+
+      // Planifie suppression dans le temps restant
+      setTimeout(() => {
+        localStorage.removeItem("session_qr_id");
+        localStorage.removeItem("session_qr_id_created_at");
+        console.log("session_qr_id supprimé après expiration restante");
+      }, remaining);
+    }
+  }
 }
+
 
   
 }

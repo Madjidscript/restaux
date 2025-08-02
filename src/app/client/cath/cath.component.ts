@@ -35,6 +35,7 @@ export class CathComponent implements OnInit {
   isReady = false;
   tb:any
   token:any
+  message:any
   loading=false
   baseUrl = environment.apiUrl + '/';
   searchForm = new FormGroup({
@@ -114,6 +115,7 @@ export class CathComponent implements OnInit {
     next: (res: any) => {
       console.log("ma reponse depuis cath", res);
       this.tb = res.numeroTable;
+      this.message = res?.message
       console.log("lidy",this.token);
       
       this.getallcath();

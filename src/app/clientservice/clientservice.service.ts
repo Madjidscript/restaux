@@ -50,9 +50,10 @@ export class ClientserviceService {
   // }
 
   sigleqr(token: any) {
-  const clientId = localStorage.getItem("emon_id");
+  // const clientId = localStorage.getItem("emon_id");
+  const clientIdqr = localStorage.getItem("session_qr_id");
 
-  return this.http.get(this.api_url + `/admin/sigleqrcode/${token}?sessionId=${clientId}`, )
+  return this.http.get(this.api_url + `/admin/sigleqrcode/${token}?sessionId=${clientIdqr}`, )
 }
 
 
