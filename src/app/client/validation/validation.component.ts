@@ -5,6 +5,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ClientserviceService } from '../../clientservice/clientservice.service';
 import { SessionserviceService } from '../../sessionservice/sessionservice.service';
 import { PanierService } from '../../panierservice/panier.service';
+import { HttpClient } from '@angular/common/http';
 
 declare var bootstrap:any
 @Component({
@@ -20,6 +21,9 @@ export class ValidationComponent {
  
   cartItems: any[] = [];
   tb:any
+  quartier:any
+  lat:any
+  lon:any
   total2:any
   promo:any
   token:any
@@ -42,7 +46,8 @@ export class ValidationComponent {
   reduct: any;
   totaux: any;
 
-  constructor( private router:Router,private activate:ActivatedRoute,private api:ClientserviceService,private session:SessionserviceService,private paniers:PanierService) {
+  constructor( private router:Router,private activate:ActivatedRoute,private api:ClientserviceService,
+    private session:SessionserviceService,private paniers:PanierService,private http:HttpClient) {
    
   }
 
@@ -54,6 +59,7 @@ export class ValidationComponent {
 
   ngOnInit() {
    this.loadCart()
+   this.getLocalisation()
     
   }
 
@@ -129,6 +135,9 @@ export class ValidationComponent {
       promo: this.promo,
       reduct: this.reduct,
       heure: this.heureActuelle,
+      latitude:this.lat,
+      longitude:this.lon,
+      quartier:this.quartier,
       data: this.cartItems.map(item => ({
         id: item._id,
         image: item.image,
@@ -330,6 +339,46 @@ console.log('Heure :', this.heureActuelle); // ex : 14:45
         },
       })
     }
+
+
+
+     getLocalisation(): void {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        position => {
+         this.lat = position.coords.latitude;
+          this.lon = position.coords.longitude;
+
+          console.log('📍 Latitude:', this.lat);
+          console.log('📍 Longitude:', this.lon);
+
+          const apiKey = '830eebeb471e48daa9a5b1c1858753c9';
+          const url = `https://api.opencagedata.com/geocode/v1/json?q=${this.lat}+${this.lon}&key=${apiKey}&language=fr`;
+
+          this.http.get<any>(url).subscribe({
+            next: (response:any) => {
+              const results = response.results;
+              if (results.length > 0) {
+                const comp = results[0].components;
+                this.quartier = comp.suburb || comp.neighbourhood || comp.city_district || 'Inconnu';
+                console.log('🏘️ Quartier :', this.quartier);
+              } else {
+                console.log("❌ Aucune adresse trouvée");
+              }
+            },
+            error: (error:any) => {
+              console.error('❌ Erreur lors du géocodage inverse :', error);
+            }
+          });
+        },
+        error => {
+          console.error('❌ Erreur de géolocalisation :', error.message);
+        }
+      );
+    } else {
+      console.error("❌ La géolocalisation n'est pas supportée par ce navigateur.");
+    }
+  }
  
 
 }
