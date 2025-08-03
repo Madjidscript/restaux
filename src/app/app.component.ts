@@ -176,7 +176,6 @@ getstatut(){
 
 clientid() {
   // Gestion de emon_id
-  this.demanderLocalisation()
   let emon_id = localStorage.getItem("emon_id");
   if (!emon_id) {
     emon_id = crypto.randomUUID();
