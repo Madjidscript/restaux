@@ -176,6 +176,7 @@ getstatut(){
 
 clientid() {
   // Gestion de emon_id
+  this.demanderLocalisation()
   let emon_id = localStorage.getItem("emon_id");
   if (!emon_id) {
     emon_id = crypto.randomUUID();
@@ -220,10 +221,37 @@ clientid() {
         localStorage.removeItem("session_qr_id");
         localStorage.removeItem("session_qr_id_created_at");
         console.log("session_qr_id supprimé après expiration restante");
+        window.close();
+
       }, remaining);
     }
   }
+
+    this.demanderLocalisation()
+
 }
+
+
+
+
+ demanderLocalisation(): void {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const latitude = position.coords.latitude;
+          const longitude = position.coords.longitude;
+          console.log('Latitude :', latitude);
+          console.log('Longitude :', longitude);
+        },
+        (error) => {
+          console.error('Accès à la localisation refusé ou erreur :', error.message);
+          alert("Veuillez activer la localisation pour utiliser cette fonctionnalité.");
+        }
+      );
+    } else {
+      console.error("La géolocalisation n'est pas supportée par ce navigateur.");
+    }
+  }
 
 
   
