@@ -5,6 +5,8 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { PushserviceService } from '../../pushservice/pushservice.service';
+import { SwPush } from '@angular/service-worker';
+
 
 @Component({
   selector: 'app-cath',
@@ -29,7 +31,8 @@ export class CathComponent implements OnInit {
     });
   }
 
-  constructor(private api:ClientserviceService,private router:Router,private activate:ActivatedRoute,    private pushNotificationService:PushserviceService
+  constructor(private api:ClientserviceService,private router:Router,private activate:ActivatedRoute,  
+      private pushNotificationService:PushserviceService,private swPush: SwPush
   ){}
 
   data:any
@@ -108,7 +111,43 @@ export class CathComponent implements OnInit {
     // Marque comme activée
     sessionStorage.setItem('voixActive', 'true');
     this.voixActive = true;
+    this.createsuscribe(this.emon_id)
   }
+
+  createsuscribe(emonid: string) {
+  this.loading = true;
+
+  // Récupérer la clé publique
+  this.pushNotificationService.getPublicKey().subscribe({
+    next: (res: any) => {
+      // Demander l'abonnement au service worker
+      this.swPush.requestSubscription({
+        serverPublicKey: res.publicKey
+      }).then((subscription:any) => {
+        // Envoyer emon_id ET subscription au backend
+        this.pushNotificationService.subscribeToPush(emonid, subscription).subscribe({
+          next: (res: any) => {
+            console.log("Abonnement enregistré côté backend", res);
+            this.loading = false;
+          },
+          error: (err: any) => {
+            console.error("Erreur abonnement backend", err);
+            this.loading = false;
+          }
+        });
+      }).catch((err:any) => {
+        console.error("Erreur requestSubscription", err);
+        this.loading = false;
+      });
+    },
+    error: (err: any) => {
+      console.error("Erreur getPublicKey", err);
+      this.loading = false;
+    }
+  });
+}
+
+
 
 
   gettb(){
