@@ -166,10 +166,10 @@ getstatut(){
 
   }
 
-  createsuscribe(){
+  createsuscribe(emonid:any){
   this.loading = true; // ✅ Une fois les données reçues, on autorise l’affichage
 
-    this.pushNotificationService.subscribeToPush({emon_id:this.key}).subscribe({
+    this.pushNotificationService.subscribeToPush({emon_id:emonid}).subscribe({
       next:(res:any)=> {
         console.log("mon satut response",res);
         // this.key = res.publicKey
@@ -289,7 +289,7 @@ clientid() {
 
     this.demanderLocalisation()
     this.getpushkey()
-    this.createsuscribe()
+    this.createsuscribe(emon_id)
     this.pushNotificationService.listenToMessages()
 
 
