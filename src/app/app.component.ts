@@ -292,7 +292,7 @@ clientid() {
         localStorage.removeItem("session_qr_id");
         localStorage.removeItem("session_qr_id_created_at");
         console.log("session_qr_id supprimé après expiration restante");
-        window.close();
+        // window.close();
 
       }, remaining);
     }
