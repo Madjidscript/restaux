@@ -122,7 +122,7 @@ export class CathComponent implements OnInit {
       console.log("lidy",this.token);
       this.emon_id = localStorage.getItem("emon_id");
 
-      this.pushNotificationService.subscribeToPush(this.emon_id); // abonne l'utilisateur
+      // this.pushNotificationService.subscribeToPush(this.emon_id); // abonne l'utilisateur
       this.pushNotificationService.listenToMessages();
       
       this.getallcath();

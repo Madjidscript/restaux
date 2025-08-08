@@ -7,6 +7,8 @@ import { SessionserviceService } from './sessionservice/sessionservice.service';
 import { ClientserviceService } from './clientservice/clientservice.service';
 import { CommonModule } from '@angular/common';
 import { PushserviceService } from './pushservice/pushservice.service';
+import { SwPush } from '@angular/service-worker';
+
 
 @Component({
   selector: 'app-root',
@@ -26,7 +28,7 @@ export class AppComponent implements OnInit {
   key: any;
 
   constructor(private socket:SoketserviceService ,private session:SessionserviceService,private api:ClientserviceService,private route:Router,private activate:ActivatedRoute,
-    private pushNotificationService:PushserviceService
+    private pushNotificationService:PushserviceService,private swPush: SwPush
   ){}
 
   ngOnInit(): void {
@@ -166,30 +168,39 @@ getstatut(){
 
   }
 
-  createsuscribe(emonid:any){
-  this.loading = true; // ✅ Une fois les données reçues, on autorise l’affichage
+  createsuscribe(emonid: string) {
+  this.loading = true;
 
-    this.pushNotificationService.subscribeToPush({emon_id:emonid}).subscribe({
-      next:(res:any)=> {
-        console.log("mon satut response",res);
-        // this.key = res.publicKey
+  // Récupérer la clé publique
+  this.pushNotificationService.getPublicKey().subscribe({
+    next: (res: any) => {
+      // Demander l'abonnement au service worker
+      this.swPush.requestSubscription({
+        serverPublicKey: res.publicKey
+      }).then((subscription:any) => {
+        // Envoyer emon_id ET subscription au backend
+        this.pushNotificationService.subscribeToPush(emonid, subscription).subscribe({
+          next: (res: any) => {
+            console.log("Abonnement enregistré côté backend", res);
+            this.loading = false;
+          },
+          error: (err: any) => {
+            console.error("Erreur abonnement backend", err);
+            this.loading = false;
+          }
+        });
+      }).catch(err => {
+        console.error("Erreur requestSubscription", err);
+        this.loading = false;
+      });
+    },
+    error: (err: any) => {
+      console.error("Erreur getPublicKey", err);
+      this.loading = false;
+    }
+  });
+}
 
-        
-      },
-      error:(err:any)=> {
-        console.log("mon err",err);
-        this.loading = false; // ✅ Une fois les données reçues, on autorise l’affichage
-
-      },
-      complete:()=> {
-        console.log("ok");
-        this.loading = false; // ✅ Une fois les données reçues, on autorise l’affichage
-
-        
-      },
-    })
-
-  }
 
 
   recupstatut(){

@@ -41,9 +41,10 @@ export class PushserviceService {
   }
 
 
-   subscribeToPush(body:any) {
-    return this.http.post(this.api_url+"/admin/subscribe",body );
-  }
+  subscribeToPush(emon_id: string, subscription: any) {
+  const body = { emon_id, subscription };
+  return this.http.post(this.api_url + "/admin/subscribe", body);
+}
 
   // Écouter les notifications entrantes
   listenToMessages() {
