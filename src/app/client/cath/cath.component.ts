@@ -4,6 +4,7 @@ import { ClientserviceService } from '../../clientservice/clientservice.service'
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { PushserviceService } from '../../pushservice/pushservice.service';
 
 @Component({
   selector: 'app-cath',
@@ -13,6 +14,7 @@ import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './cath.component.scss'
 })
 export class CathComponent implements OnInit {
+  emon_id: string|any =" ";
   ngOnInit(): void {
     this.gettb()
      let emon_id = sessionStorage.getItem("emon_id");
@@ -27,7 +29,8 @@ export class CathComponent implements OnInit {
     });
   }
 
-  constructor(private api:ClientserviceService,private router:Router,private activate:ActivatedRoute){}
+  constructor(private api:ClientserviceService,private router:Router,private activate:ActivatedRoute,    private pushNotificationService:PushserviceService
+  ){}
 
   data:any
   filteredData: any[] = [];
@@ -117,6 +120,10 @@ export class CathComponent implements OnInit {
       this.tb = res.numeroTable;
       this.message = res?.message
       console.log("lidy",this.token);
+      this.emon_id = localStorage.getItem("emon_id");
+
+      this.pushNotificationService.subscribeToPush(this.emon_id); // abonne l'utilisateur
+      this.pushNotificationService.listenToMessages();
       
       this.getallcath();
     },
