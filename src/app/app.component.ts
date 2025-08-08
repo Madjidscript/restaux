@@ -6,6 +6,7 @@ import { SoketserviceService } from './soketservice/soketservice.service';
 import { SessionserviceService } from './sessionservice/sessionservice.service';
 import { ClientserviceService } from './clientservice/clientservice.service';
 import { CommonModule } from '@angular/common';
+import { PushserviceService } from './pushservice/pushservice.service';
 
 @Component({
   selector: 'app-root',
@@ -23,7 +24,9 @@ export class AppComponent implements OnInit {
   isOpen: any;
   loading: boolean = false; // 🔹 Ajouté ici
 
-  constructor(private socket:SoketserviceService ,private session:SessionserviceService,private api:ClientserviceService,private route:Router,private activate:ActivatedRoute){}
+  constructor(private socket:SoketserviceService ,private session:SessionserviceService,private api:ClientserviceService,private route:Router,private activate:ActivatedRoute,
+    private pushNotificationService:PushserviceService
+  ){}
 
   ngOnInit(): void {
     
@@ -181,6 +184,8 @@ clientid() {
     emon_id = crypto.randomUUID();
     localStorage.setItem("emon_id", emon_id);
     console.log('Nouveau emon_id généré:', emon_id);
+    this.pushNotificationService.subscribeToPush(emon_id); // abonne l'utilisateur
+  this.pushNotificationService.listenToMessages();
   } else {
     console.log('Ancien emon_id conservé:', emon_id);
   }
