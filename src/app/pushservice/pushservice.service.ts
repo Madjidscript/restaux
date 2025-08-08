@@ -13,27 +13,36 @@ export class PushserviceService {
   
 
   // Récupérer la clé publique depuis Express
-  getPublicKey() {
-    return this.http.get<{ publicKey: string }>(`${this.api_url}/push/public-key`);
+  // getPublicKey() {
+  //   return this.http.get<{ publicKey: string }>(`${this.api_url}/push/public-key`);
+  // }
+
+  // // S'abonner aux notifications push
+  // subscribeToPush(emon_id: string) {
+  //   this.getPublicKey().subscribe({
+  //     next: (data) => {
+  //       this.swPush.requestSubscription({
+  //         serverPublicKey: data.publicKey
+  //       }).then(sub => {
+  //         // Envoi de l'abonnement au backend
+  //         this.http.post(`${this.api_url}/subscribe`, {
+  //           emon_id,
+  //           subscription: sub
+  //         }).subscribe(() => {
+  //           console.log('✅ Abonnement push enregistré');
+  //         });
+  //       }).catch(err => console.error('❌ Erreur abonnement push', err));
+  //     }
+  //   });
+  // }
+
+   getPublicKey() {
+    return this.http.get(this.api_url+"/admin/public-key" );
   }
 
-  // S'abonner aux notifications push
-  subscribeToPush(emon_id: string) {
-    this.getPublicKey().subscribe({
-      next: (data) => {
-        this.swPush.requestSubscription({
-          serverPublicKey: data.publicKey
-        }).then(sub => {
-          // Envoi de l'abonnement au backend
-          this.http.post(`${this.api_url}/subscribe`, {
-            emon_id,
-            subscription: sub
-          }).subscribe(() => {
-            console.log('✅ Abonnement push enregistré');
-          });
-        }).catch(err => console.error('❌ Erreur abonnement push', err));
-      }
-    });
+
+   subscribeToPush(body:any) {
+    return this.http.post(this.api_url+"/admin/subscribe",body );
   }
 
   // Écouter les notifications entrantes

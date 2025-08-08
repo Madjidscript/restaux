@@ -23,6 +23,7 @@ export class AppComponent implements OnInit {
   notifdata:any
   isOpen: any;
   loading: boolean = false; // 🔹 Ajouté ici
+  key: any;
 
   constructor(private socket:SoketserviceService ,private session:SessionserviceService,private api:ClientserviceService,private route:Router,private activate:ActivatedRoute,
     private pushNotificationService:PushserviceService
@@ -140,6 +141,57 @@ getstatut(){
 
   }
 
+  getpushkey(){
+  this.loading = true; // ✅ Une fois les données reçues, on autorise l’affichage
+
+    this.pushNotificationService.getPublicKey().subscribe({
+      next:(res:any)=> {
+        console.log("mon satut response",res);
+        this.key = res.publicKey
+
+        
+      },
+      error:(err:any)=> {
+        console.log("mon err",err);
+        this.loading = false; // ✅ Une fois les données reçues, on autorise l’affichage
+
+      },
+      complete:()=> {
+        console.log("ok");
+        this.loading = false; // ✅ Une fois les données reçues, on autorise l’affichage
+
+        
+      },
+    })
+
+  }
+
+  createsuscribe(){
+  this.loading = true; // ✅ Une fois les données reçues, on autorise l’affichage
+
+    this.pushNotificationService.subscribeToPush({emon_id:this.key}).subscribe({
+      next:(res:any)=> {
+        console.log("mon satut response",res);
+        // this.key = res.publicKey
+
+        
+      },
+      error:(err:any)=> {
+        console.log("mon err",err);
+        this.loading = false; // ✅ Une fois les données reçues, on autorise l’affichage
+
+      },
+      complete:()=> {
+        console.log("ok");
+        this.loading = false; // ✅ Une fois les données reçues, on autorise l’affichage
+
+        
+      },
+    })
+
+  }
+
+
   recupstatut(){
     this.loading=true
     setTimeout(() => {
@@ -185,13 +237,14 @@ clientid() {
     emon_id = crypto.randomUUID();
     localStorage.setItem("emon_id", emon_id);
     console.log('Nouveau emon_id généré:', emon_id);
-    this.pushNotificationService.subscribeToPush(emon_id); // abonne l'utilisateur
-  this.pushNotificationService.listenToMessages();
+    // this.pushNotificationService.subscribeToPush(emon_id);/ // abonne l'utilisateur
+  // this.pushNotificationService.listenToMessages();
   } else {
     console.log('Ancien emon_id conservé:', emon_id);
-     this.pushNotificationService.subscribeToPush(emon_id); // abonne l'utilisateur
-     this.pushNotificationService.listenToMessages();
+    //  this.pushNotificationService.subscribeToPush(emon_id); // abonne l'utilisateur
+    //  this.pushNotificationService.listenToMessages();
   }
+
 
   // Gestion de session_qr_id
   let session_qr_id = localStorage.getItem("session_qr_id");
@@ -235,6 +288,10 @@ clientid() {
   }
 
     this.demanderLocalisation()
+    this.getpushkey()
+    this.createsuscribe()
+    this.pushNotificationService.listenToMessages()
+
 
 }
 
