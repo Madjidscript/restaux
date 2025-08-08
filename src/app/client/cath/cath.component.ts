@@ -111,7 +111,6 @@ export class CathComponent implements OnInit {
     // Marque comme activée
     sessionStorage.setItem('voixActive', 'true');
     this.voixActive = true;
-    this.createsuscribe(this.emon_id)
   }
 
   createsuscribe(emonid: string) {
@@ -162,9 +161,12 @@ export class CathComponent implements OnInit {
       this.emon_id = localStorage.getItem("emon_id");
 
       // this.pushNotificationService.subscribeToPush(this.emon_id); // abonne l'utilisateur
-      this.pushNotificationService.listenToMessages();
       
       this.getallcath();
+      this.createsuscribe(this.emon_id)
+      this.pushNotificationService.listenToMessages();
+
+
     },
     error: (err: any) => {
       console.log("mon ersr", err);
