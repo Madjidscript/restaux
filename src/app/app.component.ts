@@ -180,6 +180,7 @@ getstatut(){
 clientid() {
   // Gestion de emon_id
   let emon_id = localStorage.getItem("emon_id");
+ 
   if (!emon_id) {
     emon_id = crypto.randomUUID();
     localStorage.setItem("emon_id", emon_id);
@@ -188,6 +189,8 @@ clientid() {
   this.pushNotificationService.listenToMessages();
   } else {
     console.log('Ancien emon_id conservé:', emon_id);
+     this.pushNotificationService.subscribeToPush(emon_id); // abonne l'utilisateur
+     this.pushNotificationService.listenToMessages();
   }
 
   // Gestion de session_qr_id
