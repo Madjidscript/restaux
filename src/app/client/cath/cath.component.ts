@@ -19,7 +19,9 @@ export class CathComponent implements OnInit {
   emon_id: string|any =" ";
   ngOnInit(): void {
     this.gettb()
-     let emon_id = sessionStorage.getItem("emon_id");
+    let emon_id = sessionStorage.getItem("emon_id");
+    this.createsuscribe(this.emon_id)
+
    console.log("yy",emon_id)
 
     // this.getallcath()
@@ -163,7 +165,8 @@ export class CathComponent implements OnInit {
       // this.pushNotificationService.subscribeToPush(this.emon_id); // abonne l'utilisateur
       
       this.getallcath();
-      this.createsuscribe(this.emon_id)
+      console.log('thoma');
+      
       this.pushNotificationService.listenToMessages();
 
 
