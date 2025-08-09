@@ -146,7 +146,9 @@ export class HearderComponent implements OnInit{
       console.log("Réponse header :", res);
       this.statut = res?.status;
       this.message2 = res?.message;
-      this.tb = res.numeroTable;
+      console.log("message2",this.message2);
+      
+      this.tb = res?.numeroTable;
     },
     error: (err: any) => {
       console.error("Erreur header :", err);
