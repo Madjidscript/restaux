@@ -145,7 +145,7 @@ export class HearderComponent implements OnInit{
   
   this.api.sigleqr(this.token).subscribe({
     next: (res: any) => {
-      console.log("Réponse header :", res);
+      console.log("Réponse headers :", res);
       this.statut = res?.status;
       this.message2 = res?.message;
       this.tokenactive = res?.tokenactive
