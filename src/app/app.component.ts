@@ -148,7 +148,7 @@ getstatut(){
 
     this.pushNotificationService.getPublicKey().subscribe({
       next:(res:any)=> {
-        console.log("mon satut response",res);
+        console.log("mon satut responsekey",res);
         this.key = res.publicKey
 
         
@@ -299,9 +299,14 @@ clientid() {
   }
 
     this.demanderLocalisation()
-    this.getpushkey()
-    this.createsuscribe(emon_id)
-    this.pushNotificationService.listenToMessages()
+    if(emon_id){
+      this.getpushkey()
+      this.createsuscribe(emon_id)
+      this.pushNotificationService.listenToMessages()
+    }else{
+      console.log("mon emoinid nexistepas");
+      
+    }
 
 
 }
