@@ -153,6 +153,30 @@
   transform: scale(1.05);
   text-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
 }
+.mybtn {
+  background-color: #ff6600; /* Orange vif */
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none; /* pour enlever le soulignement éventuel */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+.mybtn:hover {
+  background-color: #e55a00; /* Orange plus foncé */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.mybtn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
 
 /* ===== ICÔNE NOTIFICATION ===== */
 .icon-wrapper {

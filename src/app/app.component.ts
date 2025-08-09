@@ -168,7 +168,7 @@ getstatut(){
 
   }
 
-  createsuscribe(emonid: string) {
+  createsuscribe(emon_id: string) {
   this.loading = true;
 
   // Récupérer la clé publique
@@ -179,7 +179,7 @@ getstatut(){
         serverPublicKey: res.publicKey
       }).then((subscription:any) => {
         // Envoyer emon_id ET subscription au backend
-        this.pushNotificationService.subscribeToPush(emonid, subscription).subscribe({
+        this.pushNotificationService.subscribeToPush(emon_id, subscription).subscribe({
           next: (res: any) => {
             console.log("Abonnement enregistré côté backend", res);
             this.loading = false;
