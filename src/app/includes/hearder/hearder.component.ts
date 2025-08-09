@@ -30,7 +30,7 @@ export class HearderComponent implements OnInit{
   voixActive = false;
   notifdata:any
   tokenactive: any;
-  url: string="";
+  // url: string="";
   constructor(private router: Router, private route: ActivatedRoute,private socket:SoketserviceService,private session:SessionserviceService,private api:ClientserviceService,private activate :ActivatedRoute ){}
  
 
@@ -149,7 +149,7 @@ export class HearderComponent implements OnInit{
       this.statut = res?.status;
       this.message2 = res?.message;
       this.tokenactive = res?.tokenactive
-      this.url = `https://restaux-mmds.vercel.app/client/cath/${this.tokenactive}?from=scan`;
+      // this.url = `https://restaux-mmds.vercel.app/client/cath/${this.tokenactive}?from=scan`;
 
       console.log("message2",this.message2);
       
