@@ -14,6 +14,7 @@ import { ClientserviceService } from '../../clientservice/clientservice.service'
   styleUrl: './hearder.component.scss'
 })
 export class HearderComponent implements OnInit{
+  
   tb:any
   token:any
   length:any =0
@@ -60,7 +61,7 @@ export class HearderComponent implements OnInit{
       this.tableInvalide = true;
       this.loading = false;
       console.log("tok2",this.token,this.tb);
-
+      
     }
   });
 }

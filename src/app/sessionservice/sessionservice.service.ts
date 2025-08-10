@@ -18,7 +18,6 @@ export class SessionserviceService {
     localStorage.setItem(key, JSON.stringify(value));
   }
 
-  
   // Supprimer une donnée spécifique
   removeItem(key: string): void {
     localStorage.removeItem(key);
