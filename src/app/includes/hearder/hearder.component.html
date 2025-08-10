@@ -30,7 +30,7 @@
   <!-- Cher client, cette table n'existe pas -->
    <p>{{message2}}</p>
     <p>
-      <a class="mybtn" 
+      <a class="mybtn" *ngIf="tokenactive"
       [href]="'https://restaux-mmds.vercel.app/client/cath/' + tokenactive + '?from=scan'">
       Retour
     </a>
