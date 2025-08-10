@@ -37,6 +37,7 @@
 
   <a
   class="tab-button"
+  [class.disabled]="!idCommande"
   [routerLink]="idCommande ? ['/client/suivie',idCommande,token] : null"
   [routerLinkActive]="idCommande ? 'active' : ''"
   (click)="!idCommande && $event.preventDefault()"

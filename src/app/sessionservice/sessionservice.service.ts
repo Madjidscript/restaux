@@ -15,44 +15,44 @@ export class SessionserviceService {
 
    // Enregistrer une donnée
    setItem(key: string, value: any): void {
-    sessionStorage.setItem(key, JSON.stringify(value));
+    localStorage.setItem(key, JSON.stringify(value));
   }
 
   
   // Supprimer une donnée spécifique
   removeItem(key: string): void {
-    sessionStorage.removeItem(key);
+    localStorage.removeItem(key);
   }
 
   // Supprimer plusieurs clés spécifiques (ex: toutes les données de l'utilisateur connecté)
   removeItems(keys: string[]): void {
-    keys.forEach(key => sessionStorage.removeItem(key));
+    keys.forEach(key => localStorage.removeItem(key));
   }
 
   // Supprimer toute la session
   clear(): void {
-    sessionStorage.clear();
+    localStorage.clear();
   }
 
 
  
   getItem(key: string): any {
     if (typeof window !== 'undefined') {
-      return JSON.parse(sessionStorage.getItem(key) || 'null');
+      return JSON.parse(localStorage.getItem(key) || 'null');
     }
     return null;
   }
   
   setNotif(data: any) {
     if (typeof window !== 'undefined') {
-      sessionStorage.setItem('notif', JSON.stringify(data));
+      localStorage.setItem('notif', JSON.stringify(data));
       this.notifSubject.next(data);
     }
   }
   
   private getNotifFromStorage(): any {
     if (typeof window !== 'undefined') {
-      return JSON.parse(sessionStorage.getItem('notif') || '{"message":[],"notiflength":0}');
+      return JSON.parse(localStorage.getItem('notif') || '{"message":[],"notiflength":0}');
     }
     return { message: [], notiflength: 0 };
   }
