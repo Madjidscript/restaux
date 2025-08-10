@@ -6,6 +6,8 @@ import { ClientserviceService } from '../../clientservice/clientservice.service'
 import { SessionserviceService } from '../../sessionservice/sessionservice.service';
 import { PanierService } from '../../panierservice/panier.service';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment.prod';
+
 
 declare var bootstrap:any
 @Component({
@@ -168,14 +170,14 @@ export class ValidationComponent {
             notiflength:0,
             statut:"en_attente"      
           }
-          if (sessionStorage.getItem('notif')) {
+          if (localStorage.getItem('notif')) {
             console.log('supprimer et nouveau');
 
             
             console.log("datanotif",this.notif);
             
             
-            sessionStorage.removeItem('notif');
+            localStorage.removeItem('notif');
 
             this.notif={
               num:commande.num,
@@ -274,7 +276,7 @@ export class ValidationComponent {
 
   viderPanier() {
     sessionStorage.removeItem('panier');
-    sessionStorage.removeItem('notif');
+    localStorage.removeItem('notif');
     this.cartItems = [];
     this.paniers.refreshPanier()
     this.router.navigate([`/client/cath/${this.token}`])
@@ -352,8 +354,8 @@ console.log('Heure :', this.heureActuelle); // ex : 14:45
           console.log('📍 Latitude:', this.lat);
           console.log('📍 Longitude:', this.lon);
 
-          const apiKey = '830eebeb471e48daa9a5b1c1858753c9';
-          const url = `https://api.opencagedata.com/geocode/v1/json?q=${this.lat}+${this.lon}&key=${apiKey}&language=fr`;
+          // const apiKey = '830eebeb471e48daa9a5b1c1858753c9';
+          const url = `https://api.opencagedata.com/geocode/v1/json?q=${this.lat}+${this.lon}&key=${environment.apiKey}&language=fr`;
 
           this.http.get<any>(url).subscribe({
             next: (response:any) => {
