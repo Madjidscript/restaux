@@ -152,7 +152,7 @@ export class HearderComponent implements OnInit{
       this.tokenactive = res?.tokenactive
       // this.url = `https://restaux-mmds.vercel.app/client/cath/${this.tokenactive}?from=scan`;
 
-      console.log("message2",this.message2);
+      console.log("le message2",this.message2);
       
       this.tb = res?.numeroTable;
     },
