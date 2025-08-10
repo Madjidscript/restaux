@@ -37,7 +37,6 @@
 
   <a
   class="tab-button"
-  [class.disabled]="!idCommande"
   [routerLink]="idCommande ? ['/client/suivie',idCommande,token] : null"
   [routerLinkActive]="idCommande ? 'active' : ''"
   (click)="!idCommande && $event.preventDefault()"
@@ -45,6 +44,8 @@
   <i class="fas fa-clipboard-list"></i>
   <span class="tab-label">Suivi</span>
 </a>
+  <!-- [class.disabled]="!idCommande" -->
+
 
  <!-- [class.disabled]="!emon_id"  -->
 <a 
