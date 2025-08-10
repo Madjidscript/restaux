@@ -67,7 +67,7 @@ export class AppComponent implements OnInit {
         console.log("mon message depuis le socket backend222", data);
         this.message = data.message;
 
-        const notifStr = sessionStorage.getItem('notif');
+        const notifStr = localStorage.getItem('notif');
         if (notifStr) {
           const notif = JSON.parse(notifStr);
           notif.message.push(this.message);
@@ -75,7 +75,7 @@ export class AppComponent implements OnInit {
           notif.notiflength = notif.message.length;
         
           // Mets à jour sessionStorage
-          sessionStorage.setItem('notif', JSON.stringify(notif));
+          localStorage.setItem('notif', JSON.stringify(notif));
         
           // Mets à jour le BehaviorSubject pour réveiller le header
           this.session.setNotif(notif); // 🔁 AJOUT ESSENTIEL
