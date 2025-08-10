@@ -53,7 +53,7 @@ export class AppComponent implements OnInit {
     this.socket.onMessage("notification", data => {
       console.log("mon message depuis le socket backend111", data);
 
-      const notifStr = sessionStorage.getItem("notif");
+      const notifStr = localStorage.getItem("notif");
       if (!notifStr) return; 
 
       const notifdata = JSON.parse(notifStr); // pas this.notifdata ici
