@@ -165,7 +165,6 @@ export class CathComponent implements OnInit {
       // this.pushNotificationService.subscribeToPush(this.emon_id); // abonne l'utilisateur
       
       this.getallcath();
-      console.log('thoma');
       
       this.pushNotificationService.listenToMessages();
 
