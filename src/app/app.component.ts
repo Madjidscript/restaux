@@ -26,6 +26,7 @@ export class AppComponent implements OnInit {
   isOpen: any;
   loading: boolean = false; // 🔹 Ajouté ici
   key: any;
+  emon_id: string|any="";
 
   constructor(private socket:SoketserviceService ,private session:SessionserviceService,private api:ClientserviceService,private route:Router,private activate:ActivatedRoute,
     private pushNotificationService:PushserviceService,private swPush: SwPush
@@ -226,15 +227,15 @@ getstatut(){
 
 clientid() {
   // Gestion de emon_id
-  let emon_id = localStorage.getItem("emon_id");
+  this.emon_id = localStorage.getItem("emon_id");
  
-  if (!emon_id) {
-    emon_id = crypto.randomUUID();
-    localStorage.setItem("emon_id", emon_id);
-    console.log('Nouveau emon_id généré:', emon_id);
+  if (!this.emon_id) {
+    this.emon_id = crypto.randomUUID();
+    localStorage.setItem("emon_id", this.emon_id);
+    console.log('Nouveau emon_id généré:', this.emon_id);
     
   } else {
-    console.log('Ancien emon_id conservé:', emon_id);
+    console.log('Ancien emon_id conservé:', this.emon_id);
     
   }
 
@@ -281,9 +282,9 @@ clientid() {
   }
 
     this.demanderLocalisation()
-    if(emon_id){
+    if(this.emon_id){
       // this.getpushkey()
-      this.subscribePush(emon_id)
+      this.subscribePush(this.emon_id)
       this.pushNotificationService.listenToMessages()
     }else{
       console.log("mon emoinid nexistepas");
