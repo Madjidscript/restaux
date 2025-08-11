@@ -168,38 +168,22 @@ getstatut(){
 
   }
 
-  createsuscribe(emon_id: string) {
-  this.loading = true;
-
-  // Récupérer la clé publique
+ subscribePush(emon_id: string) {
   this.pushNotificationService.getPublicKey().subscribe({
     next: (res: any) => {
-      // Demander l'abonnement au service worker
       this.swPush.requestSubscription({
         serverPublicKey: res.publicKey
-      }).then((subscription:any) => {
-        // Envoyer emon_id ET subscription au backend
+      }).then(subscription => {
         this.pushNotificationService.subscribeToPush(emon_id, subscription).subscribe({
-          next: (res: any) => {
-            console.log("Abonnement enregistré côté backend", res);
-            this.loading = false;
-          },
-          error: (err: any) => {
-            console.error("Erreur abonnement backend", err);
-            this.loading = false;
-          }
+          next: () => console.log("Abonnement enregistré"),
+          error: err => console.error("Erreur backend", err)
         });
-      }).catch(err => {
-        console.error("Erreur requestSubscription", err);
-        this.loading = false;
-      });
+      }).catch(err => console.error("Erreur requestSubscription", err));
     },
-    error: (err: any) => {
-      console.error("Erreur getPublicKey", err);
-      this.loading = false;
-    }
+    error: err => console.error("Erreur getPublicKey", err)
   });
 }
+
 
 
 
@@ -248,12 +232,10 @@ clientid() {
     emon_id = crypto.randomUUID();
     localStorage.setItem("emon_id", emon_id);
     console.log('Nouveau emon_id généré:', emon_id);
-    // this.pushNotificationService.subscribeToPush(emon_id);/ // abonne l'utilisateur
-  // this.pushNotificationService.listenToMessages();
+    
   } else {
     console.log('Ancien emon_id conservé:', emon_id);
-    //  this.pushNotificationService.subscribeToPush(emon_id); // abonne l'utilisateur
-    //  this.pushNotificationService.listenToMessages();
+    
   }
 
 
@@ -300,8 +282,8 @@ clientid() {
 
     this.demanderLocalisation()
     if(emon_id){
-      this.getpushkey()
-      this.createsuscribe(emon_id)
+      // this.getpushkey()
+      this.subscribePush(emon_id)
       this.pushNotificationService.listenToMessages()
     }else{
       console.log("mon emoinid nexistepas");
