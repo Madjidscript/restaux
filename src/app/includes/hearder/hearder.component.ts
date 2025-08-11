@@ -176,7 +176,11 @@ recupstatut() {
       console.log('mon statut :', this.statut);
     });
   }
+  
 
+  reload(){
+    window.location.reload();
+  }
 
 
 }
