@@ -80,9 +80,17 @@ export class SuivieComponent implements OnInit {
         const emon_id = localStorage.getItem('emon_id');
 
          this.autresCommandes = commandesValides.filter(
-       (cmd: any) => cmd.emon_id !== emon_id && cmd.index !== this.index
+
+       (cmd: any) =>{
+        cmd.emon_id == emon_id && cmd.index == this.index
+          console.log("mon emonid",emon_id,"emon dp bd",cmd.emon_id,"my indes",this.index);
+       } 
+
         );
          },
+
+        
+         
   
       error: (err: any) => {
         console.error('Erreur lors de la récupération des commandes :', err);
