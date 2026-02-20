@@ -23,85 +23,113 @@ export class SuivieComponent implements OnInit {
 
   progressWidth: string = '0%';
   autresCommandes: any;
+  constructor(private api:ClientserviceService,private activate:ActivatedRoute,private session:SessionserviceService ){}
+
   ngOnInit(): void {
     this.getallcmd()
     this.recupstatut()
     console.log("autres commandes", this.autresCommandes);
-    
-    
-    
-    
-
-   
-    
+        
   }
 
-  constructor(private api:ClientserviceService,private activate:ActivatedRoute,private session:SessionserviceService ){}
 
+
+  // recupstatut() {
+  //   this.session.notif$.subscribe((data: any) => {
+  //     this.notifdata = data;
+  //     this.statut = data?.statut 
+  //     console.log('mon statut :', this.statut);
+  //     this.updateProgress()
+  //   });
+  // }
 
   recupstatut() {
-    this.session.notif$.subscribe((data: any) => {
-      this.notifdata = data;
-      this.statut = data?.statut 
-      console.log('mon statut :', this.statut);
-      this.updateProgress()
-    });
-  }
+  this.session.notif$.subscribe((data: any) => {
+    if (data?.index == this.index) {
+      this.statut = data.statut;
+      this.updateProgress();
+    }
+  });
+}
 
 
-  getallcmd() {
-    this.loading = true;
+  // getallcmd() {
+  //   this.loading = true;
   
-    this.api.AllCommande().subscribe({
-      next: (res: any) => {
-        this.index = this.activate.snapshot.paramMap.get("id")
-        this.recupstatut()
-        console.log("mon indes",this.index);
-        this.data = res;
-        console.log("reste hoo", this.data);
+  //   this.api.AllCommande().subscribe({ 
+  //     next: (res: any) => {
+  //       this.index = this.activate.snapshot.paramMap.get("id")
+  //       this.recupstatut()
+  //       console.log("mon indes",this.index);
+  //       this.data = res;
+  //       console.log("reste hoo", this.data);
       
-        // 1. Filtrer les commandes valides
-        const commandesValides = this.data.filter((item: any) =>
-          item.statut === "en_attente" || item.statut === "en_preparation" 
-        );
+  //       // 1. Filtrer les commandes valides
+  //       const commandesValides = this.data.filter((item: any) =>
+  //         item.statut === "en_attente" || item.statut === "en_preparation" 
+  //       );
       
-        // 2. Trouver l’index réel de la commande cible via UID (this.index est un ID, pas un index numérique)
-        const position = commandesValides.findIndex((cmd: any) => cmd.index == this.index);
+  //       // 2. Trouver l’index réel de la commande cible via UID (this.index est un ID, pas un index numérique)
+  //       const position = commandesValides.findIndex((cmd: any) => cmd.index == this.index);
       
-        // 3. Si la commande est trouvée
-        if (position >= 0) {
-          this.data2 = commandesValides.slice(0, position); // commandes avant ma commande
-          this.length = this.data2.length; // 4. Nombre de commandes avant
-        } else {
-          this.data2 = [];
-          this.length = 0;
-        }
+  //       // 3. Si la commande est trouvée
+  //       if (position >= 0) {
+  //         this.data2 = commandesValides.slice(0, position); // commandes avant ma commande
+  //         this.length = this.data2.length; // 4. Nombre de commandes avant
+  //       } else {
+  //         this.data2 = [];
+  //         this.length = 0;
+  //       }
 
-        const emon_id = localStorage.getItem('emon_id');
+  //       const emon_id = localStorage.getItem('emon_id');
 
-         this.autresCommandes = commandesValides.filter(
+  //        this.autresCommandes = commandesValides.filter(
 
-       (cmd: any) =>{
-        cmd.emon_id == emon_id && cmd.index == this.index
-          console.log("mon emonid",emon_id,"emon dp bd",cmd.emon_id,"my indes",this.index);
-       } 
+  //      (cmd: any) =>{
+  //       cmd.emon_id == emon_id && cmd.index == this.index
+  //         console.log("mon emonid",emon_id,"emon dp bd",cmd.emon_id,"my indes",this.index);
+  //      } 
 
-        );
-         },
+  //       );
+  //        },
 
         
          
   
-      error: (err: any) => {
-        console.error('Erreur lors de la récupération des commandes :', err);
-        this.loading = false;
-      },
-      complete: () => {
-        this.loading = false;
-      }
-    });
+  //     error: (err: any) => {
+  //       console.error('Erreur lors de la récupération des commandes :', err);
+  //       this.loading = false;
+  //     },
+  //     complete: () => {
+  //       this.loading = false;
+  //     }
+  //   });
     
-  }
+  // }
+
+
+  getallcmd() {
+  this.loading = true;
+
+  this.api.AllCommande().subscribe({
+    next: (res: any) => {
+      this.index = this.activate.snapshot.paramMap.get("id");
+      this.data = res;
+
+      // 🔥 récupérer le statut depuis BD
+      const maCommande = this.data.find(
+        (cmd: any) => cmd.index == this.index
+      );
+
+      if (maCommande) {
+        this.statut = maCommande.statut;
+        this.updateProgress();
+      }
+    },
+    error: () => this.loading = false,
+    complete: () => this.loading = false
+  });
+}
 
 
   updateProgress() {
