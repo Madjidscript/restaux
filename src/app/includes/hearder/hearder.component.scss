@@ -117,6 +117,7 @@
   
 
 
+/* ===== HEADER ===== */
 .header {
   background: linear-gradient(135deg, #FF6B35 0%, #F39C12 100%);
   padding: 12px 20px;
@@ -130,6 +131,7 @@
   border-bottom: 2px solid rgba(255, 255, 255, 0.1);
 }
 
+/* ===== TOOLBAR ===== */
 .toolbar {
   display: flex;
   justify-content: space-between;
@@ -138,6 +140,7 @@
   margin: 0 auto;
 }
 
+/* ===== TITRE ===== */
 .left-title {
   font-size: 22px;
   font-weight: 700;
@@ -153,32 +156,15 @@
   transform: scale(1.05);
   text-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
 }
-.mybtn {
-  background-color: #ff6600; /* Orange vif */
-  color: white;
-  border: none;
-  padding: 10px 18px;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  text-decoration: none; /* pour enlever le soulignement éventuel */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
-  transition: all 0.3s ease;
+
+/* ===== ACTIONS (ICÔNES) ===== */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-.mybtn:hover {
-  background-color: #e55a00; /* Orange plus foncé */
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.mybtn:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
-}
-
-/* ===== ICÔNE NOTIFICATION ===== */
+/* ===== ICON WRAPPER ===== */
 .icon-wrapper {
   position: relative;
   cursor: pointer;
@@ -200,39 +186,112 @@
   transform: translateY(0);
 }
 
-.bell-icon {
-  width: 24px;
-  height: 24px;
+/* ===== ICÔNES ===== */
+.icon-wrapper i {
+  font-size: 18px;
   color: #FFFFFF;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+/* ===== BOUTON TÉLÉPHONE ===== */
+.phone-btn {
+  background: rgba(46, 204, 113, 0.25);
+  border: 1px solid rgba(46, 204, 113, 0.5);
+}
+
+.phone-btn:hover {
+  background: rgba(46, 204, 113, 0.4);
+  box-shadow: 0 6px 20px rgba(46, 204, 113, 0.4);
+}
+
+.phone-btn:active {
+  transform: scale(0.9);
+}
+
+/* ===== BADGE NOTIFICATION ===== */
 .badge {
   position: absolute;
-  top: -4px;
-  right: -4px;
+  top: -5px;
+  right: -5px;
   background: linear-gradient(135deg, #C0392B 0%, #E74C3C 100%);
   color: #FFFFFF;
-  font-size: 11px;
-  font-weight: 700;
-  padding: 4px 7px;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 3px 6px;
   border-radius: 50%;
-  min-width: 20px;
-  height: 20px;
+  min-width: 18px;
+  height: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 2px 8px rgba(192, 57, 43, 0.4);
   border: 2px solid #FFFFFF;
-  animation: pulse 2s infinite;
+  animation: pulse 1.5s infinite;
 }
 
+/* ===== ANIMATION BADGE ===== */
 @keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-  100% { transform: scale(1); }
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
+/* ===== BOUTON PERSONNALISÉ ===== */
+.mybtn {
+  background-color: #ff6600;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+.mybtn:hover {
+  background-color: #e55a00;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.mybtn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .header {
+    padding: 10px 15px;
+  }
+
+  .left-title {
+    font-size: 18px;
+  }
+
+  .icon-wrapper {
+    padding: 6px;
+  }
+
+  .icon-wrapper i {
+    font-size: 16px;
+  }
+
+  .actions {
+    gap: 8px;
+  }
+}
 /* ===== POPUP NOTIFICATIONS ===== */
 .popup-notif {
   position: fixed;

@@ -13,25 +13,25 @@
     </div>
 </header> -->
 
-
+<header class="header" *ngIf="!loading && tb" >
 <div class="toolbar">
   <h1 class="left-title">N°:{{tb}}</h1>
 
   <div class="actions">
 
-    <!-- 📞 bouton serveur -->
     <div class="icon-wrapper phone-btn" (click)="ouvrirPopup()">
       <i class="fas fa-phone"></i>
     </div>
 
-    <!-- 🔔 notifications -->
     <div class="icon-wrapper" (click)="notif()" *ngIf="length>0">
       <i class="fas fa-bell"></i>
       <span class="badge"> {{length}} </span> 
     </div>
 
   </div>
-</div>
+</div> 
+
+</header>
   <!-- *ngIf="tableInvalide && !loading && !tb || statut=='403'" -->
 <div  *ngIf="!loading && (statut === '403' || tableInvalide && !tb)"
 
