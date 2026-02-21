@@ -5,6 +5,9 @@ import { SoketserviceService } from '../../soketservice/soketservice.service';
 import { SessionserviceService } from '../../sessionservice/sessionservice.service';
 import { CommonModule } from '@angular/common';
 import { ClientserviceService } from '../../clientservice/clientservice.service';
+import { ElementRef, ViewChild } from '@angular/core';
+
+declare var bootstrap: any;
 
 @Component({
   selector: 'app-hearder',
@@ -14,7 +17,8 @@ import { ClientserviceService } from '../../clientservice/clientservice.service'
   styleUrl: './hearder.component.scss'
 })
 export class HearderComponent implements OnInit{
-  
+    @ViewChild('toastElement') toastEl!: ElementRef;
+
   tb:any
   token:any
   length:any =0
@@ -25,6 +29,10 @@ export class HearderComponent implements OnInit{
   showNotifPopup = false;
   firstNotif = true; // au début
   tableInvalide = false;
+  showContactPopup = false;
+
+
+
 
 
   
@@ -116,28 +124,7 @@ export class HearderComponent implements OnInit{
     }
      
 
-    // gettb(){
-    //   this.loading =true
-    //   this.api.sigleqr(this.token).subscribe({
-    //     next:(res:any)=>{
-    //       console.log("ma reponse depuis hearder",res);
-    //       this.tb = res.numeroTable
-          
-    //     },
-    //     error:(err:any)=> {
-    //      console.log("mon err hearder",err);
-    //       this.loading =false
-
-          
-    //     },
-    //     complete:()=> {
-    //       console.log("ok");
-    //       this.loading =false
-
-          
-    //     },
-    //   })
-    // }
+    
  
 
    gettb() {
@@ -181,6 +168,36 @@ recupstatut() {
   reload(){
     window.location.reload();
   }
+
+
+  ouvrirPopup() {
+  this.showContactPopup = true;
+
+  setTimeout(() => {
+    if (this.toastEl) {
+      const toastBootstrap = bootstrap.Toast.getOrCreateInstance(this.toastEl.nativeElement);
+      toastBootstrap.show();
+    }
+  });
+
+  // 🔥 envoyer la demande serveur
+  this.socket.sendMessage("demande_serveur", {
+    numeroTable: this.tb
+  });
+
+  // 🔥 écouter la réponse
+  this.socket.onMessage("retourdemande", (data) => {
+    this.message = data.texte + ' à la table ' + data.numeroTable;
+
+    const msg = new SpeechSynthesisUtterance(this.message);
+    msg.lang = navigator.language.startsWith('en') ? 'en-US' : 'fr-FR';
+    speechSynthesis.speak(msg);
+  });
+}
+
+fermerPopupcontact() {
+  this.showContactPopup = false;
+}
 
 
 }

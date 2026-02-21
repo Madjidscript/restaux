@@ -92,29 +92,29 @@ export class FooterComponent implements OnInit {
 
 
   
-  ouvrirPopup() {
-  this.showContactPopup = true;
+//   ouvrirPopup() {
+//   this.showContactPopup = true;
 
-  // Attendre que l'élément toast soit visible dans le DOM
-  setTimeout(() => {
-    if (this.toastEl) {
-      const toastBootstrap = bootstrap.Toast.getOrCreateInstance(this.toastEl.nativeElement);
-      toastBootstrap.show();
-    }
-  });
+//   // Attendre que l'élément toast soit visible dans le DOM
+//   setTimeout(() => {
+//     if (this.toastEl) {
+//       const toastBootstrap = bootstrap.Toast.getOrCreateInstance(this.toastEl.nativeElement);
+//       toastBootstrap.show();
+//     }
+//   });
 
-  // Envoi du message socket
-  this.socket.sendMessage("demande_serveur", { numeroTable: this.tb });
+//   // Envoi du message socket
+//   this.socket.sendMessage("demande_serveur", { numeroTable: this.tb });
 
-  // Réception du retour serveur
-  this.socket.onMessage("retourdemande", (data) => {
-    this.message = data.texte + ' à la table ' + data.numeroTable;
+//   // Réception du retour serveur
+//   this.socket.onMessage("retourdemande", (data) => {
+//     this.message = data.texte + ' à la table ' + data.numeroTable;
 
-    const message = new SpeechSynthesisUtterance(this.message);
-    message.lang = navigator.language.startsWith('en') ? 'en-US' : 'fr-FR';
-    speechSynthesis.speak(message);
-  });
-}
+//     const message = new SpeechSynthesisUtterance(this.message);
+//     message.lang = navigator.language.startsWith('en') ? 'en-US' : 'fr-FR';
+//     speechSynthesis.speak(message);
+//   });
+// }
 
   
   fermerPopup() {

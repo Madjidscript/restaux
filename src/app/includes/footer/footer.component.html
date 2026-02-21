@@ -9,11 +9,10 @@
     <span class="tab-label">Cath</span>
   </a>
 
-  <a (click)="ouvrirPopup()" class="tab-button" routerLinkActive="active">
-    <!-- <i class="fas fa-concierge-bell"></i> -->
-     <i class="fas fa-phone"></i> <!-- Icône de téléphone -->
+  <!-- <a (click)="ouvrirPopup()" class="tab-button" routerLinkActive="active">
+     <i class="fas fa-phone"></i> 
     <span class="tab-label">serveur</span>
-  </a>
+  </a> -->
 
   <a [routerLink]="['/client/panier', token]" routerLinkActive="active" class="tab-button cart-tab" *ngIf="totalQuantite>0">
     <div class="icon-wrapper">

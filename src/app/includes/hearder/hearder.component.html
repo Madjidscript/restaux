@@ -2,7 +2,7 @@
   <div class="spinner"></div>
 </div>
 
-<header class="header" *ngIf="!loading && tb" >
+<!-- <header class="header" *ngIf="!loading && tb" >
     <div class="toolbar">
       <h1 class="left-title" >N°:{{tb}}</h1>
   
@@ -11,7 +11,27 @@
         <span class="badge"> {{length}} </span> 
       </div>
     </div>
-</header>
+</header> -->
+
+
+<div class="toolbar">
+  <h1 class="left-title">N°:{{tb}}</h1>
+
+  <div class="actions">
+
+    <!-- 📞 bouton serveur -->
+    <div class="icon-wrapper" (click)="ouvrirPopup()">
+      <i class="fas fa-phone"></i>
+    </div>
+
+    <!-- 🔔 notifications -->
+    <div class="icon-wrapper" (click)="notif()" *ngIf="length>0">
+      <i class="fas fa-bell"></i>
+      <span class="badge"> {{length}} </span> 
+    </div>
+
+  </div>
+</div>
   <!-- *ngIf="tableInvalide && !loading && !tb || statut=='403'" -->
 <div  *ngIf="!loading && (statut === '403' || tableInvalide && !tb)"
 
@@ -76,5 +96,26 @@
   <button (click)="fermerPopup()">Fermer</button>
 </div>
 
+
+
+
+
+<div
+  class="toast position-fixed top-0 end-0 m-3"
+  style="z-index: 1000;"
+  role="alert"
+  aria-live="assertive"
+  aria-atomic="true"
+  *ngIf="showContactPopup"
+  #toastElement
+>
+  <div class="toast-header">
+    <strong class="me-auto">Serveur</strong>
+    <button type="button" class="btn-close" (click)="fermerPopupcontact()"></button>
+  </div>
+  <div class="toast-body">
+    {{ message }}
+  </div>
+</div>
 
   
