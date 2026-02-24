@@ -20,12 +20,15 @@ export class SuivieComponent implements OnInit {
   length:any
   statut="en_attente";
   notifdata: any;
+  tb:any
+  token:any
 
   progressWidth: string = '0%';
   autresCommandes: any;
   constructor(private api:ClientserviceService,private activate:ActivatedRoute,private session:SessionserviceService ){}
 
   ngOnInit(): void {
+    this.gettb()
     this.getallcmd()
     this.recupstatut()
     console.log("autres commandes", this.autresCommandes);
@@ -150,6 +153,38 @@ export class SuivieComponent implements OnInit {
 
 
 
+  gettb(){
+  this.loading = true;
+    this.token =this.activate.snapshot.paramMap.get("tb")
+  this.api.sigleqr(this.token).subscribe({
+    next: (res: any) => {
+      console.log("ma reponse depuis suivie", res);
+      this.tb = res.numeroTable;
+      // this.message = res?.message
+      console.log("lidy",this.token);
+      // this.emon_id = localStorage.getItem("emon_id");
+
+      
+      
+
+
+    },
+    error: (err: any) => {
+      console.log("mon ersr", err);
+      this.tb = null;
+      this.loading = false; // ← ici, sinon le spinner reste bloqué
+    },
+    complete: () => {
+      console.log("ok");
+    },
+  });
+}
+
+
+
+
+
+  
   
 
 }
