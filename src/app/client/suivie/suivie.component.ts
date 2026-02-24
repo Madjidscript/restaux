@@ -27,15 +27,30 @@ export class SuivieComponent implements OnInit {
   autresCommandes: any;
   constructor(private api:ClientserviceService,private activate:ActivatedRoute,private session:SessionserviceService ){}
 
-  ngOnInit(): void {
-    this.gettb()
-    this.getallcmd()
-    this.recupstatut()
-    console.log("autres commandes", this.autresCommandes,this.tb);
+  // ngOnInit(): void {
+  //   this.gettb()
+  //   this.getallcmd()
+  //   this.recupstatut()
+  //   console.log("autres commandes", this.autresCommandes,this.tb);
 
         
-  }
+  // }
 
+
+  ngOnInit(): void {
+  this.activate.paramMap.subscribe(params => {
+    this.index = params.get('id'); // id
+    this.token = params.get('tb'); // tb
+
+    console.log("ID :", this.index);
+    console.log("TOKEN :", this.token);
+
+    this.gettb();
+    this.getallcmd();
+  });
+
+  this.recupstatut();
+}
 
 
   // recupstatut() {
