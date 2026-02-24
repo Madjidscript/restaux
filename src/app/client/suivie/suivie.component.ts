@@ -31,7 +31,8 @@ export class SuivieComponent implements OnInit {
     this.gettb()
     this.getallcmd()
     this.recupstatut()
-    console.log("autres commandes", this.autresCommandes);
+    console.log("autres commandes", this.autresCommandes,this.tb);
+
         
   }
 
