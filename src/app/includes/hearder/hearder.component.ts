@@ -45,7 +45,9 @@ export class HearderComponent implements OnInit{
 
   ngOnInit() {
     this.loading = true
-  this.taille(); // écoute des notifications
+    this.taille(); // écoute des notifications
+    this.checkScroll();
+
 
   
      this.router.events
@@ -199,5 +201,16 @@ fermerPopupcontact() {
   this.showContactPopup = false;
 }
 
+ngOnChanges() {
+  this.checkScroll();
+}
+
+checkScroll() {
+  if (!this.loading && (this.statut === '403' || (this.tableInvalide && !this.tb))) {
+    document.body.classList.add('no-scroll');
+  } else {
+    document.body.classList.remove('no-scroll');
+  }
+}
 
 }
