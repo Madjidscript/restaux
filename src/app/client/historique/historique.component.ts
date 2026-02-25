@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { environment } from '../../../environments/environment.prod';
 import { ClientserviceService } from '../../clientservice/clientservice.service';
 
@@ -15,14 +15,24 @@ import { ClientserviceService } from '../../clientservice/clientservice.service'
 export class HistoriqueComponent implements OnInit {
   commandes: any[] = [];
   data:any
+  token:any
+  tb:any
   statut:any
   loading=false
   baseUrl = environment.apiUrl + '/';
   emon_id:any;
-  constructor(private api:ClientserviceService){}
+  constructor(private api:ClientserviceService, private activate:ActivatedRoute){}
   ngOnInit(): void {
+    this.activate.paramMap.subscribe(params => {
+    this.token = params.get('tb'); // tb
+
+    console.log("TOKEN :", this.token);
+
+    this.gettb();
+    // this.getallcmd();
+  });
+
     this.getcmmtby()
-    console.log("dady");
     
   }
 
@@ -64,6 +74,37 @@ export class HistoriqueComponent implements OnInit {
     },
   });
 }
+
+
+gettb(){
+  this.loading = true;
+    this.token =this.activate.snapshot.paramMap.get("tb")
+  this.api.sigleqr(this.token).subscribe({
+    next: (res: any) => {
+      console.log("ma reponse depuis suivie", res);
+      this.tb = res.numeroTable;
+      // this.message = res?.message
+      console.log("lidy",this.token);
+      // this.emon_id = localStorage.getItem("emon_id");
+
+      
+      
+
+
+    },
+    error: (err: any) => {
+      console.log("mon ersr", err);
+      this.tb = null;
+      this.loading = false; // ← ici, sinon le spinner reste bloqué
+    },
+    complete: () => {
+      console.log("ok");
+    },
+  });
+}
+
+
+
 
 }
 
