@@ -92,25 +92,45 @@
       </div>
 
       <!-- Détails commande -->
-      <div class="commande-details" style="margin-top: 20px;">
-        <p><strong>Commande :</strong> {{ data.index }}</p>
-        <p><strong>Type :</strong> {{ data.type_service }}</p>
-        <p><strong>Table :</strong> {{ data.num }}</p>
-        <p><strong>Total :</strong> {{ data.total }} FCFA</p>
-        <p><strong>Heure :</strong> {{ data.heure }}</p>
-      </div>
+      <div class="commande-card">
 
-      <!-- Liste des produits -->
-      <div class="produits" *ngIf="data?.data?.length > 0" style="margin-top: 20px;">
-        <h3>🧾 Détails des articles</h3>
+  <!-- HEADER -->
+  <div class="commande-header">
+    <h3>Commande #{{ data.index }}</h3>
+    <span class="badge">{{ data.statut }}</span>
+  </div>
 
-        <div *ngFor="let item of data.data" class="produit-item" style="border-bottom: 1px solid #ddd; padding: 10px 0;">
-          <p><strong>{{ item.nom }}</strong></p>
-          <p>Quantité : {{ item.nbre }}</p>
-          <p>Prix : {{ item.prix }} FCFA</p>
+  <!-- INFOS RAPIDES -->
+  <div class="commande-info">
+    <div><strong>Type :</strong> {{ data.type_service }}</div>
+    <div><strong>Table :</strong> {{ data.num }}</div>
+    <div><strong>Total :</strong> {{ data.total }} FCFA</div>
+    <div><strong>Heure :</strong> {{ data.heure }}</div>
+  </div>
+
+  <!-- PRODUITS (SCROLL INTERNE) -->
+  <div class="produits-box">
+    <h4>🧾 Articles</h4>
+
+    <div class="produit-scroll">
+      <div *ngFor="let item of data.data" class="produit-card">
+
+        <img *ngIf="item.image"
+             [src]="'https://qrrestaux.onrender.com/' + item.image"
+             class="produit-img"/>
+
+        <div class="produit-info">
+          <p class="name">{{ item.nom }}</p>
+          <p>Qté : {{ item.nbre }}</p>
+          <p class="price">{{ item.prix }} FCFA</p>
         </div>
-      </div>
 
+      </div>
+    </div>
+
+  </div>
+
+</div>
     </div>
 
   </div>
