@@ -124,26 +124,41 @@
 
   <!-- PRODUITS -->
   <div class="produits-section">
-    <h4>🧾 Produits commandés</h4>
 
-    <div class="produits-scroll">
-      <div *ngFor="let item of data.data" class="produit-item">
+  <h4 class="section-title">🧾 Produits commandés</h4>
 
+  <div class="produits-container">
+
+    <div *ngFor="let item of data.data" class="produit-card">
+
+      <!-- IMAGE -->
+      <div class="img-box">
         <img [src]="'https://qrrestaux.onrender.com/' + item.image" />
-
-        <div class="produit-details">
-          <p class="nom">{{ item.nom }}</p>
-
-          <div class="meta">
-            <span>Qté: {{ item.nbre }}</span>
-            <span class="prix">{{ item.prix }} FCFA</span>
-          </div>
-
-        </div>
       </div>
+
+      <!-- INFOS -->
+      <div class="info-box">
+
+        <div class="top">
+          <h5 class="nom">{{ item.nom }}</h5>
+          <span class="badge-qte">x{{ item.nbre }}</span>
+        </div>
+
+        <div class="bottom">
+          <span class="prix">{{ item.prix }} FCFA</span>
+
+          <span class="total">
+            Total: {{ item.prix * item.nbre }} FCFA
+          </span>
+        </div>
+
+      </div>
+
     </div>
 
   </div>
+
+</div>
 
 </div>
 
