@@ -160,7 +160,7 @@ getcmdbyindex() {
     next: (res: any) => {
 
        this.data = res;
-       console.log("ma commande par index", this.data);
+       console.log("ma commande par index mon", this.data);
 
       // 🔥 récupérer le statut depuis BD
       const maCommande = this.data
