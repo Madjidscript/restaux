@@ -91,47 +91,61 @@
         <span>Servie</span>
       </div>
 
-      <!-- Détails commande -->
-      <div class="commande-card">
+      
+    </div>
+
+    <!-- DÉTAIL COMMANDE STYLE MODERNE -->
+<div class="commande-card">
 
   <!-- HEADER -->
   <div class="commande-header">
-    <h3>Commande #{{ data.index }}</h3>
-    <span class="badge">{{ data.statut }}</span>
+    <div>
+      <h3>Commande #{{ data.index }}</h3>
+      <small>{{ data.heure }} • {{ data.type_service }}</small>
+    </div>
+
+    <span class="badge" [ngClass]="statut">
+      {{ data.statut }}
+    </span>
   </div>
 
-  <!-- INFOS RAPIDES -->
+  <!-- INFOS -->
   <div class="commande-info">
-    <div><strong>Type :</strong> {{ data.type_service }}</div>
-    <div><strong>Table :</strong> {{ data.num }}</div>
-    <div><strong>Total :</strong> {{ data.total }} FCFA</div>
-    <div><strong>Heure :</strong> {{ data.heure }}</div>
+    <div class="info-item">
+      <span>Table</span>
+      <strong>{{ data.num }}</strong>
+    </div>
+
+    <div class="info-item">
+      <span>Total</span>
+      <strong>{{ data.total }} FCFA</strong>
+    </div>
   </div>
 
-  <!-- PRODUITS (SCROLL INTERNE) -->
-  <div class="produits-box">
-    <h4>🧾 Articles</h4>
+  <!-- PRODUITS -->
+  <div class="produits-section">
+    <h4>🧾 Produits commandés</h4>
 
-    <div class="produit-scroll">
-      <div *ngFor="let item of data.data" class="produit-card">
+    <div class="produits-scroll">
+      <div *ngFor="let item of data.data" class="produit-item">
 
-        <img *ngIf="item.image"
-             [src]="'https://qrrestaux.onrender.com/' + item.image"
-             class="produit-img"/>
+        <img [src]="'https://qrrestaux.onrender.com/' + item.image" />
 
-        <div class="produit-info">
-          <p class="name">{{ item.nom }}</p>
-          <p>Qté : {{ item.nbre }}</p>
-          <p class="price">{{ item.prix }} FCFA</p>
+        <div class="produit-details">
+          <p class="nom">{{ item.nom }}</p>
+
+          <div class="meta">
+            <span>Qté: {{ item.nbre }}</span>
+            <span class="prix">{{ item.prix }} FCFA</span>
+          </div>
+
         </div>
-
       </div>
     </div>
 
   </div>
 
 </div>
-    </div>
 
   </div>
 

@@ -263,13 +263,12 @@
 
 
 
-
 .commande-card {
+  margin-top: 20px;
   background: #fff;
-  border-radius: 15px;
+  border-radius: 16px;
   padding: 15px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-  margin-top: 15px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
 }
 
 /* HEADER */
@@ -277,59 +276,101 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
 }
 
-.badge {
-  background: #ff9800;
-  color: white;
-  padding: 5px 10px;
-  border-radius: 20px;
+.commande-header h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.commande-header small {
+  color: gray;
   font-size: 12px;
 }
 
-/* INFOS */
-.commande-info {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  margin-top: 10px;
-  font-size: 14px;
+/* BADGE */
+.badge {
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  color: white;
 }
 
-/* PRODUITS BOX */
-.produits-box {
+.badge.en_attente { background: orange; }
+.badge.en_preparation { background: #3498db; }
+.badge.Servie { background: green; }
+
+/* INFOS */
+.commande-info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.info-item {
+  text-align: center;
+  flex: 1;
+}
+
+.info-item span {
+  display: block;
+  font-size: 12px;
+  color: gray;
+}
+
+/* PRODUITS */
+.produits-section {
   margin-top: 15px;
 }
 
-/* SCROLL INTERNE (IMPORTANT) */
-.produit-scroll {
-  max-height: 250px;   /* 👈 clé pour éviter scroll page */
+.produits-section h4 {
+  margin-bottom: 10px;
+}
+
+/* 👇 IMPORTANT: SCROLL INTERNE (évite scroll page) */
+.produits-scroll {
+  max-height: 220px;
   overflow-y: auto;
   padding-right: 5px;
 }
 
-/* PRODUIT CARD */
-.produit-card {
+/* CARD PRODUIT */
+.produit-item {
   display: flex;
   gap: 10px;
-  padding: 8px;
-  border-radius: 10px;
-  background: #f9f9f9;
-  margin-bottom: 8px;
+  padding: 10px;
+  background: #f8f8f8;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  align-items: center;
 }
 
-.produit-img {
-  width: 50px;
-  height: 50px;
+.produit-item img {
+  width: 55px;
+  height: 55px;
   border-radius: 10px;
   object-fit: cover;
 }
 
-.produit-info .name {
-  font-weight: bold;
+.produit-details {
+  flex: 1;
 }
 
-.price {
-  color: green;
+.nom {
   font-weight: bold;
+  margin: 0;
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: gray;
+}
+
+.prix {
+  font-weight: bold;
+  color: #2c3e50;
 }
