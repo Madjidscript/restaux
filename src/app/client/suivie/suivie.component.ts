@@ -46,7 +46,8 @@ export class SuivieComponent implements OnInit {
     console.log("TOKEN :", this.token);
 
     this.gettb();
-    this.getallcmd();
+    // this.getallcmd();
+    this.getcmdbyindex();
   });
 
   this.recupstatut();
@@ -127,28 +128,53 @@ export class SuivieComponent implements OnInit {
   // }
 
 
-  getallcmd() {
-  this.loading = true;
+//   getallcmd() {
+//   this.loading = true;
 
-  this.api.AllCommande().subscribe({
+//   this.api.AllCommande().subscribe({
+//     next: (res: any) => {
+//       this.index = this.activate.snapshot.paramMap.get("id");
+//       this.data = res;
+
+//       // 🔥 récupérer le statut depuis BD
+//       const maCommande = this.data.find(
+//         (cmd: any) => cmd.index == this.index
+//       );
+
+//       if (maCommande) {
+//         this.statut = maCommande.statut;
+//         this.updateProgress();
+//       }
+//     },
+//     error: () => this.loading = false,
+//     complete: () => this.loading = false
+//   });
+// }
+
+getcmdbyindex() {
+  this.loading = true;
+  this.index = this.activate.snapshot.paramMap.get("id");
+
+
+  this.api.CommandebYindex(this.index).subscribe({
     next: (res: any) => {
-      this.index = this.activate.snapshot.paramMap.get("id");
-      this.data = res;
+
+       this.data = res;
 
       // 🔥 récupérer le statut depuis BD
-      const maCommande = this.data.find(
-        (cmd: any) => cmd.index == this.index
-      );
-
+      const maCommande = this.data
       if (maCommande) {
         this.statut = maCommande.statut;
         this.updateProgress();
       }
+      // Handle the response for the specific command by index
     },
     error: () => this.loading = false,
     complete: () => this.loading = false
   });
 }
+
+      
 
 
   updateProgress() {
@@ -176,13 +202,11 @@ export class SuivieComponent implements OnInit {
     next: (res: any) => {
       console.log("ma reponse depuis suivie", res);
       this.tb = res.numeroTable;
+        this.loading = false;
+
       // this.message = res?.message
       console.log("lidy",this.token);
       // this.emon_id = localStorage.getItem("emon_id");
-
-      
-      
-
 
     },
     error: (err: any) => {
