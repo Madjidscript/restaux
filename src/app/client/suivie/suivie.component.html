@@ -1,4 +1,4 @@
-<div *ngIf="tb">
+<!-- <div *ngIf="tb">
   <div class="loader-container" *ngIf="loading">
     <div class="spinner"></div>
 </div>
@@ -19,7 +19,6 @@
 
 <div class="progress-wrapper" *ngIf="data.length >0" >
 
-      <!-- <p>taille <span> {{notifdata.length}} </span> </p> -->
     <h2>Suivi de votre commande</h2> 
     <p *ngIf="statut =='en_preparation' || statut === 'en_attente'">📦 Nombre de commandes avant vous : {{ length }}</p>
     <p *ngIf="statut =='Servie'"> Merci pour votre patience, savourez bien !🍽️</p>
@@ -31,7 +30,6 @@
       <div class="step" [class.active]=" statut === 'Servie'"></div>
     </div>
 
-    <!-- divi -->
 
     
 
@@ -41,7 +39,83 @@
       <span>En attente</span>
       <span>En préparation</span>
       <span>Servie</span>
+    </div> -->
+
+
+    <div *ngIf="tb">
+
+  <!-- Loader -->
+  <div class="loader-container" *ngIf="loading">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- Commande supprimée -->
+  <div *ngIf="!loading && statut === 'deleted_by_admin'"
+       style="height: 60vh; display: flex; justify-content: center; align-items: center; text-align: center;">
+    <h2 style="color: red;">❌ Votre commande a été supprimée par l'administrateur.</h2>
+  </div>
+
+  <!-- Aucune commande -->
+  <div *ngIf="!loading && !data"
+       style="height: 60vh; display: flex; justify-content: center; align-items: center; text-align: center;">
+    <h2 style="color: red;">Vous n'avez aucune commande</h2>
+  </div>
+
+  <!-- Contenu principal -->
+  <div class="box" *ngIf="!loading && data && statut !== 'deleted_by_admin'">
+
+    <div class="progress-wrapper">
+
+      <h2>Suivi de votre commande</h2> 
+
+      <p *ngIf="statut === 'en_preparation' || statut === 'en_attente'">
+        📦 Nombre de commandes avant vous : {{ length }}
+      </p>
+
+      <p *ngIf="statut === 'Servie'">
+        Merci pour votre patience, savourez bien ! 🍽️
+      </p>
+
+      <!-- Progress bar -->
+      <div class="step-container">
+        <div class="progress-fill" [ngStyle]="{ width: progressWidth }"></div>
+
+        <div class="step" [class.active]="true"></div>
+        <div class="step" [class.active]="statut === 'en_preparation' || statut === 'Servie'"></div>
+        <div class="step" [class.active]="statut === 'Servie'"></div>
+      </div>
+
+      <div class="labels">
+        <span>En attente</span>
+        <span>En préparation</span>
+        <span>Servie</span>
+      </div>
+
+      <!-- Détails commande -->
+      <div class="commande-details" style="margin-top: 20px;">
+        <p><strong>Commande :</strong> {{ data.index }}</p>
+        <p><strong>Type :</strong> {{ data.type_service }}</p>
+        <p><strong>Table :</strong> {{ data.num }}</p>
+        <p><strong>Total :</strong> {{ data.total }} FCFA</p>
+        <p><strong>Heure :</strong> {{ data.heure }}</p>
+      </div>
+
+      <!-- Liste des produits -->
+      <div class="produits" *ngIf="data?.data?.length > 0" style="margin-top: 20px;">
+        <h3>🧾 Détails des articles</h3>
+
+        <div *ngFor="let item of data.data" class="produit-item" style="border-bottom: 1px solid #ddd; padding: 10px 0;">
+          <p><strong>{{ item.nom }}</strong></p>
+          <p>Quantité : {{ item.nbre }}</p>
+          <p>Prix : {{ item.prix }} FCFA</p>
+        </div>
+      </div>
+
     </div>
+
+  </div>
+
+</div>
 
 
    
@@ -64,7 +138,7 @@
 
 
 
- <div class="autres-commandes" style="margin-bottom: 30px;" *ngIf="autresCommandes.length > 0">
+ <!-- <div class="autres-commandes" style="margin-bottom: 30px;" *ngIf="autresCommandes.length > 0">
   <h3 style="margin-top: 30px;">📋 Autres commandes en cours</h3>
 <div class="table-responsive">
   <table class="table-commandes">
@@ -99,7 +173,7 @@
   </table>
 </div>
 
-  </div>
+  </div> -->
 
 
 
@@ -117,7 +191,7 @@
 
 
 
-</div>
+<!-- </div> -->
 
 
 
@@ -138,4 +212,4 @@
 >
   Cher client, cette table n'existe pas
 </div> -->
-</div>
+<!-- </div> -->
