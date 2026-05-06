@@ -58,11 +58,11 @@ export class ClientserviceService {
 
 
   AllCommande() {
-    return this.http.get(this.api_url+"/admin/commandes", );
+    return this.http.get(this.api_url+"/admin/commandes");
   }
 
   CommandebYindex(index: any) {
-    return this.http.get(this.api_url+`/admin/commandes/${index}`, );
+    return this.http.get(this.api_url+`/admin/commandes/${index}`);
   }
   gettatut() {
     return this.http.get(this.api_url+"/admin/getstatut");
